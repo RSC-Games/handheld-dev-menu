@@ -1,0 +1,1 @@
+all of these libs are amd64-compatible except for libjinput-linux64, which is arm64

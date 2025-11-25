@@ -1,0 +1,38 @@
+# TODO: Need to finish sledge 4 so I can use a competent build system.
+compile {
+    # Code goes here.
+    ARGS = "-Xlint:deprecation -Xlint:unchecked -Xdiags:verbose"  # Compiler flags.
+    PATH = ""  # Variable set
+    CLASSPATH = "."  # Provided classpath
+    MAINFILE = "Main.java"  # Main file for javac code generation.
+    ENTRYPOINT = "Main"  # Code entrypoint
+    BINARY = "menu-system.jar"  # Deployment binary.
+
+    # jBuilder must be asked to explicitly copy the build dir. Once done, it will automatically execute all ops on the new dir.
+    %useoutdir
+
+    if ($(TARGET) == "") {
+        %error "missing target"
+    }
+
+    if ($(TARGET) == "win") {
+        CLASSPATH := ";./lib/jinput-2.0.10.jar;./lib/jnativehook-2.2.2.jar"
+    }
+    if ($(TARGET) == "linux") {
+        CLASSPATH := ":./lib/jinput-2.0.10.jar:./lib/jnativehook-2.2.2."
+    }
+
+    %purge ".class"  # Erase all the stale class files.
+    %javac "-cp" $(CLASSPATH) $(ARGS) $(MAINFILE)
+    %purge ".java"  # Clean out the source files.
+    # %log "Printing a message: here's the classpath" $(CLASSPATH)
+
+    # Do linking stuff. Builds the jarfile by default.
+    %mkjar $(BINARY) $(ENTRYPOINT)
+    %purge ".class"
+    #%keep  # Keep dist code only.
+}
+clean {
+    # Clean all of those stupid stale .class files that make jgrasp compilation a pain in the butt.
+    %purge ".class"
+}
