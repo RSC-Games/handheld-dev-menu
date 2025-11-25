@@ -11,10 +11,8 @@ class EntryBrightness extends MenuEntrySlider {
         this.setSliderValue(BacklightService.getScaledBrightness());
     }
 
-    // TODO: Brightness load is broken.
     @Override
     protected void valueChanged(int newValue) {
         BacklightService.setScaledBrightness(newValue);
     }
-    
 }

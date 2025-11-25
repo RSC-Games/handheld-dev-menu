@@ -1,6 +1,8 @@
 package backend;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import backend.network.AccessPoint;
 import backend.network.SavedNetwork;
@@ -137,8 +139,8 @@ public class NetworkBackend {
      * Trampoline to internal getScanResults()
      * @see NetworkBackend$WPA_CLI_IO.getScanResults()
      */
-    public static AccessPoint[] getScanResults() {
-        return WPA_CLI_IO.getScanResults();
+    public static AccessPoint[] getScanResults(boolean combineBSSIDs) {
+        return WPA_CLI_IO.getScanResults(combineBSSIDs);
     }
 
     /**
@@ -263,7 +265,7 @@ public class NetworkBackend {
             return true;
         }
 
-        // TODO: Run dhcpcd after we have a valid connection.
+        // Automatically handle obtaining an IP address
         SystemManagementThread.repeatingJob(10, new SMCallbackFunction() {
             public void run() throws SMStopExecution {
                 System.out.println("running dhcpcd...");
@@ -271,8 +273,12 @@ public class NetworkBackend {
                 CommandUtils.executeCommand0("sudo", "dhcpcd", "-x");
                 CommandOutput output = CommandUtils.executeCommand0("sudo", "dhcpcd");
 
-                if (output.getExitCode() == 0)
+                if (output.getExitCode() == 0) {
+                    System.out.println("network associated; got ip");
                     throw new SMStopExecution();
+                }
+
+                System.out.println("failed to determine ip; retrying in 10s");
             }
         });
         return true;
@@ -365,10 +371,12 @@ public class NetworkBackend {
          *  02:00:00:00:01:00     2412      -30       [WPA-PSK-TKIP][ESS]    test
          *  (seems like each parameter is tab separated)
          * 
-         * @return A list of scanned access points.
+         * @param combineBSSIDs Combine each network with a different BSSID into
+         *  the same entry.
+         * @return A list of scanned access points. If BSSIDs are combined, the closest
+         *  BSSID will be provided in the network entry.
          */
-        // Should be fixed in theory. Need a good time to test.
-        static AccessPoint[] getScanResults() {
+        static AccessPoint[] getScanResults(boolean combineBSSIDs) {
             if (activeWlanEntry == ENTRY_NO_NETWORK)
                 return new AccessPoint[0];
 
@@ -406,7 +414,23 @@ public class NetworkBackend {
                 );
             }
 
-            return discoveredNetworks;
+            if (!combineBSSIDs)
+                return discoveredNetworks;
+
+            // Deduplicate based on BSSIDs (they take up space and honestly it doesn't really
+            // matter much for this use case).
+            HashSet<String> ssids = new HashSet<>();
+            ArrayList<AccessPoint> outNetworks = new ArrayList<>();
+
+            for (AccessPoint ap : discoveredNetworks) {
+                if (ssids.contains(ap.ssid))
+                    continue;
+
+                ssids.add(ap.ssid);
+                outNetworks.add(ap);
+            }
+
+            return outNetworks.toArray(AccessPoint[]::new);
         }
 
         /**
@@ -518,7 +542,6 @@ public class NetworkBackend {
          * 
          * @return A new network ID.
          */
-        // TODO: Merge SSIDs together (not binding to BSSIDs)
         static int addNetwork() {
             if (activeWlanEntry == ENTRY_NO_NETWORK)
                 return -1;

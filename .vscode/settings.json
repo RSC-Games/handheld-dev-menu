@@ -4,6 +4,6 @@
     ],
     "java.project.referencedLibraries": [
         "lib\\jnativehook-2.2.2.jar",
-        "c:\\Users\\Raine\\Documents\\Audacity\\other\\crap-awt-menu\\lib\\jinput-2.0.10.jar"
+        "lib\\jinput-2.0.10.jar"
     ]
 }

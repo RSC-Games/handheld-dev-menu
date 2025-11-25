@@ -8,7 +8,6 @@ import menu.MenuOptionList;
 import ui.UIKeyValueText;
 
 class EntryPerformanceOverlay extends MenuEntry {
-    // TODO: Need a parameter store somewhere but we don't have one.
     boolean isEnabled = false;
     UIKeyValueText uiText;
 

@@ -223,7 +223,7 @@ public class TitleLaunchService {
 
         void closeApp() {
             // Kill all descendents too (avoid errant processes like mc)
-            for (ProcessHandle child : executingThread.children().<ProcessHandle>toArray((x) -> new ProcessHandle[x]))
+            for (ProcessHandle child : executingThread.children().<ProcessHandle>toArray(ProcessHandle[]::new))
                 child.destroy();
 
             executingThread.destroy();

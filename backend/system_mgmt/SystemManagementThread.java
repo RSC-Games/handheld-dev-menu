@@ -4,10 +4,13 @@ import java.util.ArrayList;
 
 import util.Utils;
 
-// TODO: Manage running dhcpcd after network is connected (STATE: COMPLETED) and no ip is assigned.
-// TODO: Run system updates in the background once requested.
+// TODO: Run system updates in the background once requested. (Note: will be done on the event thread)
 // TODO: System push notifications
-// TODO: Anything else long-running that needs to run in the background and might need to block.
+
+/**
+ * Handle system management code and other long-running jobs that can't stall the main
+ * thread but need to be tracked.
+ */
 public class SystemManagementThread implements Runnable {
     private static SystemManagementThread managementThread;
 
@@ -77,6 +80,7 @@ public class SystemManagementThread implements Runnable {
                 }
                 catch (SMStopExecution ie) {
                     // Job has explicitly requested not to be rescheduled.
+                    System.out.println("queued job requested explicit cancellation");
                 }
             }
 

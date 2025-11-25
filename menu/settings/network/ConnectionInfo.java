@@ -84,7 +84,7 @@ class ConnectionInfo extends UIText {
         this.wlanStatus.setValueText(status);
         this.wlanMACAddress.setValueText(statusFlags.get("address"));
 
-        // TODO: FIX THE ERROR STATE.
+        // Display relevant network state info
         if (!status.equals("INACTIVE") && !status.equals("DISCONNECTED")) {
             if (status.equals("COMPLETED"))
                 this.wlanStatus.setValueColor(Color.green);

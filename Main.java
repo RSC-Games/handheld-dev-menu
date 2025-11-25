@@ -74,6 +74,7 @@ public class Main {
 
     private static void init() {
         // TODO: Do init stuff in here
-        // TODO: Backlight and volume settings are not automatically restored yet.
+        // TODO: Volume settings are not automatically restored yet.
+        // (Backlight is automatically restored by systemd)
     }
 }

@@ -30,7 +30,7 @@ class ReadScanList extends UIBase {
     }
 
     private void generateMenu() {
-        AccessPoint[] aps = NetworkBackend.getScanResults();
+        AccessPoint[] aps = NetworkBackend.getScanResults(true);
 
         if (aps.length == 0)
             new NoAccessPointsInRangeEntry(attachedMenu);
