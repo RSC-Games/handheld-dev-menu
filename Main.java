@@ -76,6 +76,7 @@ public class Main {
     private static void init() {
         // TODO: Do init stuff in here
         // TODO: Volume settings are not automatically restored yet.
+        // TODO: Disable x11 screen blanking (xset s noblank)
         // (Backlight is automatically restored by systemd)
 
         // Run dhcp if applicable

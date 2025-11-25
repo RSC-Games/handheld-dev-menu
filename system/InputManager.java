@@ -164,20 +164,20 @@ public class InputManager implements KeyListener, NativeKeyListener {
         forceDisableJInputLogs();
 
         for (Controller controller : controllers) {
-            if (controller.getType().equals(Controller.Type.GAMEPAD))
+            //System.out.println("found input device " + controller.getName() + " type " + controller.getType()); 
+            if (controller.getType().equals(Controller.Type.GAMEPAD) || controller.getType().equals(Controller.Type.STICK))
                 activeController = controller;
         }
 
-        if (activeController == null) {
+        if (activeController == null)
             return false;
-        }
+
+        // We have a controller.
+        this.mapping = ControllerLayout.getMapping(activeController);
 
         // Won't be using a mapping.
         if (ENABLE_MAPPING_MODE)
             return true;
-
-        // We have a controller.
-        this.mapping = ControllerLayout.getMapping(activeController);
 
         // Unable to map the controller for some reason?
         if (this.mapping == null) {

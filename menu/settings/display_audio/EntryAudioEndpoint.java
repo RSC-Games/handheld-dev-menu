@@ -11,6 +11,7 @@ import system.PanelManager;
 class EntryAudioEndpoint extends MenuEntry {
 
     // TODO: Implement audio sink/source detection.
+    // https://wiki.archlinux.org/title/WirePlumber (wpctl)
     public EntryAudioEndpoint(MenuOptionList parent) {
         super(parent, "Audio Output Device", Color.WHITE, 12);
     }

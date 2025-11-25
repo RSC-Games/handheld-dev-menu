@@ -40,6 +40,8 @@ abstract class ControllerLayout {
             case "ZhiXu Gamepad":
             case "Gamepad": // JC200 reports this normally
                 return new JC200_DefaultLayout(controller);
+            case "Wireless Controller": // Dualshock 4
+                return new DualShock4_DefaultLayout(controller);
             default:
                 System.err.println("error: unknown controller type " + controller.getName());
         }
@@ -390,5 +392,88 @@ class JC200_DefaultLayout extends ControllerLayout {
 
         return triggerZR.getPollData() > triggerZR.getDeadZone();
     }
-    
+}
+
+class DualShock4_DefaultLayout extends ControllerLayout {
+    Component triggerZL;
+    Component triggerZR;
+
+    // Buttons translation list for this specific controller (Windows: name (Linux)):
+    // Button 0: Square
+    // Button 1: X 
+    // Button 2: Circle
+    // Button 3: Trianagle
+    // Button 4: L
+    // Button 5: R
+    // Button 6: 
+    // Button 7: 
+    // Button 8: Share
+    // Button 9: Options
+    // Button 10: LT
+    // Button 11: RT
+    // Button 12: Home
+    // Button 13: Touchpad
+    // Hat Switch: DPAD (0.25 up to 1.0 left clockwise)
+    // X Axis: LX
+    // Y Axis: LY
+    // Z Axis: RX
+    // X Rotation: ZL
+    // Y Rotation: ZR
+    // Z Rotation: RY
+    // TODO: Linux bindings required.
+    DualShock4_DefaultLayout(Controller controller) {
+        boolean linux = System.getProperty("os.name").equals("Linux");
+
+        leftStick = new Component[] {
+            searchComponentByName(controller, linux ? "x" : "X Axis"), 
+            searchComponentByName(controller, linux ? "y" : "Y Axis")
+        };
+        rightStick = new Component[] {
+            searchComponentByName(controller, linux ? "z" : "Z Axis"), 
+            searchComponentByName(controller, linux ? "rz" : "Z Rotation")
+        };
+        leftStickBtn = searchComponentByName(controller, linux ? "Left Thumb 3" : "Button 10");
+        rightStickBtn = searchComponentByName(controller, linux ? "Right Thumb 3" : "Button 11");
+        dpad = searchComponentByName(controller, linux ? "pov" : "Hat Switch");
+        aBtn = searchComponentByName(controller, linux ? "A" : "Button 2");
+        bBtn = searchComponentByName(controller, linux ? "B" : "Button 1");
+        xBtn = searchComponentByName(controller, linux ? "X" : "Button 0");
+        yBtn = searchComponentByName(controller, linux ? "Y" : "Button 3");
+        minusBtn = searchComponentByName(controller, linux ? "Select" : "Button 8");
+        plusBtn = searchComponentByName(controller, linux ? "Start" : "Button 9");
+        homeBtn = searchComponentByName(controller, linux ? "Unknown" : "Button 12");
+        leftTrigBtn = searchComponentByName(controller, linux ? "Left Thumb" : "Button 4");
+        rightTrigBtn = searchComponentByName(controller, linux ? "Right Thumb" : "Button 5");
+        triggerZL = searchComponentByName(controller, linux ? "slider" : "X Rotation");
+        triggerZR = searchComponentByName(controller, linux ? "slider" : "Y Rotation");
+
+        buttonComponents = new ArrayList<Component>();
+        buttonComponents.add(leftStickBtn);
+        buttonComponents.add(rightStickBtn);
+        buttonComponents.add(aBtn);
+        buttonComponents.add(bBtn);
+        buttonComponents.add(xBtn);
+        buttonComponents.add(yBtn);
+        buttonComponents.add(minusBtn);
+        buttonComponents.add(plusBtn);
+        buttonComponents.add(homeBtn);
+        buttonComponents.add(leftTrigBtn);
+        buttonComponents.add(rightTrigBtn);
+    }
+
+    @Override
+    public boolean getTriggerZL() {
+        if (!buttonJustPressed(triggerZL))
+            return false;
+
+        return triggerZL.getPollData() > triggerZL.getDeadZone();
+    }
+
+    @Override
+    public boolean getTriggerZR() {
+        if (!buttonJustPressed(triggerZR))
+            return false;
+
+        return triggerZR.getPollData() > triggerZR.getDeadZone();
+    }
 }

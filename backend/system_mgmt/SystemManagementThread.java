@@ -138,6 +138,11 @@ public class SystemManagementThread implements Runnable {
                 // Job has explicitly requested not to be rescheduled.
                 System.out.println("queued job requested explicit cancellation");
             }
+            catch (Exception ie) {
+                System.err.println("fatal exception in job; force unqueuing. exception details:");
+                System.err.print("Exception in thread " + Thread.currentThread().getName() + " ");
+                ie.printStackTrace();
+            }
         }
 
         this.jobs = rescheduleJobs;
