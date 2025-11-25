@@ -49,6 +49,22 @@ public class PanelManager {
     }
 
     /**
+     * Removes all panels currently registered.
+     */
+    public void reset() {
+        panelStack.clear();
+    }
+
+    /**
+     * Determine if any panels remain to be updated.
+     * 
+     * @return True if any such panels remain.
+     */
+    public boolean hasPanels() {
+        return panelStack.size() > 0;
+    }
+
+    /**
      * Force reset to the root panel.
      */
     public void jumpToRootPanel() {

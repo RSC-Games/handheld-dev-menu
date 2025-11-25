@@ -1,5 +1,6 @@
 package system;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,6 +24,9 @@ public class MainWindow extends JPanel {
     // Window ID for the app. Only present while an app is running, and is re-determined
     // every time the window is hidden.
     int appWindowID = -1;
+
+    // Allows identifying if an issue has occurred during panel painting.
+    volatile FailedRenderException exc;
     
     public MainWindow() {
         frame = new JFrame("menu_system");
@@ -105,9 +109,13 @@ public class MainWindow extends JPanel {
         CommandUtils.executeCommandRetry("xdotool", "windowfocus", "" + this.appWindowID);
     }
 
-    public void tickWindow() {
+    public void tickWindow() {       
         if (frame.isActive())
             frame.repaint();
+
+        // Ran into an issue on this repaint. Abort.
+        if (this.exc != null)
+            throw exc;
 
         // Update window show/hide status
         TitleLaunchService.poll();
@@ -145,6 +153,14 @@ public class MainWindow extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        this.panelManager.drawTopPanel(g);
+
+        try {
+            this.panelManager.drawTopPanel(g);
+        }
+        catch (Exception ie) {
+            this.exc = new FailedRenderException(ie);
+        }
+
+        Toolkit.getDefaultToolkit().sync();
     }
 }

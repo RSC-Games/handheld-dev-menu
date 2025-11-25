@@ -19,6 +19,7 @@
 
 import backend.NetworkBackend;
 import backend.TitleLaunchService;
+import menu.crash_handler.CrashPanel;
 import menu.main.MainMenu;
 import system.InputManager;
 import system.MainWindow;
@@ -64,9 +65,8 @@ public class Main {
             }
         }
         catch (Exception ie) {
+            menuExceptionHandler(window, ie);
             window.cleanUp();
-            System.out.print("Exception in thread " + Thread.currentThread().getName() + " ");
-            ie.printStackTrace();
             System.exit(-1);
         }
 
@@ -81,5 +81,31 @@ public class Main {
 
         // Run dhcp if applicable
         NetworkBackend.runWaitForNetwork();
+    }
+
+    private static void menuExceptionHandler(MainWindow window, Exception ie) {
+        System.out.print("Exception in thread " + Thread.currentThread().getName() + " ");
+        ie.printStackTrace();
+
+        // Format the stack trace for displaying on screen.
+        StackTraceElement[] elements = ie.getStackTrace();
+        String[] exceptionLines = new String[elements.length + 1];
+        exceptionLines[0] = "Exception in thread " + Thread.currentThread().getName() 
+                            + " " + ie.getClass().getName() + " " + ie.getMessage();
+
+        for (int i = 0; i < elements.length; i++)
+            exceptionLines[i + 1] = "      at " + elements[i].toString();
+
+        // Show the exception on screen.
+        PanelManager mgr = PanelManager.getPanelManager();
+        mgr.reset();
+        mgr.pushPanel(new CrashPanel(exceptionLines));
+
+        while (mgr.hasPanels()) {
+            window.tickWindow();
+            InputManager.getInputManager().poll();
+            Utils.sleepms(16);
+            mgr.updateTopPanel();
+        }
     }
 }

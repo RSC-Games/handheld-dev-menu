@@ -129,26 +129,26 @@ public class NetworkBackend {
     /**
      * Trampoline to the internal API function startScan
      * 
-     * @see NetworkBackend$WPA_CLI_IO.startScan()
+     * @see NetworkBackend$WpaCliPlugin.startScan()
      */
     public static boolean startScan() {
-        return WPA_CLI_IO.startScan();
+        return WpaCliPlugin.startScan();
     }
 
     /**
      * Trampoline to internal getScanResults()
-     * @see NetworkBackend$WPA_CLI_IO.getScanResults()
+     * @see NetworkBackend$WpaCliPlugin.getScanResults()
      */
     public static AccessPoint[] getScanResults(boolean combineBSSIDs) {
-        return WPA_CLI_IO.getScanResults(combineBSSIDs);
+        return WpaCliPlugin.getScanResults(combineBSSIDs);
     }
 
     /**
      * Trampoline to internal listNetworks()
-     * @see NetworkBackend$WPA_CLI_IO.listNetworks()
+     * @see NetworkBackend$WpaCliPlugin.listNetworks()
      */
     public static SavedNetwork[] listNetworks() {
-        return WPA_CLI_IO.listNetworks();
+        return WpaCliPlugin.listNetworks();
     }
 
     /**
@@ -169,10 +169,10 @@ public class NetworkBackend {
 
     /**
      * Trampoline to internal status()
-     * @see NetworkBackend$WPA_CLI_IO.status()
+     * @see NetworkBackend$WpaCliPlugin.status()
      */
     public static HashMap<String, String> status0() {
-        return WPA_CLI_IO.status();
+        return WpaCliPlugin.status();
     }
 
     /**
@@ -189,7 +189,7 @@ public class NetworkBackend {
             return false;
 
         // Create a new network entry for it
-        int networkID = WPA_CLI_IO.addNetwork();
+        int networkID = WpaCliPlugin.addNetwork();
 
         // Failed to create a network ID
         if (networkID == -1) {
@@ -197,7 +197,7 @@ public class NetworkBackend {
             return false;
         }
 
-        if (!WPA_CLI_IO.setNetwork(networkID, WPA_CLI_IO.SET_NET_SSID, sanitizeInput(ap.ssid))) {
+        if (!WpaCliPlugin.setNetwork(networkID, WpaCliPlugin.SET_NET_SSID, sanitizeInput(ap.ssid))) {
             System.err.println("invalid ssid");
             return false;
         }
@@ -209,13 +209,13 @@ public class NetworkBackend {
         }
 
         // Apparently using set psk is fine for both SAE and PSK
-        if (!WPA_CLI_IO.setNetwork(networkID, WPA_CLI_IO.SET_NET_PSK, sanitizeInput(psk))) {
+        if (!WpaCliPlugin.setNetwork(networkID, WpaCliPlugin.SET_NET_PSK, sanitizeInput(psk))) {
             System.err.println("invalid psk");
             return false;
         }
 
         // Need to save the config (Doesn't work on windows)
-        if (!WPA_CLI_IO.saveConfig()) {
+        if (!WpaCliPlugin.saveConfig()) {
             System.err.println("failed to save config; not fatal");
             return true;
         }
@@ -233,14 +233,14 @@ public class NetworkBackend {
     private static boolean setAuthMode(int networkID, AccessPoint ap) {
         // Residential; probably using WPA-PSK (TKIP/CCMP; can't tell which).
         if (ap.getFlagsSet(AccessPoint.FLAG_WPA_PSK | AccessPoint.FLAG_WPA2_PSK))
-            return WPA_CLI_IO.setNetwork(networkID, WPA_CLI_IO.SET_NET_KEY_MGMT, WPA_CLI_IO.KEY_MGMT_WPA_PSK);
+            return WpaCliPlugin.setNetwork(networkID, WpaCliPlugin.SET_NET_KEY_MGMT, WpaCliPlugin.KEY_MGMT_WPA_PSK);
 
         else if (ap.getFlagsSet(AccessPoint.FLAG_WPA3_SAE))
-            return WPA_CLI_IO.setNetwork(networkID, WPA_CLI_IO.SET_NET_KEY_MGMT, WPA_CLI_IO.KEY_MGMT_SAE);
+            return WpaCliPlugin.setNetwork(networkID, WpaCliPlugin.SET_NET_KEY_MGMT, WpaCliPlugin.KEY_MGMT_SAE);
 
         // Probably an open authentication network.
         else if (ap.areOnlyFlagsSet(AccessPoint.FLAG_ESS))
-            return WPA_CLI_IO.setNetwork(networkID, WPA_CLI_IO.SET_NET_KEY_MGMT, WPA_CLI_IO.KEY_MGMT_OPEN);
+            return WpaCliPlugin.setNetwork(networkID, WpaCliPlugin.SET_NET_KEY_MGMT, WpaCliPlugin.KEY_MGMT_OPEN);
 
         System.err.println("Unable to determine authentication mode for network " + ap.ssid + " w/ flags " + ap.flags);      
         return false;
@@ -256,11 +256,11 @@ public class NetworkBackend {
         if (activeWlanEntry == ENTRY_NO_NETWORK)
             return false;
 
-        if (!WPA_CLI_IO.networkOperation(WPA_CLI_IO.OP_SELECT_NET, network.networkID))
+        if (!WpaCliPlugin.networkOperation(WpaCliPlugin.OP_SELECT_NET, network.networkID))
             return false;
 
         // Need to save the config (Doesn't work on windows)
-        if (!WPA_CLI_IO.saveConfig()) {
+        if (!WpaCliPlugin.saveConfig()) {
             System.err.println("failed to save config; not fatal");
             return true;
         }
@@ -372,15 +372,15 @@ public class NetworkBackend {
      * @return Whether the network was successfully forgotten or not.
      */
     public static boolean forget(SavedNetwork network) {
-        return WPA_CLI_IO.networkOperation(WPA_CLI_IO.OP_REMOVE_NET, network.networkID);
+        return WpaCliPlugin.networkOperation(WpaCliPlugin.OP_REMOVE_NET, network.networkID);
     }
 
     public static boolean enableNetwork(SavedNetwork network) {
-        return WPA_CLI_IO.networkOperation(WPA_CLI_IO.OP_ENABLE_NET, network.networkID);
+        return WpaCliPlugin.networkOperation(WpaCliPlugin.OP_ENABLE_NET, network.networkID);
     }
 
     public static boolean disableNetwork(SavedNetwork network) {
-        return WPA_CLI_IO.networkOperation(WPA_CLI_IO.OP_DISABLE_NET, network.networkID);
+        return WpaCliPlugin.networkOperation(WpaCliPlugin.OP_DISABLE_NET, network.networkID);
     }
 
     /**
@@ -408,7 +408,7 @@ public class NetworkBackend {
      * Contains an internal implementation of the wpa_cli interface.
      * Required for basic networking functionality.
      */
-    private static class WPA_CLI_IO {
+    private static class WpaCliPlugin {
         static final String OP_SELECT_NET           = "select_network";
         static final String OP_ENABLE_NET           = "enable_network";
         static final String OP_DISABLE_NET          = "disable_network";
@@ -503,6 +503,7 @@ public class NetworkBackend {
             HashSet<String> ssids = new HashSet<>();
             ArrayList<AccessPoint> outNetworks = new ArrayList<>();
 
+            // TODO: Broken????
             for (AccessPoint ap : discoveredNetworks) {
                 if (ssids.contains(ap.ssid))
                     continue;

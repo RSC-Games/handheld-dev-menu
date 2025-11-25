@@ -18,7 +18,7 @@ class EntryAudioEndpoint extends MenuEntry {
 
     @Override
     public void execute() {
-        PanelManager.getPanelManager().pushPanel(new ActionPanel("Pipewire backend not implemented",
+        PanelManager.getPanelManager().pushPanel(new ActionPanel("Device selection not implemented",
             new ActionableElement() {
                 protected void trigger() {
                     PanelManager.getPanelManager().popPanel();
