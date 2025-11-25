@@ -266,12 +266,13 @@ public class NetworkBackend {
         }
 
         // Automatically handle obtaining an IP address
-        SystemManagementThread.repeatingJob(10, new SMCallbackFunction() {
+        System.out.println("pushing dhcp job");
+        SystemManagementThread.repeatingJob(5, new SMCallbackFunction() {
             public void run() throws SMStopExecution {
                 System.out.println("running dhcpcd...");
 
-                CommandUtils.executeCommand0("sudo", "dhcpcd", "-x");
-                CommandOutput output = CommandUtils.executeCommand0("sudo", "dhcpcd");
+                CommandUtils.executeCommandRetry("sudo", "dhcpcd", "-x");
+                CommandOutput output = CommandUtils.executeCommandRetry("sudo", "dhcpcd");
 
                 if (output.getExitCode() == 0) {
                     System.out.println("network associated; got ip");

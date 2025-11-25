@@ -17,6 +17,7 @@ public class SystemManagementThread implements Runnable {
     static {
         managementThread = new SystemManagementThread();
         Thread thread = new Thread(managementThread, "sys-mgr");
+        thread.setDaemon(true);
         thread.start();
     }
 
@@ -55,36 +56,48 @@ public class SystemManagementThread implements Runnable {
         while (jobs == null)
             Utils.sleepms(1);
 
+        System.out.println("pushing job");
         jobs.add(job);
     }
 
-    public synchronized void run() {
+    public void run() {
         while (true) {
             // These jobs aren't hugely time sensitive, so give time back to the OS.
             Utils.sleepms(33);
 
-            // Possible race condition? (functions should be locking anyway due to synchronized
-            // so this shouldn't be an issue)
-            ArrayList<SystemManagementJob> jobsCopy = this.jobs;
-            this.jobs = null;
-
-            ArrayList<SystemManagementJob> rescheduleJobs = new ArrayList<>();
-
-            for (SystemManagementJob job : jobsCopy) {
-                try {
-                    // Job has been executed, and might be recurring, so reschedule
-                    if (job.executeJobIfScheduled() && job.getJobType() == SystemManagementJob.Type.JOB_RECURRING)
-                        rescheduleJobs.add(job);
-
-                    // Job executed and is no longer in the queue.
-                }
-                catch (SMStopExecution ie) {
-                    // Job has explicitly requested not to be rescheduled.
-                    System.out.println("queued job requested explicit cancellation");
-                }
-            }
-
-            this.jobs = rescheduleJobs;
+            executeJobs();
         }
+    }
+
+    private synchronized void executeJobs() {
+        // Nothing to do.
+        if (this.jobs.size() == 0)
+            return;
+
+        // TOCTOU but it doesn't really matter in this context b/c we'll just execute
+        // the jobs next batch.
+
+        // Possible race condition? (functions should be locking anyway due to synchronized
+        // so this shouldn't be an issue)
+        ArrayList<SystemManagementJob> jobsCopy = this.jobs;
+        this.jobs = null;
+
+        ArrayList<SystemManagementJob> rescheduleJobs = new ArrayList<>();
+
+        for (SystemManagementJob job : jobsCopy) {
+            try {
+                // Job has been executed, and might be recurring, so reschedule
+                if (!job.executeJobIfScheduled() || job.getJobType() == SystemManagementJob.Type.JOB_RECURRING)
+                    rescheduleJobs.add(job);
+
+                // Job executed and is no longer in the queue.
+            }
+            catch (SMStopExecution ie) {
+                // Job has explicitly requested not to be rescheduled.
+                System.out.println("queued job requested explicit cancellation");
+            }
+        }
+
+        this.jobs = rescheduleJobs;
     }
 }

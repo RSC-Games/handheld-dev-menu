@@ -54,9 +54,6 @@ public class InputManager implements KeyListener, NativeKeyListener {
 
         if (!connectController())
             System.err.println("Warning: failed to connect/map controller");
-
-        // Disable logging w/o environment variable (kinda annoying)
-        forceDisableJInputLogs();
     }
 
     /**
@@ -162,6 +159,9 @@ public class InputManager implements KeyListener, NativeKeyListener {
         ControllerEnvironment defaultEnviron = ControllerEnvironment.getDefaultEnvironment();
         eraseControllersField(defaultEnviron);
         Controller[] controllers = defaultEnviron.getControllers();
+
+        // Disable logging w/o environment variable (kinda annoying)
+        forceDisableJInputLogs();
 
         for (Controller controller : controllers) {
             if (controller.getType().equals(Controller.Type.GAMEPAD))

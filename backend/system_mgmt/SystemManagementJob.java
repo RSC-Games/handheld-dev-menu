@@ -44,6 +44,7 @@ class SystemManagementJob {
         this.callback = cbFun;
         this.jobType = type;
         this.jobDelay = delay;
+        this.jobScheduled = false;
         this.jobPostedTime = System.nanoTime();
     }
 
