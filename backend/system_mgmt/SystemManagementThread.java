@@ -12,13 +12,14 @@ import util.Utils;
  * thread but need to be tracked.
  */
 public class SystemManagementThread implements Runnable {
-    private static SystemManagementThread managementThread;
+    private static final SystemManagementThread managementSystem;
+    private static final Thread managementThread;
 
     static {
-        managementThread = new SystemManagementThread();
-        Thread thread = new Thread(managementThread, "sys-mgr");
-        thread.setDaemon(true);
-        thread.start();
+        managementSystem = new SystemManagementThread();
+        managementThread = new Thread(managementSystem, "sys-mgr");
+        managementThread.setDaemon(true);
+        managementThread.start();
     }
 
     /**
@@ -26,9 +27,11 @@ public class SystemManagementThread implements Runnable {
      * errant writes.
      */
     private volatile ArrayList<SystemManagementJob> jobs;
+    private ArrayList<SystemManagementJob> deferredJobs;
 
     private SystemManagementThread() {
         jobs = new ArrayList<>();
+        deferredJobs = new ArrayList<>();
     }
 
     /**
@@ -38,7 +41,19 @@ public class SystemManagementThread implements Runnable {
      * @param cb The callback to execute.
      */
     public static void invokeDelayed(int delay, SMCallbackFunction cb) {
-        managementThread.pushJob(new SystemManagementJob(cb, SystemManagementJob.Type.JOB_NORMAL, delay));
+        managementSystem.pushJob(new SystemManagementJob(cb, SystemManagementJob.Type.JOB_NORMAL, delay));
+    }
+
+    /**
+     * Call this function on the system management dispatch thread after the given delay.
+     * Deferred is required for pushing jobs within an existing job handler.
+     * @implNote THE SYSTEM THREAD WILL DEADLOCK IF THE NON-DEFERRED VARIANT IS CALLED!
+     * 
+     * @param delay Time to wait (in seconds)
+     * @param cb The callback to execute.
+     */
+    public static void invokeDelayedDeferred(int delay, SMCallbackFunction cb) {
+        managementSystem.pushJobDeferred(new SystemManagementJob(cb, SystemManagementJob.Type.JOB_NORMAL, delay));
     }
 
     /**
@@ -48,16 +63,39 @@ public class SystemManagementThread implements Runnable {
      * @param cb The callback to execute.
      */
     public static void repeatingJob(int delay, SMCallbackFunction cb) {
-        managementThread.pushJob(new SystemManagementJob(cb, SystemManagementJob.Type.JOB_RECURRING, delay));
+        managementSystem.pushJob(new SystemManagementJob(cb, SystemManagementJob.Type.JOB_RECURRING, delay));
+    }
+
+    /**
+     * Push a repeating job for repeated queuing and execution.
+     * Deferred is required for pushing jobs within an existing job handler.
+     * @implNote THE SYSTEM THREAD WILL DEADLOCK IF THE NON-DEFERRED VARIANT IS CALLED!
+     * 
+     * @param delay Time between invocations.
+     * @param cb The callback to execute.
+     */
+    public static void repeatingJobDeferred(int delay, SMCallbackFunction cb) {
+        managementSystem.pushJobDeferred(new SystemManagementJob(cb, SystemManagementJob.Type.JOB_RECURRING, delay));
     }
 
     private synchronized void pushJob(SystemManagementJob job) {
+        if (Thread.currentThread().equals(managementThread))
+            throw new IllegalStateException("cannot synchronously push job from system thread!");
+
         // Currently being modified
         while (jobs == null)
             Utils.sleepms(1);
 
         System.out.println("pushing job");
         jobs.add(job);
+    }
+
+    private void pushJobDeferred(SystemManagementJob job) {
+        if (!Thread.currentThread().equals(managementThread))
+            throw new IllegalStateException("deferred push is not thread safe!");
+
+        System.out.println("pushing deferred job");
+        deferredJobs.add(job);
     }
 
     public void run() {
@@ -71,7 +109,7 @@ public class SystemManagementThread implements Runnable {
 
     private synchronized void executeJobs() {
         // Nothing to do.
-        if (this.jobs.size() == 0)
+        if (this.jobs.size() == 0 && this.deferredJobs.size() == 0)
             return;
 
         // TOCTOU but it doesn't really matter in this context b/c we'll just execute
@@ -81,6 +119,10 @@ public class SystemManagementThread implements Runnable {
         // so this shouldn't be an issue)
         ArrayList<SystemManagementJob> jobsCopy = this.jobs;
         this.jobs = null;
+
+        // Take all the deferred jobs and queue them for execution.
+        jobsCopy.addAll(this.deferredJobs);
+        this.deferredJobs.clear();
 
         ArrayList<SystemManagementJob> rescheduleJobs = new ArrayList<>();
 

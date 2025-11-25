@@ -265,9 +265,14 @@ public class NetworkBackend {
             return true;
         }
 
+        return true;
+    }
+
+    static void rundhcpcd() {
         // Automatically handle obtaining an IP address
         System.out.println("pushing dhcp job");
-        SystemManagementThread.repeatingJob(5, new SMCallbackFunction() {
+
+        SMCallbackFunction cb = new SMCallbackFunction() {
             public void run() throws SMStopExecution {
                 System.out.println("running dhcpcd...");
 
@@ -276,13 +281,88 @@ public class NetworkBackend {
 
                 if (output.getExitCode() == 0) {
                     System.out.println("network associated; got ip");
+                    runWaitForNetwork();
                     throw new SMStopExecution();
                 }
 
-                System.out.println("failed to determine ip; retrying in 10s");
+                System.out.println("failed to determine ip; retrying in 5s");
             }
-        });
-        return true;
+        };
+
+        if (Thread.currentThread().getName().equals("main"))
+            SystemManagementThread.repeatingJob(5, cb);
+        else
+            SystemManagementThread.repeatingJobDeferred(5, cb);
+    }
+
+    /**
+     * Starts the dhcpcd assoc thread after network is up and online.
+     */
+    public static void runWaitForNetwork() {
+        System.out.println("pushing wait for network");
+
+        HashMap<String, String> flags = status0();
+        boolean initialLinkState = isConnected0(flags) && hasIP0(flags);
+
+        SMCallbackFunction cb = new SMCallbackFunction() {
+            boolean modeLinkUp = initialLinkState;
+
+            public void run() {            
+                if (modeLinkUp)
+                    runLinkUp();
+                else
+                    runLinkDown();
+            }
+
+            /**
+             * Standard mode. Waits for the link to come online then starts the dhcp
+             * service.
+             */
+            private void runLinkDown() {
+                // Request an IP address.
+                if (isConnected()) {
+                    System.out.println("link up, starting dhcp service");
+                    rundhcpcd();
+                    throw new SMStopExecution();
+                }
+
+                // Network isn't up yet.... Do nothing
+            }
+
+            /**
+             * Standby mode. Waits for the link to go down, then switches to link down
+             * mode.
+             */
+            private void runLinkUp() {
+                if (!isConnected()) {
+                    System.out.println("link down, entering wait mode");
+                    this.modeLinkUp = false;
+                }
+            }
+        };
+
+        // Sometimes called on the main thread so avoid deadlocking when
+        // re-calling.
+        if (Thread.currentThread().getName().equals("main"))
+            SystemManagementThread.repeatingJob(3, cb);
+        else
+            SystemManagementThread.repeatingJobDeferred(3, cb);
+    }
+
+    public static boolean isConnected() {
+        return isConnected0(status0());
+    }
+    
+    public static boolean isConnected0(HashMap<String, String> flags) {
+        return flags.get("wpa_state").equals("COMPLETED");
+    }
+
+    public static boolean hasIP() {
+        return hasIP0(status0());
+    }
+
+    public static boolean hasIP0(HashMap<String, String> flags) {
+        return flags.get("ip_address") != null;
     }
 
     /**
