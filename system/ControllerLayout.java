@@ -40,6 +40,7 @@ abstract class ControllerLayout {
             case "ZhiXu Gamepad":
             case "Gamepad": // JC200 reports this normally
                 return new JC200_DefaultLayout(controller);
+            case "Sony Interactive Entertainment Wireless Controller":
             case "Wireless Controller": // Dualshock 4
                 return new DualShock4_DefaultLayout(controller);
             default:
@@ -399,28 +400,27 @@ class DualShock4_DefaultLayout extends ControllerLayout {
     Component triggerZR;
 
     // Buttons translation list for this specific controller (Windows: name (Linux)):
-    // Button 0: Square
-    // Button 1: X 
-    // Button 2: Circle
-    // Button 3: Trianagle
-    // Button 4: L
-    // Button 5: R
+    // Button 0: Square (Y)
+    // Button 1: X (A)
+    // Button 2: Circle (B)
+    // Button 3: Triangle (X)
+    // Button 4: L (Left Thumb)
+    // Button 5: R (Right Thumb)
     // Button 6: 
     // Button 7: 
-    // Button 8: Share
-    // Button 9: Options
-    // Button 10: LT
-    // Button 11: RT
-    // Button 12: Home
-    // Button 13: Touchpad
-    // Hat Switch: DPAD (0.25 up to 1.0 left clockwise)
-    // X Axis: LX
-    // Y Axis: LY
-    // Z Axis: RX
-    // X Rotation: ZL
-    // Y Rotation: ZR
-    // Z Rotation: RY
-    // TODO: Linux bindings required.
+    // Button 8: Share (Select)
+    // Button 9: Options (Start)
+    // Button 10: LT (Left Thumb 3)
+    // Button 11: RT (Right Thumb 3)
+    // Button 12: Home (Mode)
+    // Button 13: Touchpad (...)
+    // Hat Switch: DPAD (pov) (0.25 up to 1.0 left clockwise)
+    // X Axis: LX (x)
+    // Y Axis: LY (y)
+    // Z Axis: RX (rx)
+    // X Rotation: ZL (z)
+    // Y Rotation: ZR (rz)
+    // Z Rotation: RY (ry)
     DualShock4_DefaultLayout(Controller controller) {
         boolean linux = System.getProperty("os.name").equals("Linux");
 
@@ -429,8 +429,8 @@ class DualShock4_DefaultLayout extends ControllerLayout {
             searchComponentByName(controller, linux ? "y" : "Y Axis")
         };
         rightStick = new Component[] {
-            searchComponentByName(controller, linux ? "z" : "Z Axis"), 
-            searchComponentByName(controller, linux ? "rz" : "Z Rotation")
+            searchComponentByName(controller, linux ? "rx" : "Z Axis"), 
+            searchComponentByName(controller, linux ? "ry" : "Z Rotation")
         };
         leftStickBtn = searchComponentByName(controller, linux ? "Left Thumb 3" : "Button 10");
         rightStickBtn = searchComponentByName(controller, linux ? "Right Thumb 3" : "Button 11");
@@ -441,11 +441,11 @@ class DualShock4_DefaultLayout extends ControllerLayout {
         yBtn = searchComponentByName(controller, linux ? "Y" : "Button 3");
         minusBtn = searchComponentByName(controller, linux ? "Select" : "Button 8");
         plusBtn = searchComponentByName(controller, linux ? "Start" : "Button 9");
-        homeBtn = searchComponentByName(controller, linux ? "Unknown" : "Button 12");
+        homeBtn = searchComponentByName(controller, linux ? "Mode" : "Button 12");
         leftTrigBtn = searchComponentByName(controller, linux ? "Left Thumb" : "Button 4");
         rightTrigBtn = searchComponentByName(controller, linux ? "Right Thumb" : "Button 5");
-        triggerZL = searchComponentByName(controller, linux ? "slider" : "X Rotation");
-        triggerZR = searchComponentByName(controller, linux ? "slider" : "Y Rotation");
+        triggerZL = searchComponentByName(controller, linux ? "z" : "X Rotation");
+        triggerZR = searchComponentByName(controller, linux ? "rz" : "Y Rotation");
 
         buttonComponents = new ArrayList<Component>();
         buttonComponents.add(leftStickBtn);

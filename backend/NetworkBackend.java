@@ -486,7 +486,7 @@ public class NetworkBackend {
                 // Each field appears to be tab delimited?
                 String[] components = rawLines[i].split("\t");
 
-                discoveredNetworks[i - 1] = new AccessPoint(
+                discoveredNetworks[i - startLineOffset - 1] = new AccessPoint(
                     components[0], // bssid 
                     components[4], // ssid
                     Integer.parseInt(components[1]), // frequency 
