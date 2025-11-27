@@ -58,10 +58,10 @@ public class InputManager implements KeyListener, NativeKeyListener {
 
     /**
      * JInput forces a default log verbosity of INFO, which spits out some annoying logs.
-     * @throws NoSuchFieldException
      */
     private void forceDisableJInputLogs() {
-        Logger hLog = Logger.getLogger(ControllerEnvironment.class.getName());
+        Package pkg = ControllerEnvironment.class.getClassLoader().getDefinedPackage("net.java.games.input");
+        Logger hLog = Logger.getLogger(pkg.getName());
         hLog.setLevel(Level.SEVERE);
     }
 
@@ -158,16 +158,15 @@ public class InputManager implements KeyListener, NativeKeyListener {
     boolean connectController() {
         ControllerEnvironment defaultEnviron = ControllerEnvironment.getDefaultEnvironment();
         eraseControllersField(defaultEnviron);
-        Controller[] controllers = defaultEnviron.getControllers();
 
         // Disable logging w/o environment variable (kinda annoying)
         forceDisableJInputLogs();
 
-        for (Controller controller : controllers) {
-            //System.out.println("found input device " + controller.getName() + " type " + controller.getType()); 
-            if (controller.getType().equals(Controller.Type.GAMEPAD) || controller.getType().equals(Controller.Type.STICK))
-                activeController = controller;
-        }
+        // Some controllers present multiple input types, so find gamepad first.
+        activeController = findControllerByType(Controller.Type.GAMEPAD);
+
+        if (activeController == null)
+            activeController = findControllerByType(Controller.Type.STICK);
 
         if (activeController == null)
             return false;
@@ -188,6 +187,18 @@ public class InputManager implements KeyListener, NativeKeyListener {
 
         shock(100, 1f);
         return true;
+    }
+
+    private Controller findControllerByType(Controller.Type type) {
+        Controller[] controllers = ControllerEnvironment.getDefaultEnvironment().getControllers();
+
+        for (Controller controller : controllers) {
+            //System.out.println("found input device " + controller.getName() + " type " + controller.getType()); 
+            if (controller.getType().equals(type))
+                return controller;
+        }
+
+        return null;
     }
 
     /**

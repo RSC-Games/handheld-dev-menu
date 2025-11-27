@@ -204,7 +204,10 @@ public class AudioBackend {
                 return false;
             }
 
-            else if (output.getExitCode() != 0) {
+            System.out.println("command output");
+            System.out.println(output.getStdout());
+
+            if (output.getExitCode() != 0) {
                 System.err.println("failed to execute for some odd reason. stderr:");
                 System.err.println(output.getStderr());
                 return false;

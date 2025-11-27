@@ -503,8 +503,10 @@ public class NetworkBackend {
             HashSet<String> ssids = new HashSet<>();
             ArrayList<AccessPoint> outNetworks = new ArrayList<>();
 
-            // TODO: Broken????
             for (AccessPoint ap : discoveredNetworks) {
+                if (ap == null)
+                    continue; // TODO: FIX (should not be null)
+
                 if (ssids.contains(ap.ssid))
                     continue;
 

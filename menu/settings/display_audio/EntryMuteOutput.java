@@ -36,7 +36,7 @@ class EntryMuteOutput extends MenuEntry {
 
     @Override
     public void execute() {
-        System.out.println("muting");
         AudioBackend.setMute(!this.muted);
+        System.out.println("is muted: " + AudioBackend.getMuted());
     }
 }

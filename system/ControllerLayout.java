@@ -246,44 +246,46 @@ class XBOX_360_DefaultLayout extends ControllerLayout {
     Component triggerZ;
 
     // In XBOX 360 mode:
-    // Button 0: A
-    // Button 1: B
-    // Button 2: X
-    // Button 3: Y
-    // Button 4: L
-    // Button 5: R
-    // Button 6: -
-    // Button 7: +
-    // Button 8: LB
-    // Button 9: RB
-    // Hat Switch: DPAD (0.25 up to 1.0 left clockwise)
-    // X Axis: LX
-    // Y Axis: LY (inverted)
-    // X Rotation: LX
-    // Y Rotation: LY (inverted)
-    // Z Axis: (+1 = ZL, -1 = ZR)
+    // Button 0: A (A)
+    // Button 1: B (B)
+    // Button 2: X (X)
+    // Button 3: Y (Y)
+    // Button 4: L (Left Thumb)
+    // Button 5: R (Right Thumb)
+    // Button 6: - (Select)
+    // Button 7: + (Start)
+    // Button 8: LB (Left Thumb 3)
+    // Button 9: RB (Right Thumb 3)
+    // Hat Switch: DPAD (pov) (0.25 up to 1.0 left clockwise)
+    // X Axis: LX (x)
+    // Y Axis: LY (y)
+    // X Rotation: RX (rx)
+    // Y Rotation: RY (ry)
+    // Z Axis: (+1 = ZL, -1 = ZR) (linux: z = ZL, rz = ZR)
     XBOX_360_DefaultLayout(Controller controller) {
+        boolean linux = System.getProperty("os.name").equals("Linux");
+
         leftStick = new Component[] {
-            searchComponentByName(controller, "X Axis"), 
-            searchComponentByName(controller, "Y Axis")
+            searchComponentByName(controller, linux ? "x" : "X Axis"), 
+            searchComponentByName(controller, linux ? "y" : "Y Axis")
         };
         rightStick = new Component[] {
-            searchComponentByName(controller, "X Rotation"), 
-            searchComponentByName(controller, "Y Rotation")
+            searchComponentByName(controller, linux ? "rx" : "X Rotation"), 
+            searchComponentByName(controller, linux ? "ry" : "Y Rotation")
         };
-        leftStickBtn = searchComponentByName(controller, "Button 8");
-        rightStickBtn = searchComponentByName(controller, "Button 9");
-        dpad = searchComponentByName(controller, "Hat Switch");
-        aBtn = searchComponentByName(controller, "Button 0");
-        bBtn = searchComponentByName(controller, "Button 1");
-        xBtn = searchComponentByName(controller, "Button 2");
-        yBtn = searchComponentByName(controller, "Button 3");
-        minusBtn = searchComponentByName(controller, "Button 6");
-        plusBtn = searchComponentByName(controller, "Button 7");
-        homeBtn = searchComponentByName(controller, "Button 6");
-        leftTrigBtn = searchComponentByName(controller, "Button 4");
-        rightTrigBtn = searchComponentByName(controller, "Button 5");
-        triggerZ = searchComponentByName(controller, "Z Axis");
+        leftStickBtn = searchComponentByName(controller, linux ? "Left Thumb 3" : "Button 8");
+        rightStickBtn = searchComponentByName(controller, linux ? "Right Thumb 3" : "Button 9");
+        dpad = searchComponentByName(controller, linux ? "pov" : "Hat Switch");
+        aBtn = searchComponentByName(controller, linux ? "A" : "Button 0");
+        bBtn = searchComponentByName(controller, linux ? "B" : "Button 1");
+        xBtn = searchComponentByName(controller, linux ? "X" : "Button 2");
+        yBtn = searchComponentByName(controller, linux ? "Y" : "Button 3");
+        minusBtn = searchComponentByName(controller, linux ? "Select" : "Button 6");
+        plusBtn = searchComponentByName(controller, linux ? "Start" : "Button 7");
+        homeBtn = searchComponentByName(controller, linux ? "Mode" : "Button 6");
+        leftTrigBtn = searchComponentByName(controller, linux ? "Left Thumb" : "Button 4");
+        rightTrigBtn = searchComponentByName(controller, linux ? "Right Thumb" : "Button 5");
+        triggerZ = searchComponentByName(controller, linux ? "z" : "Z Axis"); // TODO: add z/rz support
 
         buttonComponents = new ArrayList<Component>();
         buttonComponents.add(leftStickBtn);
@@ -358,11 +360,12 @@ class JC200_DefaultLayout extends ControllerLayout {
         yBtn = searchComponentByName(controller, linux ? "Y" : "Button 4");
         minusBtn = searchComponentByName(controller, linux ? "Select" : "Button 10");
         plusBtn = searchComponentByName(controller, linux ? "Start" : "Button 11");
-        homeBtn = searchComponentByName(controller, linux ? "Unknown" : "Button 15");
         leftTrigBtn = searchComponentByName(controller, linux ? "Left Thumb" : "Button 6");
         rightTrigBtn = searchComponentByName(controller, linux ? "Right Thumb" : "Button 7");
         triggerZL = searchComponentByName(controller, linux ? "slider" : "Brake");
         triggerZR = searchComponentByName(controller, linux ? "slider" : "Accelerator");
+        homeBtn = searchComponentByName(controller, linux ? "Unknown" : "Button 15");
+        // If an error occurs b/c of homeBtn the controller is acting up.
 
         buttonComponents = new ArrayList<Component>();
         buttonComponents.add(leftStickBtn);
