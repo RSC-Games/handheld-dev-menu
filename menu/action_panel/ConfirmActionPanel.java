@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 
 import menu.BackButton;
+import menu.MenuOptionList;
 import menu.PanelPathPrint;
 import ui.UIBackdrop;
 import ui.UIBase;
@@ -13,15 +14,16 @@ import ui.UIPanel;
 import ui.UIText;
 import util.Version;
 
-public class ActionPanel extends UIPanel {
+public class ConfirmActionPanel extends UIPanel {
     /**
-     * Show an alert message on screen with a configurable action.
+     * Show a confirm dialog on screen with two custom actions
      * 
      * @param message Alert message
-     * @param actionElement Trigger action when okay is selected
+     * @param yesActionElement Trigger action when yes is selected
+     * @param noActionElement Trigger action when no is selected
      */
-    public ActionPanel(String message, ActionableElement actionElement) {
-        super("info");
+    public ConfirmActionPanel(String message, ActionableElement yesActionElement, ActionableElement noActionElement) {
+        super("confirm");
 
         root = new UIBase();
         new UIBackdrop(root);
@@ -33,7 +35,15 @@ public class ActionPanel extends UIPanel {
         ///////////////////////////// MENU OPTIONS /////////////////////////////////
         UIElement bodyArea = new UIClip(root, new Point(0, 60), new Point(800, 480 - 15));
         new UIText(bodyArea, new Point(20, 80), ">>> " + message, Color.WHITE, 12);
-        new UIText(bodyArea, new Point(30, 92), " < OKAY >", Color.white, 12);
-        bodyArea.addChild(actionElement);
+        MenuOptionList optionList = new MenuOptionList(bodyArea, new Point(30, 95));
+
+        // Force consistency.
+        yesActionElement.setText("Yes");
+        yesActionElement.setColor(Color.green);
+        noActionElement.setText("No");
+        noActionElement.setColor(Color.red);
+
+        noActionElement.registerWithMenu(optionList);
+        yesActionElement.registerWithMenu(optionList);
     }
 }

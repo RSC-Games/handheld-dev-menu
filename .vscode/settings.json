@@ -3,7 +3,7 @@
         "."
     ],
     "java.project.referencedLibraries": [
-        "lib\\jnativehook-2.2.2.jar",
-        "lib\\jinput-2.0.10.jar"
+        "lib/jnativehook-2.2.2.jar",
+        "lib/jinput-2.0.10.jar"
     ]
 }

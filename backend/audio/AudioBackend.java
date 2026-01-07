@@ -1,5 +1,7 @@
 package backend.audio;
 
+import java.util.ArrayList;
+
 import backend.CommandUtils;
 import backend.CommandUtils.CommandOutput;
 
@@ -102,9 +104,53 @@ public class AudioBackend {
          *  └─ Streams:
          *
          * Video (don't care)
+         * 
+         * Settings
+         *  └─ Default Configured Devices:
+         *          0. Audio/Sink    bluez_output.88_0E_85_85_44_B8.1
+         *          1. Audio/Source  alsa_input.usb-046d_HD_Webcam_C615_.....
          */
         static AudioSink[] listSinks() {
-            return null; // TODO: Parse all of the sinks and give a full list.
+            // For the human readable name, exclude -n at the end.
+            CommandOutput output = CommandUtils.executeCommandRetry("wpctl", "status", "-n");
+
+            // We only care about two regions for this: Audio and Settings.
+            // All of these are split by two newlines, which makes it pretty easy to parse.
+            String[] segments = output.getStdout().split("\n\n");
+
+            // wpctl outputs 4 segments: Clients, Audio, Video, and Settings (in this order).
+            String audioSinksList = segments[1].split("├─")[2];
+            String defaultsList = segments[3];
+
+            // Filter out the header and only capture each new sink, excluding the blank last line.
+            String[] sinks = audioSinksList.substring(audioSinksList.indexOf("\n"), 
+                                                      audioSinksList.lastIndexOf("\n")).split("\n\s+│\s+");
+
+            // Note: assuming the third index (first 2 are just for readability) is the default sink. 
+            // THIS ASSUMPTION MAY NOT ALWAYS HOLD!!!
+            String defaultSinkName = defaultsList.split("\n")[3];
+
+            ArrayList<AudioSink> foundSinks = new ArrayList<>();
+
+            for (String sink : sinks) {
+                if (sink.strip().equals(""))
+                    continue;
+
+                // Format: ID. NAME [vol: 0.xx]
+                String sinkID = sink.substring(0, sink.indexOf(".")).strip();
+                String sinkName = sink.substring(sink.indexOf(".") + 1, sink.lastIndexOf("[")).strip();
+
+                // Default sink is going to have the same name as the, well, default sink...
+                boolean isDefault = defaultSinkName.contains(sinkName);
+
+                foundSinks.add(new AudioSink(
+                    isDefault, 
+                    Integer.parseInt(sinkID), 
+                    sinkName)
+                );
+            }
+
+            return foundSinks.toArray(AudioSink[]::new);
         }
 
         /**
@@ -187,12 +233,12 @@ public class AudioBackend {
             executedSuccessfully(output);
         }
 
-        static void setMute(boolean muted) {
+        static void setMute(boolean shouldMute) {
             CommandOutput output = CommandUtils.executeCommandRetry(
                 "wpctl", 
-                "set-volume", 
+                "set-mute", 
                 DEFAULT_SINK, 
-                muted ? "1" : "0"
+                shouldMute ? "1" : "0"
             );
 
             executedSuccessfully(output);
@@ -203,9 +249,6 @@ public class AudioBackend {
                 System.err.println("failed to run wpctl (reason: not installed)");
                 return false;
             }
-
-            System.out.println("command output");
-            System.out.println(output.getStdout());
 
             if (output.getExitCode() != 0) {
                 System.err.println("failed to execute for some odd reason. stderr:");

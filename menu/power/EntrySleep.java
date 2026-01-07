@@ -4,6 +4,8 @@ import java.awt.Color;
 
 import menu.MenuEntry;
 import menu.MenuOptionList;
+import system.Config;
+import util.Log;
 
 class EntrySleep extends MenuEntry {
 
@@ -13,8 +15,13 @@ class EntrySleep extends MenuEntry {
 
     @Override
     public void execute() {
+        if (!Config.ENABLE_POWER_MANAGEMENT) {
+            Log.logInfo("menu.pm: power management requested but disabled");
+            return;
+        }
+
         // TODO: Sleep mode is the job of the embedded controller.
-        System.out.println("Not implemented; should tell EC to prepare for sleep mode");
-        System.out.println("then execute \"systemctl idle\"");
+        Log.logWarning("pm.sleep: Not implemented; should tell EC to prepare for sleep mode");
+        // then execute \"systemctl idle\"
     }
 }

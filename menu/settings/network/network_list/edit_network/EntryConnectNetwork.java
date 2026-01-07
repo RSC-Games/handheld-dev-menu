@@ -6,8 +6,8 @@ import backend.NetworkBackend;
 import backend.network.SavedNetwork;
 import menu.MenuEntry;
 import menu.MenuOptionList;
-import menu.action_panel.ActionPanel;
-import menu.action_panel.ActionableElement;
+import menu.action_panel.NotificationActionPanel;
+import menu.action_panel.DefaultActionElement;
 import system.PanelManager;
 
 class EntryConnectNetwork extends MenuEntry {
@@ -21,13 +21,8 @@ class EntryConnectNetwork extends MenuEntry {
     @Override
     public void execute() {
         NetworkBackend.reconnect(network);
-        PanelManager.getPanelManager().pushPanel(new ActionPanel("Connecting! Press OKAY to return to the menu", 
-            new ActionableElement() {
-                protected void trigger() {
-                    for (int i = 0; i < 3; i++)
-                        PanelManager.getPanelManager().popPanel();
-                }
-            }
+        PanelManager.getPanelManager().pushPanel(new NotificationActionPanel("Connecting! Press OKAY to return to the menu",
+            new DefaultActionElement(3)
         ));
     }
 }

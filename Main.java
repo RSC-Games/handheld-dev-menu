@@ -1,5 +1,5 @@
 // Handheld System Menu for the RSC Games Pi-based handheld 
-// Copyright (C) 2025  sRGB
+// Copyright (C) 2025-2026  sRGB
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License 2.0 as published by
@@ -25,6 +25,7 @@ import system.InputManager;
 import system.MainWindow;
 import system.PanelManager;
 import ui.UIPanel;
+import util.Log;
 import util.Utils;
 
 public class Main {
@@ -40,7 +41,7 @@ public class Main {
         UIPanel mainMenu = new MainMenu();
         panelManager.pushPanel(mainMenu);
 
-        // Simple render loop. Everythign is managed in here.
+        // Simple render loop. Everything is managed in here.
         try {
             window.display();
 
@@ -65,6 +66,9 @@ public class Main {
             }
         }
         catch (Exception ie) {
+            Log.logFatal("unhandled exception caught in main event loop");
+            Log.logException(ie);
+
             menuExceptionHandler(window, ie);
             window.cleanUp();
             System.exit(-1);
@@ -83,6 +87,12 @@ public class Main {
         NetworkBackend.runWaitForNetwork();
     }
 
+    /**
+     * Show the exception details on screen to potentially make debugging easier.
+     * 
+     * @param window The active window for rendering (not any overlays)
+     * @param ie The exception to print.
+     */
     private static void menuExceptionHandler(MainWindow window, Exception ie) {
         System.out.print("Exception in thread " + Thread.currentThread().getName() + " ");
         ie.printStackTrace();

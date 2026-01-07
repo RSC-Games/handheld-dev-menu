@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
+import util.Log;
 
 abstract class ControllerLayout {
     static final float DPAD_BUTTON_RANGE = 0.125f;
@@ -31,8 +32,8 @@ abstract class ControllerLayout {
     ArrayList<Component> buttonComponents;
 
     public static ControllerLayout getMapping(Controller controller) {
-        System.out.println("mapping " + controller.getName());
-        System.out.println("controller info " + controller.getType());
+        Log.logInfo("gamepad: mapping " + controller.getName());
+        Log.logVerbose("gamepad: controller info " + controller.getType());
 
         switch (controller.getName()) {
             case "Controller (XBOX 360 For Windows)": // JC200 reports this in Xbox mode.
@@ -44,7 +45,7 @@ abstract class ControllerLayout {
             case "Wireless Controller": // Dualshock 4
                 return new DualShock4_DefaultLayout(controller);
             default:
-                System.err.println("error: unknown controller type " + controller.getName());
+                Log.logError("gamepad: couldn't map unknown controller type: " + controller.getName());
         }
         return null;
     }
@@ -57,7 +58,7 @@ abstract class ControllerLayout {
                 return component;
         }
 
-        System.err.printf("Warning: no component \"%s\" found on gamepad \"%s\"\n", name, controller.getName());
+        Log.logWarning(String.format("gamepad: no component \"%s\" found on gamepad \"%s\"\n", name, controller.getName()));
         return null;
     }
 
@@ -235,10 +236,10 @@ abstract class ControllerLayout {
      */
     //@SuppressWarnings("unused")
     static void printMappingInformation(Controller controller) {
-        System.out.println("************************************************************");
+        Log.logVerbose("gamepad: ************************************************************");
 
         for (Component component : controller.getComponents())
-            System.out.println(component.getName() + ": " + component.getPollData() + " (dead " + component.getDeadZone() + ")");
+            Log.logVerbose("gamepad: " + component.getName() + ": " + component.getPollData() + " (dead " + component.getDeadZone() + ")");
     }
 }
 

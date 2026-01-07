@@ -6,8 +6,8 @@ import backend.NetworkBackend;
 import backend.network.SavedNetwork;
 import menu.MenuEntry;
 import menu.MenuOptionList;
-import menu.action_panel.ActionPanel;
-import menu.action_panel.ActionableElement;
+import menu.action_panel.NotificationActionPanel;
+import menu.action_panel.DefaultActionElement;
 import system.PanelManager;
 
 class EntryDisableNetwork extends MenuEntry {
@@ -22,11 +22,9 @@ class EntryDisableNetwork extends MenuEntry {
     public void execute() {
         NetworkBackend.disableNetwork(network);
 
-        PanelManager.getPanelManager().pushPanel(new ActionPanel("Network disabled!", new ActionableElement() {
-            protected void trigger() {
-                for (int i = 0; i < 3; i++)
-                    PanelManager.getPanelManager().popPanel();
-            }
-        }));
+        PanelManager.getPanelManager().pushPanel(
+            new NotificationActionPanel("Network disabled!",
+            new DefaultActionElement(3)
+        ));
     }
 }

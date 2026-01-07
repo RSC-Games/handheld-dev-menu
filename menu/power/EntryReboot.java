@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import menu.MenuEntry;
 import menu.MenuOptionList;
+import system.Config;
+import util.Log;
 
 class EntryReboot extends MenuEntry {
 
@@ -14,9 +16,13 @@ class EntryReboot extends MenuEntry {
 
     @Override
     public void execute() {
-        System.out.println("Need to execute \"systemctl reboot\"");
+        if (!Config.ENABLE_POWER_MANAGEMENT) {
+            Log.logInfo("menu.pm: power management requested but disabled");
+            return;
+        }
 
         try {
+            Log.logVerbose("menu.pm: executing \"systemctl reboot\"");
             Runtime.getRuntime().exec(new String[] {"systemctl", "reboot"});
         }
         catch (IOException ie) {

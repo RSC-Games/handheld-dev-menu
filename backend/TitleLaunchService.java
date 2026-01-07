@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import backend.title.TitleInfo;
+import util.Log;
 import util.Utils;
 
 /**
@@ -195,7 +196,7 @@ public class TitleLaunchService {
 
         boolean startProcess() {
             ProcessBuilder titleToLaunch = new ProcessBuilder(thisTitle.args);
-            System.out.println(titleToLaunch.command());
+            Log.logInfo("title.service: running title launch command " + titleToLaunch.command());
             titleToLaunch.inheritIO();
 
             try {

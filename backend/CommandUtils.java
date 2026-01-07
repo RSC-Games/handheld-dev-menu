@@ -1,6 +1,10 @@
 package backend;
 
+import system.Config;
 import java.io.IOException;
+import java.util.Arrays;
+
+import util.Log;
 
 public class CommandUtils {
         /**
@@ -19,10 +23,13 @@ public class CommandUtils {
                 if (output != null)
                     return output;
 
-                System.out.println("Warning: retrying command " + args[0] + " <args redacted>");
-            } 
+                Log.logWarning("command_engine: retrying command " + args[0] + (!Config.SHOW_COMMAND_ARGS_IN_LOGS ? 
+                               Arrays.toString(args) : " <args redacted>"));
+            }
+            // Unable to retry command execution; return no output.
             catch (IllegalStateException ie) {
-                //ie.printStackTrace();
+                Log.logError("command_engine: unable to execute provided command. details below");
+                Log.logException(ie);
                 return null;
             }
         }
@@ -40,13 +47,11 @@ public class CommandUtils {
             );
         }
         catch (IOException ie) {
-            //System.out.println("An error occurred while executing the command:");
-            //ie.printStackTrace();
             throw new IllegalStateException("Unable to execute command: " + args[0], ie);
         }
         catch (InterruptedException ie) {
-            System.out.println("Interrupted during execution");
-            ie.printStackTrace();
+            Log.logWarning("command_engine: thread sent interrupt during command execution- possible bug");
+            Log.logException(ie);
         }
 
         return null;

@@ -7,6 +7,7 @@ import backend.audio.AudioBackend;
 import menu.MenuEntry;
 import menu.MenuOptionList;
 import ui.UIKeyValueText;
+import util.Log;
 
 class EntryMuteOutput extends MenuEntry {
     private static final int FRAMES_UPDATE = 30;
@@ -37,6 +38,7 @@ class EntryMuteOutput extends MenuEntry {
     @Override
     public void execute() {
         AudioBackend.setMute(!this.muted);
-        System.out.println("is muted: " + AudioBackend.getMuted());
+        Log.logVerbose("menu.audio: is muted: " + AudioBackend.getMuted());
+        this.muted = AudioBackend.getMuted();
     }
 }

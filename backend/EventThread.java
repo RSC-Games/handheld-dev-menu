@@ -2,6 +2,7 @@ package backend;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
+import util.Log;
 import util.Utils;
 
 /**
@@ -178,10 +179,10 @@ final class EventThread implements Runnable {
     private EVTResponse execute(EVTCommand command) {
         switch (command.command) {
             case "wpa_cli_status":
-                //System.out.println("executing wpa_cli_status");
+                Log.logVerbose("event_handler: async executing wpa_cli_status");
                 return EventThreadTrampolines.wpaCliStatusTrampoline(command);
             default:
-                System.out.println("nothing to do; unknown command " + command.command);
+                Log.logInfo("event_handler: issued unrecognized command " + command.command);
         }
 
         return null;

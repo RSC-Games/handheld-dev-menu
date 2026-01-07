@@ -5,8 +5,8 @@ import java.awt.Color;
 import backend.network.AccessPoint;
 import menu.MenuEntry;
 import menu.MenuOptionList;
-import menu.action_panel.ActionPanel;
-import menu.action_panel.ActionableElement;
+import menu.action_panel.NotificationActionPanel;
+import menu.action_panel.DefaultActionElement;
 import system.PanelManager;
 
 class EntryEnterPSK extends MenuEntry {
@@ -20,11 +20,9 @@ class EntryEnterPSK extends MenuEntry {
     // TODO: PSK support
     @Override
     public void execute() {
-        PanelManager.getPanelManager().pushPanel(new ActionPanel("ERROR: PSK entry not implemented!", new ActionableElement() {
-            protected void trigger() {
-                for (int i = 0; i < 3; i++)
-                    PanelManager.getPanelManager().popPanel();
-            }
-        }));
+        PanelManager.getPanelManager().pushPanel(new NotificationActionPanel(
+            "ERROR: PSK entry not implemented!",
+            new DefaultActionElement(3)
+        ));
     }
 }

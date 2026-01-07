@@ -5,8 +5,8 @@ import java.awt.Color;
 import backend.network.AccessPoint;
 import menu.MenuEntry;
 import menu.MenuOptionList;
-import menu.action_panel.ActionPanel;
-import menu.action_panel.ActionableElement;
+import menu.action_panel.NotificationActionPanel;
+import menu.action_panel.DefaultActionElement;
 import system.PanelManager;
 
 class EntryWPS extends MenuEntry {
@@ -20,13 +20,9 @@ class EntryWPS extends MenuEntry {
     // TODO: WPS support.
     @Override
     public void execute() {
-        PanelManager.getPanelManager().pushPanel(new ActionPanel("ERROR: WPS not yet supported", 
-            new ActionableElement() {
-                protected void trigger() {
-                    for (int i = 0; i < 3; i++)
-                        PanelManager.getPanelManager().popPanel();
-                }
-            }
+        PanelManager.getPanelManager().pushPanel(new NotificationActionPanel(
+            "ERROR: WPS not yet supported", 
+            new DefaultActionElement(3)
         ));
     }
 }

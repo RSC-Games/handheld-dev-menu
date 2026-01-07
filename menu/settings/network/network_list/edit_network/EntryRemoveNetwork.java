@@ -6,8 +6,8 @@ import backend.NetworkBackend;
 import backend.network.SavedNetwork;
 import menu.MenuEntry;
 import menu.MenuOptionList;
-import menu.action_panel.ActionPanel;
-import menu.action_panel.ActionableElement;
+import menu.action_panel.NotificationActionPanel;
+import menu.action_panel.DefaultActionElement;
 import system.PanelManager;
 
 class EntryRemoveNetwork extends MenuEntry {
@@ -21,11 +21,9 @@ class EntryRemoveNetwork extends MenuEntry {
     @Override
     public void execute() {
         NetworkBackend.forget(network);
-        PanelManager.getPanelManager().pushPanel(new ActionPanel("Network forgotten!", new ActionableElement() {
-            protected void trigger() {
-                for (int i = 0; i < 3; i++)
-                    PanelManager.getPanelManager().popPanel();
-            }
-        }));
+        PanelManager.getPanelManager().pushPanel(
+            new NotificationActionPanel("Network forgotten!", 
+            new DefaultActionElement(3)
+        ));
     }
 }

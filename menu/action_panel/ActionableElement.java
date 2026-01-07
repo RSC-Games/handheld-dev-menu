@@ -1,20 +1,16 @@
 package menu.action_panel;
 
-import java.awt.Point;
+import java.awt.Color;
 
-import system.InputManager;
-import ui.UIBase;
+import menu.MenuEntry;
 
-public abstract class ActionableElement extends UIBase {
+public abstract class ActionableElement extends MenuEntry {
     public ActionableElement() {
-        super(null, new Point());
+        super(null, "", Color.white, 12);
     }
 
-    @Override
-    protected void tick() {
-        // Go back a menu (if possible)
-        if (InputManager.getInputManager().confirm())
-            trigger();
+    public void execute() {
+        trigger();
     }
 
     protected abstract void trigger();

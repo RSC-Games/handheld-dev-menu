@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import util.Log;
+
 /**
  * Exposes the system backlight as a clean API for the menu system to use.
  * Converts the internal scaling from 45-255 (40 when dimmed) to 0-100%.
@@ -56,7 +58,7 @@ public class BacklightService {
      */
     public static int getScaledBrightness() {
         int rawBrightness = getRawBrightness();
-        System.out.println("Got raw brightness " + rawBrightness);
+        Log.logVerbose("display.backlight: got raw brightness " + rawBrightness);
         return Math.round(mapRange(MIN_BRIGHTNESS, MAX_BRIGHTNESS, 1, 100, rawBrightness));
     }
 
@@ -106,7 +108,7 @@ public class BacklightService {
         }
         catch (FileNotFoundException ie) {
             ie.printStackTrace();
-            System.err.println("Failed to set file " + filePath + " data " + data);
+            System.err.println("Warning: Failed to set file " + filePath + " data " + data);
         }
     }
 
@@ -121,7 +123,7 @@ public class BacklightService {
         }
         catch (FileNotFoundException ie) {
             ie.printStackTrace();
-            System.err.println("Failed to read file " + filePath);
+            System.err.println("Warning: Failed to read file " + filePath);
             return "45";
         }
     }

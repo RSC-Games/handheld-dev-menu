@@ -16,6 +16,7 @@ import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
 import net.java.games.input.Rumbler;
 import net.java.games.input.Version;
+import util.Log;
 import util.Utils;
 
 /**
@@ -45,7 +46,7 @@ public class InputManager implements KeyListener, NativeKeyListener {
         
         activeManager = this;
 
-        System.out.println("Dev Menu: JInput version " + Version.getVersion());
+        Log.logInfo("input: Dev Menu: JInput version " + Version.getVersion());
         GlobalScreen.addNativeKeyListener(this);
 
         // Set up oneshot key buffers.
@@ -53,7 +54,7 @@ public class InputManager implements KeyListener, NativeKeyListener {
         activeKeys = new ArrayList<>();
 
         if (!connectController())
-            System.err.println("Warning: failed to connect/map controller");
+            Log.logWarning("input: failed to connect/map controller");
     }
 
     /**
@@ -136,7 +137,7 @@ public class InputManager implements KeyListener, NativeKeyListener {
         Rumbler[] rumblers = activeController.getRumblers();
 
         if (rumblers.length == 0)
-            System.out.println("Warning: no rumblers detected");
+            Log.logInfo("input: no rumblers detected");
         
         for (Rumbler rumbler : rumblers) 
             rumbler.rumble(intensity);
@@ -180,7 +181,7 @@ public class InputManager implements KeyListener, NativeKeyListener {
 
         // Unable to map the controller for some reason?
         if (this.mapping == null) {
-            System.err.println("Unable to map gamepad. Disabling gamepad input.");
+            Log.logInfo("input: unable to map gamepad; disabling input");
             activeController = null;
             return false;
         }
@@ -250,11 +251,11 @@ public class InputManager implements KeyListener, NativeKeyListener {
                 return;
             }
 
-            System.out.println("Controller reconnected");
+            Log.logVerbose("input: controller reconnected");
         }
 
         if (!activeController.poll()) {
-            System.out.println("Controller disconnected.");
+            Log.logVerbose("input: controller disconnected");
             rescanCounter = RESCAN_INTERVAL;
             activeController = null;
             mapping = null;

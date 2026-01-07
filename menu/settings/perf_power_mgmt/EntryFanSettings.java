@@ -4,12 +4,11 @@ import java.awt.Color;
 
 import menu.MenuEntry;
 import menu.MenuOptionList;
-import menu.action_panel.ActionPanel;
-import menu.action_panel.ActionableElement;
+import menu.action_panel.NotificationActionPanel;
+import menu.action_panel.DefaultActionElement;
 import system.PanelManager;
 
 class EntryFanSettings extends MenuEntry {
-
     // TODO: is a submenu; needs a submenu
     public EntryFanSettings(MenuOptionList parent) {
         super(parent, "Fan Settings", Color.white, 12);
@@ -17,12 +16,9 @@ class EntryFanSettings extends MenuEntry {
 
     @Override
     public void execute() {
-        PanelManager.getPanelManager().pushPanel(new ActionPanel("Changing fan settings not supported",
-            new ActionableElement() {
-                protected void trigger() {
-                    PanelManager.getPanelManager().popPanel();
-                }
-            }
+        PanelManager.getPanelManager().pushPanel(new NotificationActionPanel(
+            "Changing fan settings not supported",
+            new DefaultActionElement()
         ));
     }
 }

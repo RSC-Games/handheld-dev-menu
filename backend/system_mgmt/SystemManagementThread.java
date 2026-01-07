@@ -2,6 +2,7 @@ package backend.system_mgmt;
 
 import java.util.ArrayList;
 
+import util.Log;
 import util.Utils;
 
 // TODO: Run system updates in the background once requested. (Note: will be done on the event thread)
@@ -80,13 +81,13 @@ public class SystemManagementThread implements Runnable {
 
     private synchronized void pushJob(SystemManagementJob job) {
         if (Thread.currentThread().equals(managementThread))
-            throw new IllegalStateException("cannot synchronously push job from system thread!");
+            throw new IllegalStateException("cannot synchronously push job from management thread!");
 
-        // Currently being modified
+        // Currently being modified; wait for release
         while (jobs == null)
             Utils.sleepms(1);
 
-        System.out.println("pushing job");
+        Log.logVerbose("sm_thread: pushing synchronous job " + job);
         jobs.add(job);
     }
 
@@ -94,13 +95,14 @@ public class SystemManagementThread implements Runnable {
         if (!Thread.currentThread().equals(managementThread))
             throw new IllegalStateException("deferred push is not thread safe!");
 
-        System.out.println("pushing deferred job");
+        Log.logVerbose("sm_thread: pushing deferred job " + job);
         deferredJobs.add(job);
     }
 
     public void run() {
         while (true) {
-            // These jobs aren't hugely time sensitive, so give time back to the OS.
+            // These jobs aren't hugely time sensitive, so give time back to other threads
+            // (The target hardware only has a few cores anyway)
             Utils.sleepms(33);
 
             executeJobs();
@@ -117,6 +119,7 @@ public class SystemManagementThread implements Runnable {
 
         // Possible race condition? (functions should be locking anyway due to synchronized
         // so this shouldn't be an issue)
+        // Other than language features java doesn't have any intrinsics afaik
         ArrayList<SystemManagementJob> jobsCopy = this.jobs;
         this.jobs = null;
 
@@ -136,12 +139,11 @@ public class SystemManagementThread implements Runnable {
             }
             catch (SMStopExecution ie) {
                 // Job has explicitly requested not to be rescheduled.
-                System.out.println("queued job requested explicit cancellation");
+                Log.logVerbose("sm_thread: job " + job + " requested termination; removing from queue");
             }
             catch (Exception ie) {
-                System.err.println("fatal exception in job; force unqueuing. exception details:");
-                System.err.print("Exception in thread " + Thread.currentThread().getName() + " ");
-                ie.printStackTrace();
+                Log.logError("sm_thread: fatal exception in job; force unqueuing. exception details:");
+                Log.logException(ie);
             }
         }
 

@@ -8,8 +8,9 @@ import backend.network.AccessPoint;
 import menu.BackButton;
 import menu.MenuOptionList;
 import menu.PanelPathPrint;
-import menu.action_panel.ActionPanel;
+import menu.action_panel.NotificationActionPanel;
 import menu.action_panel.ActionableElement;
+import menu.action_panel.DefaultActionElement;
 import system.PanelManager;
 import ui.UIBackdrop;
 import ui.UIBase;
@@ -41,13 +42,9 @@ public class ConnectionMenu extends UIPanel {
         // Depending on the network type we may or may not need a password.
         // WEP unsupported.
         if (ap.isWEP()) {
-            PanelManager.getPanelManager().pushPanel(new ActionPanel("WEP network not supported!", 
-                new ActionableElement() {
-                    protected void trigger() {
-                        for (int i = 0; i < 3; i++)
-                            PanelManager.getPanelManager().popPanel();
-                    }
-                }
+            PanelManager.getPanelManager().pushPanel(new NotificationActionPanel(
+                "WEP network not supported!", 
+                new DefaultActionElement(3)
             ));
         }
 
@@ -61,7 +58,7 @@ public class ConnectionMenu extends UIPanel {
 
         // Open network (just automatically connect)
         else {
-            PanelManager.getPanelManager().pushPanel(new ActionPanel("Connecting to open network", 
+            PanelManager.getPanelManager().pushPanel(new NotificationActionPanel("Connecting to open network", 
                 new ActionableElement() {
                     protected void trigger() {
                         NetworkBackend.associate(ap, "");

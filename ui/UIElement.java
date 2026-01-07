@@ -73,6 +73,16 @@ public abstract class UIElement {
         this.children.add(child);
     }
 
+    /**
+     * Determine if a given UIElement is currently the child of this element.
+     * 
+     * @param child The child to test
+     * @return Whether the UIElement is in fact a child of this one.
+     */
+    public final boolean hasChild(UIElement child) {
+        return this.children.contains(child);
+    }
+
     protected abstract void tick();
     protected abstract void draw(Point drawLoc, Graphics g);
 

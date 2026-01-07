@@ -9,6 +9,8 @@ import backend.network.SavedNetwork;
 import backend.system_mgmt.SMCallbackFunction;
 import backend.system_mgmt.SMStopExecution;
 import backend.system_mgmt.SystemManagementThread;
+import system.Config;
+import util.Log;
 import backend.CommandUtils.CommandOutput;
 
 /**
@@ -78,7 +80,6 @@ public class NetworkBackend {
      * 
      * @return If this card is enabled or not.
      */
-    //static boolean fakeEnabled = false;
     public static boolean wlanEnabled() {
         CommandOutput output = CommandUtils.executeCommandRetry("rfkill");
         // /*new CommandOutput("ID TYPE DEVICE        SOFT        HARD\n 0 wlan phy0   unblocked unblocked\n 1 wlan phy0   unblocked unblocked", null, 0)
@@ -91,12 +92,12 @@ public class NetworkBackend {
 
         // Ensure this is the first wlan object.
         if (!status[1].equals("wlan")) {
-            System.out.println("unexpected device found: got " + status[1]);
-            System.out.println(output.getStdout());
+            Log.logWarning("network_backend: unexpected device found; got " + status[1]);
+            Log.logVerbose("network_backend: command output: " + output.getStdout());
             return false;
         }
 
-        return status[3].equals("unblocked"); //fakeEnabled;
+        return status[3].equals("unblocked");
     }
 
     /**
@@ -270,22 +271,23 @@ public class NetworkBackend {
 
     static void rundhcpcd() {
         // Automatically handle obtaining an IP address
-        System.out.println("pushing dhcp job");
+        Log.logVerbose("network_backend: pushing job dhcp_get_address_on_wifi_up");
 
         SMCallbackFunction cb = new SMCallbackFunction() {
             public void run() throws SMStopExecution {
-                System.out.println("running dhcpcd...");
+                Log.logVerbose("network_backend: trigger condition met; executing dhcpcd...");
 
+                // TODO: Don't rely on sudo
                 CommandUtils.executeCommandRetry("sudo", "dhcpcd", "-x");
                 CommandOutput output = CommandUtils.executeCommandRetry("sudo", "dhcpcd");
 
                 if (output.getExitCode() == 0) {
-                    System.out.println("network associated; got ip");
+                    Log.logVerbose("network_backend: successfully obtained ip for network");
                     runWaitForNetwork();
                     throw new SMStopExecution();
                 }
 
-                System.out.println("failed to determine ip; retrying in 5s");
+                Log.logInfo("network_backend: failed to obtain dhcp lease; retrying in 5s");
             }
         };
 
@@ -299,7 +301,12 @@ public class NetworkBackend {
      * Starts the dhcpcd assoc thread after network is up and online.
      */
     public static void runWaitForNetwork() {
-        System.out.println("pushing wait for network");
+        if (!Config.ENABLE_NETWORK_BACKEND) {
+            Log.logInfo("network_backend: not pushing ap callback; network support disabled in build");
+            return;
+        }
+
+        Log.logVerbose("network_backend: pushing job wait_for_network_assoc");
 
         HashMap<String, String> flags = status0();
         boolean initialLinkState = isConnected0(flags) && hasIP0(flags);
@@ -321,7 +328,7 @@ public class NetworkBackend {
             private void runLinkDown() {
                 // Request an IP address.
                 if (isConnected()) {
-                    System.out.println("link up, starting dhcp service");
+                    Log.logVerbose("network_backend: network up; obtaining dhcp lease in background");
                     rundhcpcd();
                     throw new SMStopExecution();
                 }
@@ -335,7 +342,7 @@ public class NetworkBackend {
              */
             private void runLinkUp() {
                 if (!isConnected()) {
-                    System.out.println("link down, entering wait mode");
+                    Log.logVerbose("network_backend: network down; passively waiting for network reassoc");
                     this.modeLinkUp = false;
                 }
             }
@@ -759,7 +766,6 @@ public class NetworkBackend {
          * @return Whether it is the banner.
          */
         private static boolean isWpaCliBanner(String line) {
-            //System.out.println("found banner " + line.strip().matches("Selected interface '.*'"));
             return line.strip().matches("Selected interface '.*'");
         }
 

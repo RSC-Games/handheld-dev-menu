@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import menu.MenuEntry;
 import menu.MenuOptionList;
-import menu.action_panel.ActionPanel;
-import menu.action_panel.ActionableElement;
+import menu.action_panel.NotificationActionPanel;
+import menu.action_panel.DefaultActionElement;
 import system.PanelManager;
 
 class EntryOverclockSettings extends MenuEntry {
@@ -17,12 +17,9 @@ class EntryOverclockSettings extends MenuEntry {
 
     @Override
     public void execute() {
-        PanelManager.getPanelManager().pushPanel(new ActionPanel("Overclocking not supported",
-            new ActionableElement() {
-                protected void trigger() {
-                    PanelManager.getPanelManager().popPanel();
-                }
-            }
+        PanelManager.getPanelManager().pushPanel(new NotificationActionPanel(
+            "Overclocking not supported",
+            new DefaultActionElement()
         ));
     }
 }

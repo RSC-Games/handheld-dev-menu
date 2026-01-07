@@ -6,8 +6,9 @@ import backend.TitleLaunchService;
 import backend.title.TitleInfo;
 import menu.MenuEntry;
 import menu.MenuOptionList;
-import menu.action_panel.ActionPanel;
+import menu.action_panel.NotificationActionPanel;
 import menu.action_panel.ActionableElement;
+import menu.action_panel.DefaultActionElement;
 import system.PanelManager;
 
 class GameMenuEntry extends MenuEntry {
@@ -27,11 +28,11 @@ class GameMenuEntry extends MenuEntry {
 
     @Override
     public void execute() {
-        ActionPanel panel;
+        NotificationActionPanel panel;
 
         if (!TitleLaunchService.isTitleRunning()) {
             boolean launched = TitleLaunchService.launchTitle(title);
-            panel = new ActionPanel(
+            panel = new NotificationActionPanel(
                 (launched ? "Launched title" : "Error: Failed to launch title") + " " + title.entryName, 
                 new ActionableElement() {
                     protected void trigger() {
@@ -52,13 +53,9 @@ class GameMenuEntry extends MenuEntry {
                 return;
             }
 
-            panel = new ActionPanel(
+            panel = new NotificationActionPanel(
                 "Title already running! Please close (with X) before starting a new one.", 
-                new ActionableElement() {
-                    protected void trigger() {
-                        PanelManager.getPanelManager().popPanel();
-                    }
-                }
+                new DefaultActionElement()
             );
         }
 

@@ -4,8 +4,7 @@ import java.awt.Color;
 
 import menu.MenuEntry;
 import menu.MenuOptionList;
-import menu.action_panel.ActionPanel;
-import menu.action_panel.ActionableElement;
+import menu.settings.display_audio.sinks_menu.AudioSinksMenu;
 import system.PanelManager;
 
 class EntryAudioEndpoint extends MenuEntry {
@@ -18,12 +17,6 @@ class EntryAudioEndpoint extends MenuEntry {
 
     @Override
     public void execute() {
-        PanelManager.getPanelManager().pushPanel(new ActionPanel("Device selection not implemented",
-            new ActionableElement() {
-                protected void trigger() {
-                    PanelManager.getPanelManager().popPanel();
-                }
-            }
-        ));
+        PanelManager.getPanelManager().pushPanel(new AudioSinksMenu());
     }
 }

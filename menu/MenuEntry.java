@@ -14,9 +14,23 @@ public abstract class MenuEntry extends UIText {
     float curLerpX;
 
     public MenuEntry(MenuOptionList parent, String text, Color color, int fontSize) {
-        super(parent, new Point(), text, color, fontSize);
-        parent.addMenuOption(this);
-        origOffset = new Point(this.location);
+        super(parent, new Point(0, 50), text, color, fontSize);
+        this.registerWithMenu(parent);
+    }
+
+    /**
+     * Intended for lazy binding a menu entry to a menu. Should not be called more than once
+     * or there's a high risk of having multiple menus share the same button.
+     * 
+     * @param parent The parent to bind to.
+     */
+    public void registerWithMenu(MenuOptionList parent) {
+        if (parent != null) {
+            if (!parent.hasChild(this))
+                parent.addChild(this);
+
+            parent.addMenuOption(this);
+        }
     }
 
     protected final void tick() {
@@ -31,18 +45,29 @@ public abstract class MenuEntry extends UIText {
 
     protected void menuTick() {}
 
-    public final void register(Point offset) {
-        this.origOffset = new Point(this.location);
+    /**
+     * Prepare the UI element for being used in a linked menu system.
+     * 
+     * @param offset The relative vertical offset from the menu starting point.
+     */
+    final void register(Point offset) {
         this.location = offset;
         this.target = new Point(offset);
+        this.origOffset = new Point(this.location);
     }
 
-    public void select() {
+    /**
+     * Event handler for when this option comes under focus.
+     */
+    void select() {
         this.target = new Point(origOffset.x + 12, origOffset.y);
         this.isSelected = true;
     }
 
-    public void unselect() {
+    /**
+     * Event handler for when this option is no longer under focus.
+     */
+    void unselect() {
         this.target = origOffset;
         this.isSelected = false;
     }
@@ -57,5 +82,8 @@ public abstract class MenuEntry extends UIText {
         return a + t * (b - a);
     }
 
+    /**
+     * Event triggered when this option is pressed/triggered.
+     */
     public abstract void execute();
 }
