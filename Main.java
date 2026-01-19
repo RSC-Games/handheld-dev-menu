@@ -70,6 +70,7 @@ public class Main {
             Log.logException(ie);
 
             menuExceptionHandler(window, ie);
+            // TODO: close logfile and clean up logger.
             window.cleanUp();
             System.exit(-1);
         }
@@ -94,8 +95,10 @@ public class Main {
      * @param ie The exception to print.
      */
     private static void menuExceptionHandler(MainWindow window, Exception ie) {
+        System.out.print("\033[31m");
         System.out.print("Exception in thread " + Thread.currentThread().getName() + " ");
         ie.printStackTrace();
+        System.out.print("\033[0m");
 
         // Format the stack trace for displaying on screen.
         StackTraceElement[] elements = ie.getStackTrace();

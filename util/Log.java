@@ -24,11 +24,16 @@ public class Log {
 
         File logPath = new File("~/.local/share/rsc-games/menu-logs");
 
-        if (!logPath.exists())
+        if (!logPath.exists()) {
+            System.out.println("creating log directory");
             logPath.mkdirs();
+        }
+
+        File logFilePath = new File(logPath.getPath() + "/log-" + LocalDateTime.now() + ".log");
+        System.out.println("opening log file " + logFilePath.getAbsolutePath());
 
         try {
-            logWriter = new FileWriter(new File(logPath.getPath() + "/log-" + LocalDateTime.now() + ".log"));
+            logWriter = new FileWriter(logFilePath);
             logWriter.append("==== STARTED LOG FILE WRITER ====\n");
         }
         catch (IOException ie) {
@@ -100,8 +105,8 @@ public class Log {
             return;
 
         // Color it yellow.
-        message = String.format("\033[33mW [%d]: %s\033[0m\n", message);
-        System.out.print(message);
+        message = String.format("\033[33mW [%d]: %s\033[0m\n", getMillis(), message);
+        System.err.print(message);
 
         try {
             logWriter.append(message);
@@ -121,8 +126,8 @@ public class Log {
             return;
 
         // Color it red.
-        message = String.format("\033[31mE [%d]: %s\033[0m\n", message);
-        System.out.print(message);
+        message = String.format("\033[31mE [%d]: %s\033[0m\n", getMillis(), message);
+        System.err.print(message);
 
         try {
             logWriter.append(message);
@@ -139,8 +144,8 @@ public class Log {
      */
     public static synchronized void logFatal(String message) {
         // Color it red.
-        message = String.format("\033[31,103mFATAL ERROR [%d]: %s\033[0m\n", message);
-        System.out.print(message);
+        message = String.format("\033[31;103mFATAL ERROR [%d]: %s\033[0m\n", getMillis(), message);
+        System.err.print(message);
 
         try {
             logWriter.append(message);
@@ -152,7 +157,7 @@ public class Log {
 
     public static synchronized void logException(Exception ie) {
         try {
-            logWriter.append("\n============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================");
+            logWriter.append("\n============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================\n");
 
             // Format the stack trace for displaying on screen.
             StackTraceElement[] elements = ie.getStackTrace();
@@ -160,10 +165,13 @@ public class Log {
             exceptionLines[0] = "Exception in thread " + Thread.currentThread().getName() 
                                 + " " + ie.getClass().getName() + " " + ie.getMessage();
 
+            for (int i = 0; i < elements.length; i++)
+                exceptionLines[i + 1] = "      at " + elements[i].toString();
+
             for (String line : exceptionLines)
                 logWriter.append(line + "\n");
 
-            logWriter.append("\n===================== End of backtrace =========================");
+            logWriter.append("\n===================== End of backtrace =========================\n");
         }
         catch (IOException exc) {
             System.err.println("Warning: failed to write backtrace to logfile!");

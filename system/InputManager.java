@@ -220,11 +220,11 @@ public class InputManager implements KeyListener, NativeKeyListener {
             plugins.setAccessible(true);
             ((Collection<?>)plugins.get(environment)).clear();
         }
-        catch (NoSuchFieldException ie) {
-            System.err.println("cannot locate field to overwrite!");
-        }
         catch (IllegalAccessException ie) {
-            System.err.println("unable to unlock field");
+            Log.logInfo("input: controller module: unable to unlock field");
+        }
+        catch (NoSuchFieldException ie) {
+            Log.logInfo("input: controller module: cannot locate field to overwrite!");
         }
     }
 

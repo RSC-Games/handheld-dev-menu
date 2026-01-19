@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import util.Log;
+
 public class AccessPoint {
     public static final int FLAG_ESS        = 0b1 << 0;
     public static final int FLAG_IBSS       = 0b1 << 1;
@@ -133,7 +135,7 @@ public class AccessPoint {
 
         for (String flag : parsedStringFlags) {
             if (!stringToFlags.containsKey(flag))
-                System.err.println("Warning! Identified unknown flag: " + flag);
+                Log.logWarning("network_backend.ap: got unknown flag: " + flag);
 
             outFlag |= stringToFlags.getOrDefault(flag, FLAG_UNKNOWN);
         }

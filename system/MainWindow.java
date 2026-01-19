@@ -11,6 +11,7 @@ import com.github.kwhat.jnativehook.dispatcher.SwingDispatchService;
 
 import backend.CommandUtils;
 import backend.CommandUtils.CommandOutput;
+import util.Log;
 import backend.TitleLaunchService;
 
 // TODO: Overlay options window in a new class.
@@ -51,7 +52,7 @@ public class MainWindow extends JPanel {
             GlobalScreen.registerNativeHook();
         }
         catch (NativeHookException ie) {
-            System.err.println("Unable to use native hook to determine global keypresses!");
+            Log.logWarning("window: native hook load failed; not globally capturing keypresses");
         }
     }
 
@@ -83,7 +84,7 @@ public class MainWindow extends JPanel {
         CommandOutput output = CommandUtils.executeCommandRetry("xdotool", "getwindowfocus");
 
         if (output.getExitCode() != 0)
-            System.err.println("Warning: couldn't identify title window!");
+            Log.logWarning("window: x11 couldn't identify title window for update");
 
         this.appWindowID = Integer.parseInt(output.getStdout().strip());
         

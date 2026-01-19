@@ -43,7 +43,7 @@ public class TitleLaunchService {
             return res;
         }
         catch (IOException ie) {
-            System.err.println("Couldn't find titledb list " + file.getPath());
+            Log.logError("title.service: couldn't locate titledb list " + file.getPath());
             return new TitleInfo[0];
         }
     }
@@ -56,7 +56,7 @@ public class TitleLaunchService {
      */
     public static boolean launchTitle(TitleInfo info) {
         if (currentTitle != null) {
-            System.err.println("Tried to start process when one was already running!");
+            Log.logWarning("title.service: tried to start process when one was already running");
             return false;
         }
 
@@ -204,7 +204,7 @@ public class TitleLaunchService {
                 return true;
             }
             catch (IOException ie) {
-                System.err.println("failed to execute process args " + Arrays.toString(thisTitle.args));
+                Log.logError("title.service: failed to launch title; cmd " + Arrays.toString(thisTitle.args));
                 return false;
             }
         }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import backend.CommandUtils;
 import backend.CommandUtils.CommandOutput;
+import util.Log;
 
 public class AudioBackend {
     // Wireplumber commands:
@@ -176,7 +177,7 @@ public class AudioBackend {
             CommandOutput output = CommandUtils.executeCommandRetry("wpctl", "set-default", "" + sink.id);
 
             if (!executedSuccessfully(output))
-                System.err.println("error while setting default sink");
+                Log.logWarning("pipewire.service: error setting default sink");
         }
 
         /**
@@ -191,7 +192,7 @@ public class AudioBackend {
             CommandOutput output = CommandUtils.executeCommandRetry("wpctl", "get-volume", DEFAULT_SINK);
 
             if (!executedSuccessfully(output)) {
-                System.err.println("error determining card volume");
+                Log.logInfo("pipewire.service: error determining default sink volume");
                 return 0;
             }
 
@@ -246,13 +247,13 @@ public class AudioBackend {
 
         private static boolean executedSuccessfully(CommandOutput output) {
             if (output == null)  {
-                System.err.println("failed to run wpctl (reason: not installed)");
+                Log.logError("pipewire.service: failed to run wpctl (reason: not installed)");
                 return false;
             }
 
             if (output.getExitCode() != 0) {
-                System.err.println("failed to execute for some odd reason. stderr:");
-                System.err.println(output.getStderr());
+                Log.logWarning("pipewire.service: failed to execute command. stderr:");
+                Log.logVerbose("pipewire.service: " + output.getStderr());
                 return false;
             }
 

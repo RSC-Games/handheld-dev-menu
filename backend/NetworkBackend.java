@@ -29,7 +29,7 @@ public class NetworkBackend {
         if (output != null && output.getExitCode() == 0)
             determineWlanOffset(output.getStdout().split("\n"));
         else
-            System.err.println("Failed to run rfkill! Couldn't determine wifi card");
+            Log.logError("network_backend: rfkill exec failed; couldn't determine network adapter index");
     }
 
     /**
@@ -48,7 +48,7 @@ public class NetworkBackend {
             }
         }
 
-        System.err.println("Warning: No wlan card identifiable!");
+        Log.logError("network_backend: no wifi card present/detectable");
     }
 
     /**
@@ -194,30 +194,30 @@ public class NetworkBackend {
 
         // Failed to create a network ID
         if (networkID == -1) {
-            System.err.println("failed to create network id");
+            Log.logError("network_backend.associate: failed to create network id");
             return false;
         }
 
         if (!WpaCliPlugin.setNetwork(networkID, WpaCliPlugin.SET_NET_SSID, sanitizeInput(ap.ssid))) {
-            System.err.println("invalid ssid");
+            Log.logError("network_backend.associate: failed; invalid ssid");
             return false;
         }
 
         // Authentication is really weird to determine.
         if (!setAuthMode(networkID, ap)) {
-            System.err.println("invalid auth mode");
+            Log.logError("network_backend.associate: illegal auth mode");
             return false;
         }
 
         // Apparently using set psk is fine for both SAE and PSK
         if (!WpaCliPlugin.setNetwork(networkID, WpaCliPlugin.SET_NET_PSK, sanitizeInput(psk))) {
-            System.err.println("invalid psk");
+            Log.logError("network_backend.associate: invalid psk");
             return false;
         }
 
         // Need to save the config (Doesn't work on windows)
         if (!WpaCliPlugin.saveConfig()) {
-            System.err.println("failed to save config; not fatal");
+            Log.logWarning("network_backend.associate: failed to save config network config; not fatal");
             return true;
         }
 
@@ -243,7 +243,7 @@ public class NetworkBackend {
         else if (ap.areOnlyFlagsSet(AccessPoint.FLAG_ESS))
             return WpaCliPlugin.setNetwork(networkID, WpaCliPlugin.SET_NET_KEY_MGMT, WpaCliPlugin.KEY_MGMT_OPEN);
 
-        System.err.println("Unable to determine authentication mode for network " + ap.ssid + " w/ flags " + ap.flags);      
+        Log.logWarning(String.format("network_backend: unable to identify auth mode: (ap %s flags %d)", ap.ssid, ap.flags));      
         return false;
     }
     
@@ -262,7 +262,7 @@ public class NetworkBackend {
 
         // Need to save the config (Doesn't work on windows)
         if (!WpaCliPlugin.saveConfig()) {
-            System.err.println("failed to save config; not fatal");
+            Log.logWarning("network_backend: failed to save ap config; not fatal");
             return true;
         }
 
@@ -481,8 +481,8 @@ public class NetworkBackend {
 
             // wpa_cli always has this banner (that for whatever reason isn't tab aligned (??!)).
             if (!rawLines[startLineOffset].strip().equals("bssid / frequency / signal level / flags / ssid")) {
-                System.err.println("Got unexpected banner");
-                System.err.println(output.getStdout());
+                Log.logInfo("wpa_cli.scan: got unexpected banner from command execution.");
+                Log.logVerbose("wpa_cli.scan: output: " + output.getStdout());
                 return new AccessPoint[0];
             }
 
@@ -511,8 +511,10 @@ public class NetworkBackend {
             ArrayList<AccessPoint> outNetworks = new ArrayList<>();
 
             for (AccessPoint ap : discoveredNetworks) {
-                if (ap == null)
+                if (ap == null) {
+                    Log.logVerbose("wpa_cli.scan: got null access point when filtering; discarding");
                     continue; // TODO: FIX (should not be null)
+                }
 
                 if (ssids.contains(ap.ssid))
                     continue;
@@ -556,8 +558,8 @@ public class NetworkBackend {
 
             // wpa_cli always has this banner (that for whatever reason isn't tab aligned (??!)).
             if (!rawLines[startLineOffset].strip().equals("network id / ssid / bssid / flags")) {
-                System.err.println("Got unexpected banner");
-                System.err.println(output.getStdout());
+                Log.logInfo("wpa_cli.scan: got unexpected banner from command execution.");
+                Log.logVerbose("wpa_cli.scan: output: " + output.getStdout());
                 return new SavedNetwork[0];
             }
 
@@ -777,22 +779,22 @@ public class NetworkBackend {
          */
         private static void checkExitCode_wpa_cli(CommandOutput output) {
             if (output == null) {
-                System.err.println("======================= UNEXPECTED ERROR IN WPA_CLI =======================");
-                System.err.println("GOT NO RESPONSE FROM WPA_CLI/WPA_CLI NOT INSTALLED!");
-                System.err.println("========================= END WPA_CLI ERROR REPORT ========================");
+                Log.logFatal("======================= UNEXPECTED ERROR IN WPA_CLI =======================");
+                Log.logError("wpa_cli: GOT NO RESPONSE FROM WPA_CLI/WPA_CLI NOT INSTALLED!");
+                Log.logError("========================= END WPA_CLI ERROR REPORT ========================");
 
                 throw new RuntimeException("Internal bugcheck case encountered in wpa_cli code. See above error.");
             }
 
             // Unknown command provided. Probably a bug in this code.
             if (output.getExitCode() != 0) {
-                System.err.println("======================= UNEXPECTED ERROR IN WPA_CLI =======================");
-                System.err.println("Got exit code " + output.getExitCode());
-                System.err.println("================= captured stdout below ==v");
-                System.err.println(output.getStdout());
-                System.err.println("================= captured stderr below ==v");
-                System.err.println(output.getStderr());
-                System.err.println("========================= END WPA_CLI ERROR REPORT ========================");
+                Log.logFatal("======================= UNEXPECTED ERROR IN WPA_CLI =======================");
+                Log.logError("wpa_cli: Got exit code " + output.getExitCode());
+                Log.logError("================= captured stdout below ==v");
+                Log.logError(output.getStdout());
+                Log.logError("================= captured stderr below ==v");
+                Log.logError(output.getStderr());
+                Log.logError("========================= END WPA_CLI ERROR REPORT ========================");
 
                 throw new RuntimeException("Internal bugcheck case encountered in wpa_cli code. See above error.");
             }

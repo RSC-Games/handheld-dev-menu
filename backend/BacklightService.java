@@ -107,8 +107,8 @@ public class BacklightService {
             outStream.close();
         }
         catch (FileNotFoundException ie) {
-            ie.printStackTrace();
-            System.err.println("Warning: Failed to set file " + filePath + " data " + data);
+            Log.logWarning("display.backlight: failed to write sysfs entry " + filePath + "; param " + data);
+            Log.logException(ie);
         }
     }
 
@@ -122,9 +122,9 @@ public class BacklightService {
             return result;
         }
         catch (FileNotFoundException ie) {
-            ie.printStackTrace();
-            System.err.println("Warning: Failed to read file " + filePath);
-            return "45";
+            Log.logWarning("display.backlight: failed to read sysfs entry " + filePath);
+            Log.logException(ie);
+            return "" + MIN_BRIGHTNESS; // Default value for the 
         }
     }
 

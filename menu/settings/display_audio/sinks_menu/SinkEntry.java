@@ -13,7 +13,7 @@ class SinkEntry extends MenuEntry {
     AudioSink sink;
 
     public SinkEntry(MenuOptionList parent, AudioSink sink) {
-        super(parent, sink.name + (sink.isDefault ? " (DEFAULT)" : ""), 
+        super(parent, (sink.isDefault ? "* " : "") + sink.name, 
               Color.white, 12);
         this.sink = sink;
     }
