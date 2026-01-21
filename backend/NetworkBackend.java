@@ -480,20 +480,21 @@ public class NetworkBackend {
                 startLineOffset++;
 
             // wpa_cli always has this banner (that for whatever reason isn't tab aligned (??!)).
-            if (!rawLines[startLineOffset].strip().equals("bssid / frequency / signal level / flags / ssid")) {
+            if (!rawLines[startLineOffset++].strip().equals("bssid / frequency / signal level / flags / ssid")) {
                 Log.logInfo("wpa_cli.scan: got unexpected banner from command execution.");
                 Log.logVerbose("wpa_cli.scan: output: " + output.getStdout());
                 return new AccessPoint[0];
             }
 
             // Everything past the banner is networks.
-            AccessPoint[] discoveredNetworks = new AccessPoint[rawLines.length - 1];
+            // startLineOffset should reflect the start of the networks list.
+            AccessPoint[] discoveredNetworks = new AccessPoint[rawLines.length - startLineOffset];
 
-            for (int i = startLineOffset + 1; i < rawLines.length; i++) {
+            for (int i = startLineOffset; i < rawLines.length; i++) {
                 // Each field appears to be tab delimited?
                 String[] components = rawLines[i].split("\t");
 
-                discoveredNetworks[i - startLineOffset - 1] = new AccessPoint(
+                discoveredNetworks[i - startLineOffset] = new AccessPoint(
                     components[0], // bssid 
                     components[4], // ssid
                     Integer.parseInt(components[1]), // frequency 
