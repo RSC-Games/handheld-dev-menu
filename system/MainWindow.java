@@ -1,9 +1,7 @@
 package system;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
@@ -16,34 +14,20 @@ import backend.TitleLaunchService;
 
 // TODO: Overlay options window in a new class.
 // TODO: Performance overlay (not interactible).
-public class MainWindow extends JPanel {
+public class MainWindow extends WindowBase {
     PanelManager panelManager;
     InputManager inputManager;
-    boolean isHiding = false;
-    JFrame frame;
 
     // Window ID for the app. Only present while an app is running, and is re-determined
     // every time the window is hidden.
+    // TODO: Need to move window management to the title management service.
     int appWindowID = -1;
-
-    // Allows identifying if an issue has occurred during panel painting.
-    volatile FailedRenderException exc;
     
     public MainWindow() {
-        frame = new JFrame("menu_system");
-        frame.setVisible(false);
-        frame.setFocusable(true);
-
-        frame.setUndecorated(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Resolution of the handheld
-        frame.setSize(800, 480);
-        frame.setLocation(0, 0);
+        super("menu_system", 0, 0, 800, 480, false, true, JFrame.EXIT_ON_CLOSE, 0);
 
         inputManager = new InputManager();
-        frame.add(this);
-        frame.addKeyListener(inputManager);
+        windowFrame.addKeyListener(inputManager);
 
         panelManager = new PanelManager();
         GlobalScreen.setEventDispatcher(new SwingDispatchService());
@@ -59,15 +43,12 @@ public class MainWindow extends JPanel {
     /**
      * Force the frame to the front and steal focus (if possible)
      */
-    public void display() {
+    public void show() {
         minimiseTitleWindow();
 
-        frame.setAutoRequestFocus(true);
-        int state = frame.getExtendedState();
-        frame.setExtendedState(state & ~(JFrame.ICONIFIED));
-        frame.setVisible(true);
-        frame.toFront();
-        frame.requestFocus();
+        int state = windowFrame.getExtendedState();
+        windowFrame.setExtendedState(state & ~(JFrame.ICONIFIED));
+        super.show();
     }
 
     // TODO: Use C++ stub to get this working (can't get it working in Java)
@@ -88,14 +69,13 @@ public class MainWindow extends JPanel {
 
         this.appWindowID = Integer.parseInt(output.getStdout().strip());
         
-        // TODO: Mask all x11 events.
+        // TODO: Mask all x11 events (will probably need C++ stub for this)
         CommandUtils.executeCommandRetry("xdotool", "windowminimize", "" + this.appWindowID);
     }
 
-    public void minimize() {
-        int state = frame.getExtendedState();
-        frame.setExtendedState(state | JFrame.ICONIFIED);
-        //frame.setVisible(false);
+    public void hide() {
+        int state = windowFrame.getExtendedState();
+        windowFrame.setExtendedState(state | JFrame.ICONIFIED);
 
         maximiseTitleWindow();
     }
@@ -110,58 +90,39 @@ public class MainWindow extends JPanel {
         CommandUtils.executeCommandRetry("xdotool", "windowfocus", "" + this.appWindowID);
     }
 
-    public void tickWindow() {       
-        if (frame.isActive())
-            frame.repaint();
-
-        // Ran into an issue on this repaint. Abort.
-        if (this.exc != null)
-            throw exc;
-
+    @Override
+    protected void updateHook() {       
         // Update window show/hide status
         TitleLaunchService.poll();
-        boolean shouldStillHide = TitleLaunchService.getWindowHideState();
+        boolean shouldShow = !TitleLaunchService.getWindowHideState();
 
         // Prevent changing window state every frame.
-        if (isHiding != shouldStillHide) {
-            if (!shouldStillHide)
-                display();
+        if (isVisible != shouldShow) {
+            if (shouldShow)
+                show();
             else
-                minimize();
+                hide();
 
-            isHiding = shouldStillHide;
+            isVisible = shouldShow;
         }
     }
 
-    /**
-     * Determine if this window is currently visible or if it's been hidden.
-     * 
-     * @return If the window is visible.
-     */
-    public boolean isActive() {
-        return frame.isActive();
+    @Override
+    public boolean alwaysSimulate() {
+        return false;
+    }
+
+    @Override
+    protected void tickContent() {
+        panelManager.updateTopPanel();
     }
 
     public InputManager getInputManager() {
         return inputManager;
     }
 
-    public void cleanUp() {
-        minimize();
-        frame.dispose();
-    }
-
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-
-        try {
-            this.panelManager.drawTopPanel(g);
-        }
-        catch (Exception ie) {
-            this.exc = new FailedRenderException(ie);
-        }
-
-        Toolkit.getDefaultToolkit().sync();
+    protected void paintHook(Graphics g) throws Exception {
+        this.panelManager.drawTopPanel(g);
     }
 }

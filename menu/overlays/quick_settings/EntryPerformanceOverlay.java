@@ -1,4 +1,4 @@
-package menu.settings.perf_power_mgmt;
+package menu.overlays.quick_settings.quick_settings;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -12,7 +12,6 @@ class EntryPerformanceOverlay extends MenuEntry {
     UIKeyValueText uiText;
 
     // TODO: Need to actually enable/disable the performance overlay.
-    // Performance overlay is implemented but not yet togglable.
     public EntryPerformanceOverlay(MenuOptionList parent) {
         super(parent, "", Color.white, 12);
         this.uiText = new UIKeyValueText(this, new Point(), Color.white);

@@ -7,9 +7,10 @@ import java.util.Arrays;
 import util.Log;
 
 public class CommandUtils {
-        /**
+    /**
      * Retry command execution until external factors other than errors within the command
-     * itself are eliminated.
+     * itself are eliminated. If no command can be found, stderr/stdout will be null and the
+     * return code will be -2^31
      * 
      * @param args Command arguments
      * @return Command outputs
@@ -30,7 +31,7 @@ public class CommandUtils {
             catch (IllegalStateException ie) {
                 Log.logError("command_engine: unable to execute provided command. details below");
                 Log.logException(ie);
-                return null;
+                return new CommandOutput(null, null, Integer.MIN_VALUE);
             }
         }
     }

@@ -23,7 +23,10 @@ import menu.crash_handler.CrashPanel;
 import menu.main.MainMenu;
 import system.InputManager;
 import system.MainWindow;
+import system.MenuOverlayWindow;
 import system.PanelManager;
+import system.PerfOverlayWindow;
+import system.WindowBase;
 import ui.UIPanel;
 import util.Log;
 import util.Utils;
@@ -31,8 +34,12 @@ import util.Utils;
 public class Main {
     public static void main(String[] args) {
         MainWindow window = new MainWindow();
+        MenuOverlayWindow settingsOverlay = new MenuOverlayWindow();
+        PerfOverlayWindow perfOverlay = new PerfOverlayWindow();
         InputManager inputManager = window.getInputManager();
         PanelManager panelManager = PanelManager.getPanelManager();
+
+        WindowBase[] windows = {window, settingsOverlay, perfOverlay};
 
         // Initial hardware housekeeping stuff like network/volume/power management.
         init();
@@ -43,7 +50,9 @@ public class Main {
 
         // Simple render loop. Everything is managed in here.
         try {
-            window.display();
+            //window.show();
+            //settingsOverlay.show();
+            perfOverlay.show();
 
             while (true) {
                 // Wait for an interrupt if a game is actively executing.
@@ -53,16 +62,13 @@ public class Main {
                 Utils.sleepms(16);
 
                 // UI is simulated when the window is active and on screen.
-                if (window.isActive()) {
-                    panelManager.updateTopPanel();
+                for (WindowBase openWindow : windows) {
+                    if (openWindow.alwaysSimulate() || openWindow.isActive()) 
+                        openWindow.tick();
                 }
 
-                // Otherwise we run the background logic (like re-showing the window)
-                else {
-
-                }
-
-                window.tickWindow();
+                for (WindowBase openWindow : windows)
+                    openWindow.update();
             }
         }
         catch (Exception ie) {
@@ -70,8 +76,8 @@ public class Main {
             Log.logException(ie);
 
             menuExceptionHandler(window, ie);
-            // TODO: close logfile and clean up logger.
-            window.cleanUp();
+            // Log file close is done at VM exit
+            window.destroy();
             System.exit(-1);
         }
 
@@ -115,7 +121,7 @@ public class Main {
         mgr.pushPanel(new CrashPanel(exceptionLines));
 
         while (mgr.hasPanels()) {
-            window.tickWindow();
+            window.update();
             InputManager.getInputManager().poll();
             Utils.sleepms(16);
             mgr.updateTopPanel();

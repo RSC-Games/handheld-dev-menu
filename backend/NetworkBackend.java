@@ -791,11 +791,11 @@ public class NetworkBackend {
             if (output.getExitCode() != 0) {
                 Log.logFatal("======================= UNEXPECTED ERROR IN WPA_CLI =======================");
                 Log.logError("wpa_cli: Got exit code " + output.getExitCode());
-                Log.logError("================= captured stdout below ==v");
-                Log.logError(output.getStdout());
-                Log.logError("================= captured stderr below ==v");
-                Log.logError(output.getStderr());
-                Log.logError("========================= END WPA_CLI ERROR REPORT ========================");
+                Log.logVerbose("================= captured stdout below ==v");
+                Log.logVerbose(output.getStdout());
+                Log.logVerbose("================= captured stderr below ==v");
+                Log.logVerbose(output.getStderr());
+                Log.logVerbose("========================= END WPA_CLI ERROR REPORT ========================");
 
                 throw new RuntimeException("Internal bugcheck case encountered in wpa_cli code. See above error.");
             }

@@ -6,4 +6,5 @@ Super Tux Kart, /usr/games/supertuxkart
 Testing another menu system (Windows host), java, -Djava.library.path=./lib, -jar, ../crap-awt-menu_build/menu-system.jar
 Bluetooth scan, bluetoothctl, --timeout, 10, scan, on
 Bluetooth connect WH201A, bluetoothctl, --timeout, 5, connect, D1:3D:D5:9D:7D:F9
+Bluetooth connect Soundcore Q20i, bluetoothctl, --timeout, 5, connect, 88:0E:85:85:44:B8
 Bluetooth connect JLab Go Pop+ (Translucent), bluetoothctl, --timeout, 5, connect, 58:71:67:40:6f:d5

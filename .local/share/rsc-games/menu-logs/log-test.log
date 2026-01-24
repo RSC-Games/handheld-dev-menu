@@ -1,0 +1,2024 @@
+==== STARTED LOG FILE WRITER ====
+[32mI [1]: input: Dev Menu: JInput version 2.0.10[0m
+[33mW [178]: input: failed to connect/map controller[0m
+[31mE [198]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: rfkill
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.NetworkBackend.<clinit>(NetworkBackend.java:27)
+      at Main.init(Main.java:94)
+      at Main.main(Main.java:45)
+
+===================== End of backtrace =========================
+[31mE [200]: network_backend: rfkill exec failed; couldn't determine network adapter index[0m
+[32mI [200]: network_backend: not pushing ap callback; network support disabled in build[0m
+[31mE [390]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [391]: perfmon: failed to read arm freq[0m
+[34mV [391]: stdout: null[0m
+[34mV [391]: stderr: null[0m
+[31mE [394]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [395]: perfmon: failed to read v3d freq[0m
+[34mV [395]: stdout: null[0m
+[34mV [395]: stderr: null[0m
+[31mE [397]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [397]: perfmon: failed to read SoC V_core[0m
+[34mV [398]: stdout: null[0m
+[34mV [398]: stderr: null[0m
+[31mE [400]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [401]: perfmon: failed to read SoC V_core[0m
+[34mV [401]: stdout: null[0m
+[34mV [401]: stderr: null[0m
+[31mE [403]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [404]: perfmon: failed to read meminfo[0m
+[34mV [404]: stdout: null[0m
+[34mV [404]: stderr: null[0m
+[31mE [405]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [405]: perfmon: failed to read meminfo[0m
+[34mV [406]: stdout: null[0m
+[34mV [406]: stderr: null[0m
+[31mE [1432]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [1433]: perfmon: failed to read arm freq[0m
+[34mV [1433]: stdout: null[0m
+[34mV [1434]: stderr: null[0m
+[31mE [1437]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [1438]: perfmon: failed to read v3d freq[0m
+[34mV [1438]: stdout: null[0m
+[34mV [1439]: stderr: null[0m
+[31mE [1441]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [1443]: perfmon: failed to read SoC V_core[0m
+[34mV [1443]: stdout: null[0m
+[34mV [1443]: stderr: null[0m
+[31mE [1445]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [1446]: perfmon: failed to read SoC V_core[0m
+[34mV [1446]: stdout: null[0m
+[34mV [1446]: stderr: null[0m
+[31mE [1448]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [1448]: perfmon: failed to read meminfo[0m
+[34mV [1448]: stdout: null[0m
+[34mV [1448]: stderr: null[0m
+[31mE [1450]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [1451]: perfmon: failed to read meminfo[0m
+[34mV [1451]: stdout: null[0m
+[34mV [1451]: stderr: null[0m
+[31mE [2535]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [2535]: perfmon: failed to read arm freq[0m
+[34mV [2536]: stdout: null[0m
+[34mV [2536]: stderr: null[0m
+[31mE [2537]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [2537]: perfmon: failed to read v3d freq[0m
+[34mV [2538]: stdout: null[0m
+[34mV [2538]: stderr: null[0m
+[31mE [2539]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [2539]: perfmon: failed to read SoC V_core[0m
+[34mV [2539]: stdout: null[0m
+[34mV [2539]: stderr: null[0m
+[31mE [2540]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [2541]: perfmon: failed to read SoC V_core[0m
+[34mV [2541]: stdout: null[0m
+[34mV [2541]: stderr: null[0m
+[31mE [2542]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [2543]: perfmon: failed to read meminfo[0m
+[34mV [2543]: stdout: null[0m
+[34mV [2543]: stderr: null[0m
+[31mE [2544]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [2545]: perfmon: failed to read meminfo[0m
+[34mV [2545]: stdout: null[0m
+[34mV [2545]: stderr: null[0m
+[31mE [3637]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [3638]: perfmon: failed to read arm freq[0m
+[34mV [3638]: stdout: null[0m
+[34mV [3638]: stderr: null[0m
+[31mE [3640]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [3641]: perfmon: failed to read v3d freq[0m
+[34mV [3641]: stdout: null[0m
+[34mV [3641]: stderr: null[0m
+[31mE [3643]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [3644]: perfmon: failed to read SoC V_core[0m
+[34mV [3644]: stdout: null[0m
+[34mV [3644]: stderr: null[0m
+[31mE [3647]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [3647]: perfmon: failed to read SoC V_core[0m
+[34mV [3647]: stdout: null[0m
+[34mV [3648]: stderr: null[0m
+[31mE [3649]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [3650]: perfmon: failed to read meminfo[0m
+[34mV [3650]: stdout: null[0m
+[34mV [3650]: stderr: null[0m
+[31mE [3651]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [3652]: perfmon: failed to read meminfo[0m
+[34mV [3652]: stdout: null[0m
+[34mV [3652]: stderr: null[0m
+[31mE [4742]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [4743]: perfmon: failed to read arm freq[0m
+[34mV [4744]: stdout: null[0m
+[34mV [4744]: stderr: null[0m
+[31mE [4748]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [4749]: perfmon: failed to read v3d freq[0m
+[34mV [4750]: stdout: null[0m
+[34mV [4750]: stderr: null[0m
+[31mE [4753]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [4754]: perfmon: failed to read SoC V_core[0m
+[34mV [4754]: stdout: null[0m
+[34mV [4754]: stderr: null[0m
+[31mE [4758]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [4758]: perfmon: failed to read SoC V_core[0m
+[34mV [4758]: stdout: null[0m
+[34mV [4758]: stderr: null[0m
+[31mE [4761]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [4761]: perfmon: failed to read meminfo[0m
+[34mV [4762]: stdout: null[0m
+[34mV [4762]: stderr: null[0m
+[31mE [4765]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [4765]: perfmon: failed to read meminfo[0m
+[34mV [4766]: stdout: null[0m
+[34mV [4766]: stderr: null[0m
+[31mE [5871]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [5872]: perfmon: failed to read arm freq[0m
+[34mV [5873]: stdout: null[0m
+[34mV [5873]: stderr: null[0m
+[31mE [5877]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [5877]: perfmon: failed to read v3d freq[0m
+[34mV [5877]: stdout: null[0m
+[34mV [5878]: stderr: null[0m
+[31mE [5881]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [5881]: perfmon: failed to read SoC V_core[0m
+[34mV [5882]: stdout: null[0m
+[34mV [5882]: stderr: null[0m
+[31mE [5883]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [5884]: perfmon: failed to read SoC V_core[0m
+[34mV [5884]: stdout: null[0m
+[34mV [5884]: stderr: null[0m
+[31mE [5885]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [5886]: perfmon: failed to read meminfo[0m
+[34mV [5886]: stdout: null[0m
+[34mV [5886]: stderr: null[0m
+[31mE [5887]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [5888]: perfmon: failed to read meminfo[0m
+[34mV [5888]: stdout: null[0m
+[34mV [5888]: stderr: null[0m
+[31mE [6976]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [6977]: perfmon: failed to read arm freq[0m
+[34mV [6977]: stdout: null[0m
+[34mV [6977]: stderr: null[0m
+[31mE [6979]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [6980]: perfmon: failed to read v3d freq[0m
+[34mV [6980]: stdout: null[0m
+[34mV [6980]: stderr: null[0m
+[31mE [6981]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [6982]: perfmon: failed to read SoC V_core[0m
+[34mV [6982]: stdout: null[0m
+[34mV [6982]: stderr: null[0m
+[31mE [6984]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [6985]: perfmon: failed to read SoC V_core[0m
+[34mV [6985]: stdout: null[0m
+[34mV [6985]: stderr: null[0m
+[31mE [6987]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [6988]: perfmon: failed to read meminfo[0m
+[34mV [6988]: stdout: null[0m
+[34mV [6988]: stderr: null[0m
+[31mE [6990]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [6991]: perfmon: failed to read meminfo[0m
+[34mV [6991]: stdout: null[0m
+[34mV [6991]: stderr: null[0m
+[31mE [8070]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [8070]: perfmon: failed to read arm freq[0m
+[34mV [8071]: stdout: null[0m
+[34mV [8071]: stderr: null[0m
+[31mE [8074]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [8074]: perfmon: failed to read v3d freq[0m
+[34mV [8074]: stdout: null[0m
+[34mV [8075]: stderr: null[0m
+[31mE [8076]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [8077]: perfmon: failed to read SoC V_core[0m
+[34mV [8077]: stdout: null[0m
+[34mV [8077]: stderr: null[0m
+[31mE [8080]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [8080]: perfmon: failed to read SoC V_core[0m
+[34mV [8080]: stdout: null[0m
+[34mV [8080]: stderr: null[0m
+[31mE [8082]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [8083]: perfmon: failed to read meminfo[0m
+[34mV [8083]: stdout: null[0m
+[34mV [8083]: stderr: null[0m
+[31mE [8085]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [8085]: perfmon: failed to read meminfo[0m
+[34mV [8085]: stdout: null[0m
+[34mV [8085]: stderr: null[0m
+[31mE [9167]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [9167]: perfmon: failed to read arm freq[0m
+[34mV [9168]: stdout: null[0m
+[34mV [9168]: stderr: null[0m
+[31mE [9170]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [9170]: perfmon: failed to read v3d freq[0m
+[34mV [9171]: stdout: null[0m
+[34mV [9171]: stderr: null[0m
+[31mE [9172]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [9173]: perfmon: failed to read SoC V_core[0m
+[34mV [9173]: stdout: null[0m
+[34mV [9173]: stderr: null[0m
+[31mE [9174]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [9175]: perfmon: failed to read SoC V_core[0m
+[34mV [9175]: stdout: null[0m
+[34mV [9175]: stderr: null[0m
+[31mE [9177]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [9178]: perfmon: failed to read meminfo[0m
+[34mV [9178]: stdout: null[0m
+[34mV [9178]: stderr: null[0m
+[31mE [9180]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [9180]: perfmon: failed to read meminfo[0m
+[34mV [9180]: stdout: null[0m
+[34mV [9180]: stderr: null[0m
+[31mE [10274]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [10275]: perfmon: failed to read arm freq[0m
+[34mV [10276]: stdout: null[0m
+[34mV [10276]: stderr: null[0m
+[31mE [10279]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [10280]: perfmon: failed to read v3d freq[0m
+[34mV [10280]: stdout: null[0m
+[34mV [10280]: stderr: null[0m
+[31mE [10282]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [10283]: perfmon: failed to read SoC V_core[0m
+[34mV [10283]: stdout: null[0m
+[34mV [10283]: stderr: null[0m
+[31mE [10285]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [10286]: perfmon: failed to read SoC V_core[0m
+[34mV [10286]: stdout: null[0m
+[34mV [10286]: stderr: null[0m
+[31mE [10287]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [10288]: perfmon: failed to read meminfo[0m
+[34mV [10288]: stdout: null[0m
+[34mV [10288]: stderr: null[0m
+[31mE [10289]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [10290]: perfmon: failed to read meminfo[0m
+[34mV [10290]: stdout: null[0m
+[34mV [10290]: stderr: null[0m
+[31mE [11386]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [11388]: perfmon: failed to read arm freq[0m
+[34mV [11388]: stdout: null[0m
+[34mV [11388]: stderr: null[0m
+[31mE [11393]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [11394]: perfmon: failed to read v3d freq[0m
+[34mV [11394]: stdout: null[0m
+[34mV [11395]: stderr: null[0m
+[31mE [11398]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [11399]: perfmon: failed to read SoC V_core[0m
+[34mV [11399]: stdout: null[0m
+[34mV [11399]: stderr: null[0m
+[31mE [11403]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [11404]: perfmon: failed to read SoC V_core[0m
+[34mV [11404]: stdout: null[0m
+[34mV [11404]: stderr: null[0m
+[31mE [11407]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [11407]: perfmon: failed to read meminfo[0m
+[34mV [11408]: stdout: null[0m
+[34mV [11408]: stderr: null[0m
+[31mE [11410]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [11410]: perfmon: failed to read meminfo[0m
+[34mV [11411]: stdout: null[0m
+[34mV [11411]: stderr: null[0m
+[31mE [12500]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [12501]: perfmon: failed to read arm freq[0m
+[34mV [12501]: stdout: null[0m
+[34mV [12501]: stderr: null[0m
+[31mE [12504]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [12505]: perfmon: failed to read v3d freq[0m
+[34mV [12505]: stdout: null[0m
+[34mV [12505]: stderr: null[0m
+[31mE [12507]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [12508]: perfmon: failed to read SoC V_core[0m
+[34mV [12508]: stdout: null[0m
+[34mV [12508]: stderr: null[0m
+[31mE [12511]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [12512]: perfmon: failed to read SoC V_core[0m
+[34mV [12512]: stdout: null[0m
+[34mV [12512]: stderr: null[0m
+[31mE [12515]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [12515]: perfmon: failed to read meminfo[0m
+[34mV [12516]: stdout: null[0m
+[34mV [12516]: stderr: null[0m
+[31mE [12518]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [12519]: perfmon: failed to read meminfo[0m
+[34mV [12519]: stdout: null[0m
+[34mV [12519]: stderr: null[0m
+[31mE [13605]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [13605]: perfmon: failed to read arm freq[0m
+[34mV [13605]: stdout: null[0m
+[34mV [13605]: stderr: null[0m
+[31mE [13608]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [13609]: perfmon: failed to read v3d freq[0m
+[34mV [13609]: stdout: null[0m
+[34mV [13609]: stderr: null[0m
+[31mE [13612]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [13612]: perfmon: failed to read SoC V_core[0m
+[34mV [13613]: stdout: null[0m
+[34mV [13613]: stderr: null[0m
+[31mE [13615]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [13616]: perfmon: failed to read SoC V_core[0m
+[34mV [13616]: stdout: null[0m
+[34mV [13616]: stderr: null[0m
+[31mE [13619]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [13619]: perfmon: failed to read meminfo[0m
+[34mV [13619]: stdout: null[0m
+[34mV [13619]: stderr: null[0m
+[31mE [13622]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [13622]: perfmon: failed to read meminfo[0m
+[34mV [13622]: stdout: null[0m
+[34mV [13623]: stderr: null[0m
+[31mE [14696]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [14697]: perfmon: failed to read arm freq[0m
+[34mV [14697]: stdout: null[0m
+[34mV [14698]: stderr: null[0m
+[31mE [14701]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [14702]: perfmon: failed to read v3d freq[0m
+[34mV [14703]: stdout: null[0m
+[34mV [14703]: stderr: null[0m
+[31mE [14705]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [14706]: perfmon: failed to read SoC V_core[0m
+[34mV [14706]: stdout: null[0m
+[34mV [14706]: stderr: null[0m
+[31mE [14709]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [14710]: perfmon: failed to read SoC V_core[0m
+[34mV [14710]: stdout: null[0m
+[34mV [14710]: stderr: null[0m
+[31mE [14713]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [14714]: perfmon: failed to read meminfo[0m
+[34mV [14714]: stdout: null[0m
+[34mV [14714]: stderr: null[0m
+[31mE [14717]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [14717]: perfmon: failed to read meminfo[0m
+[34mV [14718]: stdout: null[0m
+[34mV [14718]: stderr: null[0m
+[32mI [15038]: menu.pm: power management requested but disabled[0m
+[31mE [15786]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [15786]: perfmon: failed to read arm freq[0m
+[34mV [15787]: stdout: null[0m
+[34mV [15787]: stderr: null[0m
+[31mE [15789]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [15790]: perfmon: failed to read v3d freq[0m
+[34mV [15790]: stdout: null[0m
+[34mV [15790]: stderr: null[0m
+[31mE [15792]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [15792]: perfmon: failed to read SoC V_core[0m
+[34mV [15792]: stdout: null[0m
+[34mV [15793]: stderr: null[0m
+[31mE [15795]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [15796]: perfmon: failed to read SoC V_core[0m
+[34mV [15796]: stdout: null[0m
+[34mV [15796]: stderr: null[0m
+[31mE [15797]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [15797]: perfmon: failed to read meminfo[0m
+[34mV [15798]: stdout: null[0m
+[34mV [15798]: stderr: null[0m
+[31mE [15799]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [15799]: perfmon: failed to read meminfo[0m
+[34mV [15799]: stdout: null[0m
+[34mV [15799]: stderr: null[0m
+[32mI [16482]: menu.pm: power management requested but disabled[0m
+[31mE [16866]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [16866]: perfmon: failed to read arm freq[0m
+[34mV [16867]: stdout: null[0m
+[34mV [16867]: stderr: null[0m
+[31mE [16868]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [16868]: perfmon: failed to read v3d freq[0m
+[34mV [16868]: stdout: null[0m
+[34mV [16868]: stderr: null[0m
+[31mE [16869]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [16870]: perfmon: failed to read SoC V_core[0m
+[34mV [16870]: stdout: null[0m
+[34mV [16870]: stderr: null[0m
+[31mE [16871]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [16871]: perfmon: failed to read SoC V_core[0m
+[34mV [16872]: stdout: null[0m
+[34mV [16872]: stderr: null[0m
+[31mE [16873]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [16874]: perfmon: failed to read meminfo[0m
+[34mV [16874]: stdout: null[0m
+[34mV [16874]: stderr: null[0m
+[31mE [16876]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [16876]: perfmon: failed to read meminfo[0m
+[34mV [16876]: stdout: null[0m
+[34mV [16876]: stderr: null[0m
+[31mE [17965]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getCPUFrequencyMHz(PerformanceMonitor.java:25)
+      at menu.overlays.perf_mon.EntryCPUFreq.tick(EntryCPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [17966]: perfmon: failed to read arm freq[0m
+[34mV [17966]: stdout: null[0m
+[34mV [17966]: stderr: null[0m
+[31mE [17970]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getDomainClockSpeed(PerformanceMonitor.java:114)
+      at backend.PerformanceMonitor.getGPUFrequencyMHz(PerformanceMonitor.java:39)
+      at menu.overlays.perf_mon.EntryGPUFreq.tick(EntryGPUFreq.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [17970]: perfmon: failed to read v3d freq[0m
+[34mV [17970]: stdout: null[0m
+[34mV [17970]: stderr: null[0m
+[31mE [17972]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCVcore(PerformanceMonitor.java:48)
+      at menu.overlays.perf_mon.EntrySoCVoltage.tick(EntrySoCVoltage.java:18)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [17973]: perfmon: failed to read SoC V_core[0m
+[34mV [17973]: stdout: null[0m
+[34mV [17973]: stderr: null[0m
+[31mE [17975]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: vcgencmd
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getSoCTemperature(PerformanceMonitor.java:71)
+      at menu.overlays.perf_mon.EntrySoCTemp.tick(EntrySoCTemp.java:19)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [17975]: perfmon: failed to read SoC V_core[0m
+[34mV [17976]: stdout: null[0m
+[34mV [17976]: stderr: null[0m
+[31mE [17978]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMTotalMB(PerformanceMonitor.java:95)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:20)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [17978]: perfmon: failed to read meminfo[0m
+[34mV [17978]: stdout: null[0m
+[34mV [17978]: stderr: null[0m
+[31mE [17981]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: cat
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:51)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:21)
+      at backend.PerformanceMonitor.getMemoryTypeMB(PerformanceMonitor.java:138)
+      at backend.PerformanceMonitor.getSDRAMAvailableMB(PerformanceMonitor.java:104)
+      at menu.overlays.perf_mon.EntrySDRAMUtil.tick(EntrySDRAMUtil.java:21)
+      at ui.UIElement.tickAll(UIElement.java:53)
+      at ui.UIElement.tickAll(UIElement.java:56)
+      at ui.UIPanel.update(UIPanel.java:19)
+      at system.PerfOverlayWindow.tickContent(PerfOverlayWindow.java:42)
+      at system.WindowBase.tick(WindowBase.java:92)
+      at Main.main(Main.java:67)
+
+===================== End of backtrace =========================
+[31mE [17981]: perfmon: failed to read meminfo[0m
+[34mV [17981]: stdout: null[0m
+[34mV [17981]: stderr: null[0m

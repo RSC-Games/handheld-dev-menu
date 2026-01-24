@@ -232,7 +232,7 @@ abstract class ControllerLayout {
     
     /**
      * Retained for testing purposes and for testing gamepads. Not used for most
-     * cases, but still too important to rewrite.
+     * cases, but still too important to remove.
      */
     //@SuppressWarnings("unused")
     static void printMappingInformation(Controller controller) {

@@ -115,6 +115,11 @@ public class AudioBackend {
             // For the human readable name, exclude -n at the end.
             CommandOutput output = CommandUtils.executeCommandRetry("wpctl", "status", "-n");
 
+            if (output.getExitCode() != 0) {
+                Log.logError("pipewire.service: failed to query wpctl for sinks list");
+                return new AudioSink[0];
+            }
+
             // We only care about two regions for this: Audio and Settings.
             // All of these are split by two newlines, which makes it pretty easy to parse.
             String[] segments = output.getStdout().split("\n\n");

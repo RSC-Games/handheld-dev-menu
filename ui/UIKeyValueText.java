@@ -16,13 +16,17 @@ public class UIKeyValueText extends UIBase {
     }
     
     public void setKeyText(String keyText) {
-        keyText += ":  ";
+        keyText += ": ";
         this.key.setText(keyText);
 
         //FontMetrics metrics = __g.getFontMetrics(key.getFont());
         //int textWidth = metrics.stringWidth(keyText);
-        this.value.setPosition(new Point(keyText.length() * 7, 0));
+        this.value.setPosition(new Point((int)(keyText.length() * 7.25f), 0));
     }
+
+    public void setKeyColor(Color color) {
+        this.key.setColor(color);
+    } 
 
     public void setValueText(String valueText) {
         this.value.setText(valueText);

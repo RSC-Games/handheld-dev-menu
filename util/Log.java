@@ -18,18 +18,34 @@ public class Log {
     static final FileWriter logWriter;
     static final long startTime;
     static LogLevel logLevel;
+    static LogLevel fileLogLevel;
 
     static {
         logLevel = Config.INITIAL_LOG_LEVEL;
 
-        File logPath = new File("~/.local/share/rsc-games/menu-logs");
+        // NOTE: File log level must always be equal to or more verbose than the print
+        // log level.
+        fileLogLevel = LogLevel.VERBOSE;
+
+        File logPath;
+        String logName;
+
+        // MacOS unsupported (Windows only supported for dev reasons)
+        if (System.getProperty("os.name").equals("Linux")) {
+            logPath = new File("~/.local/share/rsc-games/menu-logs");
+            logName = "log-" + LocalDateTime.now() + ".log";
+        }
+        else {
+            logPath = new File("./.local/share/rsc-games/menu-logs");
+            logName = "log-test.log";
+        }
 
         if (!logPath.exists()) {
             System.out.println("creating log directory");
             logPath.mkdirs();
         }
 
-        File logFilePath = new File(logPath.getPath() + "/log-" + LocalDateTime.now() + ".log");
+        File logFilePath = new File(logPath.getPath() + "/" + logName);
         System.out.println("opening log file " + logFilePath.getAbsolutePath());
 
         try {
@@ -42,6 +58,13 @@ public class Log {
         }
 
         startTime = System.currentTimeMillis();
+
+        // Ensure log file is closed no matter what.
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                close();
+            }
+        });
     }
 
     /**
@@ -59,12 +82,11 @@ public class Log {
      * @param message Verbose message to log.
      */
     public static synchronized void logVerbose(String message) {
-        if (logLevel.compareTo(LogLevel.VERBOSE) < 0)
+        if (fileLogLevel.compareTo(LogLevel.VERBOSE) < 0)
             return;
 
         // Format it blue.
         message = String.format("\033[34mV [%d]: %s\033[0m\n", getMillis(), message);
-        System.out.print(message);
 
         try {
             logWriter.append(message);
@@ -72,6 +94,9 @@ public class Log {
         catch (IOException ie) {
             System.err.println("Warning: failed to write message to logfile!");
         }
+
+        if (logLevel.compareTo(LogLevel.VERBOSE) >= 0)
+            System.out.print(message);
     }
 
     /**
@@ -80,12 +105,11 @@ public class Log {
      * @param message info message to log.
      */
     public static synchronized void logInfo(String message) {
-        if (logLevel.compareTo(LogLevel.INFO) < 0)
+        if (fileLogLevel.compareTo(LogLevel.INFO) < 0)
             return;
 
         // Color it green.
         message = String.format("\033[32mI [%d]: %s\033[0m\n", getMillis(), message);
-        System.out.print(message);
 
         try {
             logWriter.append(message);
@@ -93,6 +117,9 @@ public class Log {
         catch (IOException ie) {
             System.err.println("Warning: failed to write message to logfile!");
         }
+
+        if (logLevel.compareTo(LogLevel.INFO) >= 0)
+            System.out.print(message);
     }
 
     /**
@@ -106,7 +133,6 @@ public class Log {
 
         // Color it yellow.
         message = String.format("\033[33mW [%d]: %s\033[0m\n", getMillis(), message);
-        System.err.print(message);
 
         try {
             logWriter.append(message);
@@ -114,6 +140,9 @@ public class Log {
         catch (IOException ie) {
             System.err.println("Warning: failed to write message to logfile!");
         }
+
+        if (logLevel.compareTo(LogLevel.WARN) >= 0)
+            System.err.print(message);
     }
 
     /**
@@ -122,12 +151,11 @@ public class Log {
      * @param message error message to log.
      */
     public static synchronized void logError(String message) {
-        if (logLevel.compareTo(LogLevel.WARN) < 0)
+        if (logLevel.compareTo(LogLevel.ERROR) < 0)
             return;
 
         // Color it red.
         message = String.format("\033[31mE [%d]: %s\033[0m\n", getMillis(), message);
-        System.err.print(message);
 
         try {
             logWriter.append(message);
@@ -135,6 +163,9 @@ public class Log {
         catch (IOException ie) {
             System.err.println("Warning: failed to write message to logfile!");
         }
+
+        if (logLevel.compareTo(LogLevel.ERROR) >= 0)
+            System.err.print(message);
     }
 
     /**
@@ -180,5 +211,15 @@ public class Log {
 
     static long getMillis() {
         return System.currentTimeMillis() - startTime;
+    }
+
+    public static void close() {
+        try {
+            logWriter.flush();
+            logWriter.close();
+        }
+        catch (IOException ie) {
+            System.err.println("Warning: failed to close log file!");
+        }
     }
 }
