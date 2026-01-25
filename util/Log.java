@@ -32,7 +32,7 @@ public class Log {
 
         // MacOS unsupported (Windows only supported for dev reasons)
         if (System.getProperty("os.name").equals("Linux")) {
-            logPath = new File("~/.local/share/rsc-games/menu-logs");
+            logPath = new File(System.getProperty("user.home") + "/.local/share/rsc-games/menu-logs");
             logName = "log-" + LocalDateTime.now() + ".log";
         }
         else {

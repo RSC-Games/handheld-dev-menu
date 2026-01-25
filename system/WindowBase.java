@@ -35,8 +35,10 @@ public abstract class WindowBase extends JPanel {
         windowFrame = new JFrame();
         windowFrame.setVisible(false);
         windowFrame.setUndecorated(true);
-        windowFrame.setFocusable(focusable);
+        //windowFrame.setFocusable(focusable);
+        windowFrame.setFocusableWindowState(focusable);
         windowFrame.setAlwaysOnTop(alwaysOnTop);
+        //windowFrame.set
         
         windowFrame.setDefaultCloseOperation(closeOp);
         windowFrame.setSize(w, h);

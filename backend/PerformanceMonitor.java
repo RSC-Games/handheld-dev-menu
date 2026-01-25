@@ -1,7 +1,5 @@
 package backend;
 
-import java.util.Random;
-
 import backend.CommandUtils.CommandOutput;
 import util.Log;
 
@@ -56,9 +54,10 @@ public class PerformanceMonitor {
 
         String stdout = output.getStdout();
         int startidx = stdout.indexOf("=");
+        int endidx = stdout.indexOf("V");
 
         // Filter out the leading volt= and the V at the end.
-        float vcore = Float.parseFloat(stdout.substring(startidx + 1, stdout.length()));
+        float vcore = Float.parseFloat(stdout.substring(startidx + 1, endidx).strip());
         return vcore;
     }
 
@@ -82,7 +81,7 @@ public class PerformanceMonitor {
         int endidx = stdout.indexOf(".");
 
         // Filter out the leading temp= and the .x'C at the end.
-        int temp = Integer.parseInt(stdout.substring(startidx + 1, endidx));
+        int temp = Integer.parseInt(stdout.substring(startidx + 1, endidx).strip());
         return temp;
     }
 
@@ -120,7 +119,7 @@ public class PerformanceMonitor {
             return 50; // No clock domain will idle below 50 MHz; the Pi idles at 600 MHz/1.5 GHz (Pi 4/5)
         }
 
-        long freq = Long.parseLong(output.getStdout().split("=")[1]);
+        long freq = Long.parseLong(output.getStdout().split("=")[1].strip());
         return (int)(freq / 1_000_000);
     }
 
@@ -155,7 +154,9 @@ public class PerformanceMonitor {
         if (requestedFlag == null)
             throw new RuntimeException("unable to find flag " + flag + " in /proc/meminfo");
 
-        long memFlagKB = Long.parseLong(flag.split("\s+")[1]);
+        Log.logVerbose("perf_mon.debug: got flag text " + requestedFlag);
+
+        long memFlagKB = Long.parseLong(requestedFlag.split("\s+")[1].strip());
         return (int)(memFlagKB / 1_000);
     }
 }

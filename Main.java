@@ -34,12 +34,12 @@ import util.Utils;
 public class Main {
     public static void main(String[] args) {
         MainWindow window = new MainWindow();
-        MenuOverlayWindow settingsOverlay = new MenuOverlayWindow();
+        //MenuOverlayWindow settingsOverlay = new MenuOverlayWindow();
         PerfOverlayWindow perfOverlay = new PerfOverlayWindow();
         InputManager inputManager = window.getInputManager();
         PanelManager panelManager = PanelManager.getPanelManager();
 
-        WindowBase[] windows = {window, settingsOverlay, perfOverlay};
+        WindowBase[] windows = {window, /*settingsOverlay,*/ perfOverlay};
 
         // Initial hardware housekeeping stuff like network/volume/power management.
         init();

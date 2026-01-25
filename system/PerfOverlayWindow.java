@@ -26,7 +26,9 @@ public class PerfOverlayWindow extends WindowBase {
     }
 
     @Override
-    protected void updateHook() {}
+    protected void updateHook() {
+        //windowFrame.toFront();
+    }
 
     /**
      * This window should ALWAYS be simulated regardless of whether it has
