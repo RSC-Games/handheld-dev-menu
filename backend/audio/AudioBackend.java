@@ -134,7 +134,8 @@ public class AudioBackend {
 
             // Note: assuming the third index (first 2 are just for readability) is the default sink. 
             // THIS ASSUMPTION MAY NOT ALWAYS HOLD!!!
-            String defaultSinkName = defaultsList.split("\n")[3];
+            Log.logVerbose("pipewire.service: defaultslist " + defaultsList);
+            String defaultSinkName = defaultsList.split("\n")[2];
 
             ArrayList<AudioSink> foundSinks = new ArrayList<>();
 
@@ -143,7 +144,8 @@ public class AudioBackend {
                     continue;
 
                 // Format: ID. NAME [vol: 0.xx]
-                String sinkID = sink.substring(0, sink.indexOf(".")).strip();
+                int idStart = Math.max(0, sink.indexOf("*") + 1);
+                String sinkID = sink.substring(idStart, sink.indexOf(".")).strip();
                 String sinkName = sink.substring(sink.indexOf(".") + 1, sink.lastIndexOf("[")).strip();
 
                 // Default sink is going to have the same name as the, well, default sink...

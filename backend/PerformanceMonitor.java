@@ -148,15 +148,13 @@ public class PerformanceMonitor {
 
         for (String memFlag : memFlags) {
             if (memFlag.contains(flag))
-                requestedFlag = flag;
+                requestedFlag = memFlag;
         }
 
         if (requestedFlag == null)
             throw new RuntimeException("unable to find flag " + flag + " in /proc/meminfo");
 
-        Log.logVerbose("perf_mon.debug: got flag text " + requestedFlag);
-
         long memFlagKB = Long.parseLong(requestedFlag.split("\s+")[1].strip());
-        return (int)(memFlagKB / 1_000);
+        return (int)(memFlagKB / 1_024);
     }
 }
