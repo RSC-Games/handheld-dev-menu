@@ -38,7 +38,7 @@ public class PerformanceMonitor {
 
         if (stats == null) {
             Log.logError("perfmon: unable to read /proc/stat");
-            return 0;
+            return -1;
         }
 
         String[] statsList = stats.split("\n");
@@ -79,7 +79,7 @@ public class PerformanceMonitor {
         cpuPrevIdleTime = idle;
 
         // CPU_Percentage = (totald - idled)/totald
-        return (int)((totalDelta - idleDelta) * 100 / (double)totalDelta);
+        return (int)Math.round((totalDelta - idleDelta) * 100 / (double)totalDelta);
     }
 
     /**
@@ -91,10 +91,55 @@ public class PerformanceMonitor {
         return getDomainClockSpeed("arm");
     }
 
+    private static long prevV3DTimestamp = 0;
+    private static final long[] prevV3DCounters = new long[5];
+
+    /**
+     * Report the current utilization of the maximally used hardware unit on the
+     * Raspberry Pi iGPU. Possible units are bin, render, tfu, csd, and cache_clean.
+     * 
+     * @return The percent utilization of the hardware block.
+     */
     public static int getGPUUtilization() {
-        // TODO: read and parse /sys/devices/platform/axi/1002000000.v3d/gpu_stats
-        // TODO: see /proc/*/fdinfo/* (https://github.com/raspberrypi-ui/lxtask/blob/master/src/functions.c)
-        return 0; //new Random().nextInt(0, 15);
+        // Pi 5 way to read the bus: /sys/devices/platform/axi/1002000000.v3d/gpu_stats
+        String gpuStats = Utils.readTextFile("/sys/devices/platform/axi/1002000000.v3d/gpu_stats");
+
+        // Pi 4 way to read the bus: /sys/devices/platform/v3dbus/fec00000.v3d/gpu_stats
+        if (gpuStats == null) {
+            gpuStats = Utils.readTextFile("/sys/devices/platform/v3dbus/fec00000.v3d/gpu_stats");
+
+            // Probably running on an unsupported device?
+            if (gpuStats == null) {
+                Log.logError("perfmon: unable to read V3D profiling counters");
+                return -1;
+            }
+        }
+
+        // Indices in question: [1, 5] (bin, render, tfu, csd, cache_clean)
+        String[] lines = gpuStats.split("\n");
+        long[] counters = new long[5];
+        long[] counterDeltas = new long[5];
+
+        // Determine time delta from the last time we called this.
+        long timestamp = Long.parseLong(lines[1].split("\t")[1].strip());
+        long timeDelta = timestamp - prevV3DTimestamp;
+        prevV3DTimestamp = timestamp;
+
+        long maxDelta = 0;
+
+        for (int i = 0; i < counters.length; i++) {
+            counters[i] = Long.parseLong(lines[i+1].split("\t")[3].strip());
+            counterDeltas[i] = counters[i] - prevV3DCounters[i];
+
+            // Find the maximally used hardware unit and report that utilization.
+            if (counterDeltas[i] > maxDelta)
+                maxDelta = counterDeltas[i];
+        }
+
+        // Update counters (to keep deltas on track)
+        System.arraycopy(counters, 0, prevV3DCounters, 0, counters.length);
+
+        return (int)Math.round((maxDelta * 100.) / timeDelta);
     }
 
     /**

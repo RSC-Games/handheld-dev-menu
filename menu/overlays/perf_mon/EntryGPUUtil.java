@@ -17,6 +17,6 @@ public class EntryGPUUtil extends UIKeyValueText {
     
     @Override
     public void tick() {
-        setValueText(PerformanceMonitor.getCPUUtilization() + "%");
+        setValueText(PerformanceMonitor.getGPUUtilization() + "%");
     }
 }

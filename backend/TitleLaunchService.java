@@ -233,6 +233,7 @@ public class TitleLaunchService {
         }
 
         void closeApp() {
+            // TODO: regression: fails to kill minecraft (is it no longer a subprocess?)
             // Kill all descendents too (avoid errant processes like mc)
             for (ProcessHandle child : executingThread.children().<ProcessHandle>toArray(ProcessHandle[]::new))
                 child.destroy();
