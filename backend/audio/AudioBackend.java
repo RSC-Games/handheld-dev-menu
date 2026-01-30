@@ -264,7 +264,7 @@ public class AudioBackend {
             }
 
             if (output.getExitCode() != 0) {
-                Log.logWarning("pipewire.service: failed to execute command. stderr:");
+                Log.logVerbose("pipewire.service: failed to execute command. stderr:");
                 Log.logVerbose("pipewire.service: " + output.getStderr());
                 return false;
             }

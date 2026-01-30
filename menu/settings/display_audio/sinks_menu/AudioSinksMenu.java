@@ -29,6 +29,6 @@ public class AudioSinksMenu extends UIPanel {
         UIElement bodyArea = new UIClip(root, new Point(0, 60), new Point(800, 480 - 15));
         MenuOptionList menu = new MenuOptionList(bodyArea, new Point(30, 80));
         new UIText(bodyArea, new Point(20, 80), ">", Color.WHITE, 12);
-        new EnumerateSinks(menu);
+        new EnumerateSinks(root, menu);
     }
 }

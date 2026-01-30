@@ -52,6 +52,7 @@ public class Main {
 
         // Simple render loop. Everything is managed in here.
         try {
+            // TODO: bug: settings overlay window shows and freezes
             window.show();
             perfOverlay.start();
             settingsOverlay.hide();
@@ -89,7 +90,6 @@ public class Main {
     private static void init() {
         Log.logInfo("main: started dev menu version " + Version.VERSION);
 
-        // TODO: Do init stuff in here
         // TODO: Volume settings are not automatically restored yet.
         BacklightService.disableX11Management();
         // (Backlight is automatically restored by systemd)
@@ -97,6 +97,7 @@ public class Main {
         // Run dhcp if applicable
         NetworkBackend.runWaitForNetwork();
 
+        // For deadlock investigation (menu system has a tendency to freeze?)
         Log.logInfo("main: init done; starting menu code");
     }
 

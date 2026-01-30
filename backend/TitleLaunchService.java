@@ -203,7 +203,8 @@ public class TitleLaunchService {
         boolean startProcess() {
             ProcessBuilder titleToLaunch = new ProcessBuilder(thisTitle.args);
             titleToLaunch.environment().put("DRI_PRIME", "1");
-            // TODO: Detect if a discrete GPU is present to avoid weird Mesa/DRM bugs.
+            // TODO: OpenGL version is force overridden to 3.3 which could be problematic for
+            // certain titles.
 
             Log.logInfo("title.service: running title launch command " + titleToLaunch.command());
             Log.logVerbose("title.service: title env " + titleToLaunch.environment());
