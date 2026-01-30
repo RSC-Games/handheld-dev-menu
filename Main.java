@@ -50,8 +50,6 @@ public class Main {
         UIPanel mainMenu = new MainMenu();
         panelManager.pushPanel(mainMenu);
 
-        Log.logVerbose("main: active process environment: " + System.getenv());
-
         // Simple render loop. Everything is managed in here.
         try {
             window.show();
@@ -93,7 +91,6 @@ public class Main {
 
         // TODO: Do init stuff in here
         // TODO: Volume settings are not automatically restored yet.
-        // TODO: Disable x11 screen blanking (xset s noblank)
         BacklightService.disableX11Management();
         // (Backlight is automatically restored by systemd)
 

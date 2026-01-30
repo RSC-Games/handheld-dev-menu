@@ -15,7 +15,17 @@ class EntrySoCTemp extends UIText {
     
     @Override
     public void tick() {
-        // TODO: Color changing temp tracking
-        setText(PerformanceMonitor.getSoCTemperature() + "C");
+        int temp = PerformanceMonitor.getSoCTemperature();
+
+        if (temp <= 40)
+            setColor(Color.green);
+        else if (temp <= 55)
+            setColor(Color.yellow);
+        else if (temp <= 65)
+            setColor(Color.orange);
+        else
+            setColor(Color.red);
+
+        setText(temp + "C");
     }
 }

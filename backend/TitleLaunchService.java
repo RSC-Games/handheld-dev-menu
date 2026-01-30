@@ -202,11 +202,11 @@ public class TitleLaunchService {
          */
         boolean startProcess() {
             ProcessBuilder titleToLaunch = new ProcessBuilder(thisTitle.args);
+            titleToLaunch.environment().put("DRI_PRIME", "1");
             // TODO: Detect if a discrete GPU is present to avoid weird Mesa/DRM bugs.
-            // TODO: Add to process environment
-            //titleToLaunch.command().add(0, "DRI_PRIME=1");
 
             Log.logInfo("title.service: running title launch command " + titleToLaunch.command());
+            Log.logVerbose("title.service: title env " + titleToLaunch.environment());
             titleToLaunch.inheritIO();
 
             try {
