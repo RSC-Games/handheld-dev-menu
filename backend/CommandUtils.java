@@ -2,7 +2,10 @@ package backend;
 
 import system.Config;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import util.Log;
 
@@ -29,8 +32,12 @@ public class CommandUtils {
             }
             // Unable to retry command execution; return no output.
             catch (IllegalStateException ie) {
-                Log.logError("command_engine: unable to execute provided command. details below");
-                Log.logException(ie);
+                // Avoid logging certain command details if they're known to work.
+                if (!Config.SUPPRESS_CMD_ERRLOG.contains(args[0])) {
+                    Log.logError("command_engine: unable to execute provided command. details below");
+                    Log.logException(ie);
+                }
+
                 return new CommandOutput(null, null, Integer.MIN_VALUE);
             }
         }
@@ -38,7 +45,7 @@ public class CommandUtils {
 
     static CommandOutput executeCommand0(String... args) {
         try {
-            Process process = Runtime.getRuntime().exec(args);
+            Process process = Runtime.getRuntime().exec(args, getProcessEnv());
             int exitCode = process.waitFor();
 
             return new CommandOutput(
@@ -56,6 +63,22 @@ public class CommandUtils {
         }
 
         return null;
+    }
+
+    /**
+     * Take the preprocessed environment from this process and convert it to a form
+     * that can be passed on to child processes.
+     * 
+     * @return The converted environment variable array.
+     */
+    private static String[] getProcessEnv() {
+        Map<String, String> processEnvironment = System.getenv();
+        ArrayList<String> parsedEnv = new ArrayList<>();
+
+        for (Entry<String, String> envVar : processEnvironment.entrySet())
+            parsedEnv.add(String.format("%s=%s", envVar.getKey(), envVar.getValue()));
+
+        return parsedEnv.toArray(String[]::new);
     }
 
     public static class CommandOutput {

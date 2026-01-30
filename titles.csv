@@ -1,7 +1,5 @@
 Minecraft 1.21.10 Modded, bash, ../load_prism.sh
-mGBA - Minish Cap, /usr/games/mgba, ../roms/zelda_minish.gba
 mGBA - A Link to the Past, /usr/games/mgba, ../roms/zelda_past.gba
-mGBA - Super Mario Advance, /usr/games/mgba, ../roms/supermarioadvance.gba
 Super Tux Kart, /usr/games/supertuxkart
 Testing another menu system (Windows host), java, -Djava.library.path=./lib, -jar, ../crap-awt-menu_build/menu-system.jar
 Bluetooth scan, bluetoothctl, --timeout, 10, scan, on

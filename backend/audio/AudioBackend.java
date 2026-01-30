@@ -117,6 +117,8 @@ public class AudioBackend {
 
             if (output.getExitCode() != 0) {
                 Log.logError("pipewire.service: failed to query wpctl for sinks list");
+                Log.logVerbose("pipewire.service: stdout: " + output.getStdout());
+                Log.logVerbose("pipewire.service: stderr:" + output.getStderr());
                 return new AudioSink[0];
             }
 

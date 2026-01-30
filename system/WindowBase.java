@@ -35,9 +35,15 @@ public abstract class WindowBase extends JPanel {
         windowFrame = new JFrame();
         windowFrame.setVisible(false);
         windowFrame.setUndecorated(true);
-        //windowFrame.setFocusable(focusable);
+        windowFrame.setTitle(title);
+        windowFrame.setName(title);
+
+        // FIX: window manager never gets window title.
+        windowFrame.setVisible(true);
         windowFrame.setFocusableWindowState(focusable);
         windowFrame.setAlwaysOnTop(alwaysOnTop);
+        windowFrame.setVisible(false);
+        //windowFrame.setFocusable(focusable);
         //windowFrame.set
         
         windowFrame.setDefaultCloseOperation(closeOp);

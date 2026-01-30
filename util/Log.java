@@ -186,7 +186,7 @@ public class Log {
         }
     }
 
-    public static synchronized void logException(Exception ie) {
+    public static synchronized void logException(Throwable ie) {
         try {
             logWriter.append("\n============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================\n");
 
@@ -201,6 +201,12 @@ public class Log {
 
             for (String line : exceptionLines)
                 logWriter.append(line + "\n");
+
+            Throwable cause = ie.getCause();
+            if (cause != null) {
+                logWriter.append("\nThis exception was caused by:\n");
+                logException(cause);
+            }
 
             logWriter.append("\n===================== End of backtrace =========================\n");
         }

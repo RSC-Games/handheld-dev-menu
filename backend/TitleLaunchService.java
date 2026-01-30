@@ -97,7 +97,7 @@ public class TitleLaunchService {
      * Wait for an undeterminable time if the title is running.
      * Waits for an interrupt to re-run the menu system code.
      * 
-     * @param enableWait whether the menu should sleep.
+     * @param enableHide whether the menu should sleep.
      */
     public static void setWindowHideState(boolean enableHide) {
         shouldHide = enableHide;
@@ -194,8 +194,18 @@ public class TitleLaunchService {
             this.thisTitle = thisTitle;
         }
 
+        /**
+         * Launch the requested title (if a dGPU is present execute it on the discrete card
+         * for higher performance).
+         * 
+         * @return If the title could be successfully launched.
+         */
         boolean startProcess() {
             ProcessBuilder titleToLaunch = new ProcessBuilder(thisTitle.args);
+            // TODO: Detect if a discrete GPU is present to avoid weird Mesa/DRM bugs.
+            // TODO: Add to process environment
+            //titleToLaunch.command().add(0, "DRI_PRIME=1");
+
             Log.logInfo("title.service: running title launch command " + titleToLaunch.command());
             titleToLaunch.inheritIO();
 

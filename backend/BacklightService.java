@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import backend.CommandUtils.CommandOutput;
 import util.Log;
 
 /**
@@ -34,6 +35,31 @@ public class BacklightService {
 
     static {
         currentPanelBrightness = getScaledBrightness();
+    }
+
+    /**
+     * Disable the X server's built in power management (since the menu system provides
+     * its own)
+     */
+    public static void disableX11Management() {
+        // TODO: FIX: most commands aren't on path for some reason?
+        // Disable screensaver
+        CommandOutput output = CommandUtils.executeCommandRetry("xset s off");
+
+        if (output.getExitCode() != 0) {
+            Log.logWarning("display.dpms: failed to disable x11 screensaver");
+            Log.logVerbose("display.dpms stdout: " + output.getStdout());
+            Log.logVerbose("display.dpms stderr: " + output.getStderr());
+        }
+
+        // Force disable dpms (which the DSI screen probably won't use anyway)
+        output = CommandUtils.executeCommandRetry("xset -dpms");
+
+        if (output.getExitCode() != 0) {
+            Log.logWarning("display.dpms: failed to full disable dpms");
+            Log.logVerbose("display.dpms stdout: " + output.getStdout());
+            Log.logVerbose("display.dpms stderr: " + output.getStderr());
+        }
     }
 
     /**

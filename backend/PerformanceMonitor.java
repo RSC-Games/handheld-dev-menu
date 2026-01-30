@@ -2,16 +2,84 @@ package backend;
 
 import backend.CommandUtils.CommandOutput;
 import util.Log;
+import util.Utils;
 
 public class PerformanceMonitor {
+    /**
+     * Get the CPU utilization across all execution cores.
+     * 
+     * @return The all core CPU utilization.
+     */
     public static int getCPUUtilization() {
-        // TODO: /proc/stats (cpu)
-        return 0;//new Random().nextInt(0, 15);
+        return computeUtilization(-1);
     }
 
     public static int[] getPerCoreUtilization() {
-        // TODO: /proc/stats (cpuX)
+        // TODO: Can't implement because of delta tracking
         return new int[4];
+    }
+
+    // For delta tracking.
+    private static long cpuPrevIdleTime = 0;
+    private static long cpuPrevTotalTime = 0;
+
+    /**
+     * Calculate the utilization for a given core (or all cores).
+     * 
+     * @param coreID Core ID (-1 for all cores)
+     * @return The utilization percentage for the given core(s)
+     */
+    // TODO: Deltas are updated every time this is called (potentially causing issues).
+    // Per core can't be properly supported until deltas are tracked.
+    private static int computeUtilization(int coreID) {
+        // CPU counters are stored as follows:
+        // cpuX user nice system idle iowait irq softirq steal guest guest_nice
+        String stats = Utils.readTextFile("/proc/stat");
+
+        if (stats == null) {
+            Log.logError("perfmon: unable to read /proc/stat");
+            return 0;
+        }
+
+        String[] statsList = stats.split("\n");
+        String[] cpuInfo = statsList[coreID + 1].split("\s+");
+
+        // All fields are required for utilization calculation.
+        long user = Long.parseLong(cpuInfo[1].strip());
+        long nice = Long.parseLong(cpuInfo[2].strip());
+        long system = Long.parseLong(cpuInfo[3].strip());
+        long idle = Long.parseLong(cpuInfo[4].strip());
+        long iowait = Long.parseLong(cpuInfo[5].strip());
+        long irq = Long.parseLong(cpuInfo[6].strip());
+        long softirq = Long.parseLong(cpuInfo[7].strip());
+        long steal = Long.parseLong(cpuInfo[8].strip());
+        long guest = Long.parseLong(cpuInfo[9].strip());
+        long guest_nice = Long.parseLong(cpuInfo[10].strip());
+
+        // PrevIdle = previdle + previowait
+        // Idle = idle + iowait
+        idle = idle + iowait;
+
+        // PrevNonIdle = prevuser + prevnice + prevsystem + previrq + prevsoftirq + prevsteal
+        // NonIdle = user + nice + system + irq + softirq + steal
+        long nonIdle = user + nice + system + irq + softirq + steal + guest + guest_nice;
+
+        // PrevTotal = PrevIdle + PrevNonIdle
+        // Total = Idle + NonIdle
+        long total = idle + nonIdle;
+
+        // # differentiate: actual value minus the previous one
+        // totald = Total - PrevTotal
+        // idled = Idle - PrevIdle
+        long totalDelta = total - cpuPrevTotalTime;
+        long idleDelta = idle - cpuPrevIdleTime;
+
+        // Update previous times for future deltas
+        cpuPrevTotalTime = total;
+        cpuPrevIdleTime = idle;
+
+        // CPU_Percentage = (totald - idled)/totald
+        return (int)((totalDelta - idleDelta) * 100 / (double)totalDelta);
     }
 
     /**
@@ -25,6 +93,7 @@ public class PerformanceMonitor {
 
     public static int getGPUUtilization() {
         // TODO: read and parse /sys/devices/platform/axi/1002000000.v3d/gpu_stats
+        // TODO: see /proc/*/fdinfo/* (https://github.com/raspberrypi-ui/lxtask/blob/master/src/functions.c)
         return 0; //new Random().nextInt(0, 15);
     }
 
@@ -70,7 +139,7 @@ public class PerformanceMonitor {
         CommandOutput output = CommandUtils.executeCommandRetry("vcgencmd", "measure_temp");
 
         if (output.getExitCode() != 0) {
-            Log.logError("perfmon: failed to read SoC V_core");
+            Log.logError("perfmon: failed to read SoC temp");
             Log.logVerbose("stdout: " + output.getStdout());
             Log.logVerbose("stderr: " + output.getStderr());
             return 0; // Unlikely the thing is going to still be at freezing after boot, even in cold weather.
@@ -127,10 +196,10 @@ public class PerformanceMonitor {
      * Determine various Linux memory region sizes. All we want here is the physical memory
      * size but other stuff could be useful.
      * 
-     * @param flag The memory region we want.
+     * @param flagName The memory region we want.
      * @return The memory region size in kB
      */
-    private static int getMemoryTypeMB(String flag) {
+    private static int getMemoryTypeMB(String flagName) {
         // The proper way to do this is with the native file I/O of java...
         // Or coreutils can do it for me since the logic is already here.
         // TODO: Use proper file I/O to read the file.
@@ -147,14 +216,14 @@ public class PerformanceMonitor {
         String requestedFlag = null;
 
         for (String memFlag : memFlags) {
-            if (memFlag.contains(flag))
+            if (memFlag.contains(flagName))
                 requestedFlag = memFlag;
         }
 
         if (requestedFlag == null)
-            throw new RuntimeException("unable to find flag " + flag + " in /proc/meminfo");
+            throw new RuntimeException("unable to find flag " + flagName + " in /proc/meminfo");
 
         long memFlagKB = Long.parseLong(requestedFlag.split("\s+")[1].strip());
-        return (int)(memFlagKB / 1_024);
+        return (int)(memFlagKB / 1024);
     }
 }
