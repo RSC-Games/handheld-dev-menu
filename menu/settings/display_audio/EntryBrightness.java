@@ -4,7 +4,7 @@ import backend.BacklightService;
 import menu.MenuEntrySlider;
 import menu.MenuOptionList;
 
-class EntryBrightness extends MenuEntrySlider {
+public class EntryBrightness extends MenuEntrySlider {
 
     public EntryBrightness(MenuOptionList parent) {
         super(parent, "Brightness", "%", 1, 100, true);

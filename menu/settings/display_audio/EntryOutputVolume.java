@@ -4,7 +4,7 @@ import backend.audio.AudioBackend;
 import menu.MenuEntrySlider;
 import menu.MenuOptionList;
 
-class EntryOutputVolume extends MenuEntrySlider {
+public class EntryOutputVolume extends MenuEntrySlider {
     private static final int FRAMES_UPDATE = 30;
 
     int timer = 0;

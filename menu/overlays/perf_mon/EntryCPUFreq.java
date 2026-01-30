@@ -7,7 +7,7 @@ import backend.PerformanceMonitor;
 import ui.UIElement;
 import ui.UIText;
 
-public class EntryCPUFreq extends UIText {
+class EntryCPUFreq extends UIText {
 
     public EntryCPUFreq(UIElement parent, Point location) {
         super(parent, location, "0.0 kHz", Color.white, 12);

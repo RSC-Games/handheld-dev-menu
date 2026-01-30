@@ -127,17 +127,20 @@ public class AudioBackend {
             String[] segments = output.getStdout().split("\n\n");
 
             // wpctl outputs 4 segments: Clients, Audio, Video, and Settings (in this order).
-            String audioSinksList = segments[1].split("├─")[2];
+            //Log.logVerbose("pipewire.service: audio sinks list: " + Arrays.toString(segments[1].split("\s[A-Za-z]+:\n")));
+            String audioSinksList = segments[1].split("\s[A-Za-z]+:\n")[2];
             String defaultsList = segments[3];
 
             // Filter out the header and only capture each new sink, excluding the blank last line.
-            String[] sinks = audioSinksList.substring(audioSinksList.indexOf("\n"), 
-                                                      audioSinksList.lastIndexOf("\n")).split("\n\s+│\s+");
+            String[] sinks = audioSinksList.substring(0, audioSinksList.lastIndexOf("\n")).split("\n\s+│\s+");
 
             // Note: assuming the third index (first 2 are just for readability) is the default sink. 
             // THIS ASSUMPTION MAY NOT ALWAYS HOLD!!!
-            Log.logVerbose("pipewire.service: defaultslist " + defaultsList);
-            String defaultSinkName = defaultsList.split("\n")[2];
+            //Log.logVerbose("pipewire.service: defaultslist " + defaultsList);
+            String[] splitDefaults = defaultsList.split("\n");
+
+            // Bugfix: avoid crash when no default sink is present.
+            String defaultSinkName = splitDefaults.length >= 3 ? splitDefaults[2] : "";
 
             ArrayList<AudioSink> foundSinks = new ArrayList<>();
 

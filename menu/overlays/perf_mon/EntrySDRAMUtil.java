@@ -7,7 +7,7 @@ import backend.PerformanceMonitor;
 import ui.UIElement;
 import ui.UIKeyValueText;
 
-public class EntrySDRAMUtil extends UIKeyValueText {
+class EntrySDRAMUtil extends UIKeyValueText {
     private float totalRAM;
 
     public EntrySDRAMUtil(UIElement parent, Point location) {

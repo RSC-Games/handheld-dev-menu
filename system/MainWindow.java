@@ -64,8 +64,10 @@ public class MainWindow extends WindowBase {
         // Unfocus the application window manually.
         CommandOutput output = CommandUtils.executeCommandRetry("xdotool", "getwindowfocus");
 
-        if (output.getExitCode() != 0)
+        if (output.getExitCode() != 0) {
             Log.logWarning("window: x11 couldn't identify title window for update");
+            return;
+        }
 
         this.appWindowID = Integer.parseInt(output.getStdout().strip());
         

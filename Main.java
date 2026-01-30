@@ -26,21 +26,22 @@ import system.InputManager;
 import system.MainWindow;
 import system.MenuOverlayWindow;
 import system.PanelManager;
-import system.PerfOverlayWindow;
+import system.PerformanceOverlayThread;
 import system.WindowBase;
 import ui.UIPanel;
 import util.Log;
 import util.Utils;
+import util.Version;
 
 public class Main {
     public static void main(String[] args) {
         MainWindow window = new MainWindow();
-        //MenuOverlayWindow settingsOverlay = new MenuOverlayWindow();
-        PerfOverlayWindow perfOverlay = new PerfOverlayWindow();
         InputManager inputManager = window.getInputManager();
         PanelManager panelManager = PanelManager.getPanelManager();
+        PerformanceOverlayThread perfOverlay = PerformanceOverlayThread.getOverlayThread();
 
-        WindowBase[] windows = {window, /*settingsOverlay,*/ perfOverlay};
+        MenuOverlayWindow settingsOverlay = new MenuOverlayWindow();
+        WindowBase[] windows = {window, settingsOverlay};
 
         // Initial hardware housekeeping stuff like network/volume/power management.
         init();
@@ -53,8 +54,9 @@ public class Main {
 
         // Simple render loop. Everything is managed in here.
         try {
-            //settingsOverlay.show();
-            perfOverlay.show();
+            window.show();
+            perfOverlay.start();
+            settingsOverlay.hide();
 
             while (true) {
                 // Wait for an interrupt if a game is actively executing.
@@ -87,6 +89,8 @@ public class Main {
     }
 
     private static void init() {
+        Log.logInfo("main: started dev menu version " + Version.VERSION);
+
         // TODO: Do init stuff in here
         // TODO: Volume settings are not automatically restored yet.
         // TODO: Disable x11 screen blanking (xset s noblank)
@@ -95,6 +99,8 @@ public class Main {
 
         // Run dhcp if applicable
         NetworkBackend.runWaitForNetwork();
+
+        Log.logInfo("main: init done; starting menu code");
     }
 
     /**

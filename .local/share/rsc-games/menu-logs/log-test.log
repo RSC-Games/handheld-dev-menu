@@ -1,212 +1,277 @@
 ==== STARTED LOG FILE WRITER ====
 [32mI [0]: input: Dev Menu: JInput version 2.0.10[0m
-[33mW [209]: input: failed to connect/map controller[0m
-[31mE [300]: perfmon: failed to read meminfo[0m
-[34mV [307]: stdout: null[0m
-[34mV [307]: stderr: null[0m
-[33mW [310]: display.backlight: failed to read sysfs entry /sys/class/backlight/10-0045/max_brightness[0m
+[33mW [292]: input: failed to connect/map controller[0m
+[32mI [331]: main: started dev menu version v0.0.12-dev[0m
+[33mW [336]: display.backlight: failed to read sysfs entry /sys/class/backlight/10-0045/max_brightness[0m
 
 ============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
 Exception in thread main java.io.FileNotFoundException \sys\class\backlight\10-0045\max_brightness (The system cannot find the path specified)
       at java.base/java.io.FileInputStream.open0(Native Method)
-      at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
-      at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
-      at backend.BacklightService.readString(BacklightService.java:144)
+      at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+      at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+      at backend.BacklightService.readString(BacklightService.java:143)
       at backend.BacklightService.<clinit>(BacklightService.java:28)
-      at Main.init(Main.java:93)
-      at Main.main(Main.java:46)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:47)
 
 ===================== End of backtrace =========================
-[33mW [314]: display.backlight: failed to read sysfs entry /sys/class/backlight/10-0045/brightness[0m
+[33mW [341]: display.backlight: failed to read sysfs entry /sys/class/backlight/10-0045/brightness[0m
 
 ============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
 Exception in thread main java.io.FileNotFoundException \sys\class\backlight\10-0045\brightness (The system cannot find the path specified)
       at java.base/java.io.FileInputStream.open0(Native Method)
-      at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
-      at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
-      at backend.BacklightService.readString(BacklightService.java:144)
-      at backend.BacklightService.getRawBrightness(BacklightService.java:92)
-      at backend.BacklightService.getScaledBrightness(BacklightService.java:86)
+      at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+      at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+      at backend.BacklightService.readString(BacklightService.java:143)
+      at backend.BacklightService.getRawBrightness(BacklightService.java:91)
+      at backend.BacklightService.getScaledBrightness(BacklightService.java:85)
       at backend.BacklightService.<clinit>(BacklightService.java:37)
-      at Main.init(Main.java:93)
-      at Main.main(Main.java:46)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:47)
 
 ===================== End of backtrace =========================
-[34mV [316]: display.backlight: got raw brightness 45[0m
-[31mE [326]: command_engine: unable to execute provided command. details below[0m
-
-============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
-Exception in thread main java.lang.IllegalStateException Unable to execute command: xset s off
-      at backend.CommandUtils.executeCommand0(CommandUtils.java:58)
-      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
-      at backend.BacklightService.disableX11Management(BacklightService.java:47)
-      at Main.init(Main.java:93)
-      at Main.main(Main.java:46)
-
-This exception was caused by:
-
-============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
-Exception in thread main java.io.IOException Cannot run program "xset s off": CreateProcess error=2, The system cannot find the file specified
-      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1170)
-      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1089)
-      at java.base/java.lang.Runtime.exec(Runtime.java:681)
-      at java.base/java.lang.Runtime.exec(Runtime.java:577)
-      at backend.CommandUtils.executeCommand0(CommandUtils.java:48)
-      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
-      at backend.BacklightService.disableX11Management(BacklightService.java:47)
-      at Main.init(Main.java:93)
-      at Main.main(Main.java:46)
-
-This exception was caused by:
-
-============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
-Exception in thread main java.io.IOException CreateProcess error=2, The system cannot find the file specified
-      at java.base/java.lang.ProcessImpl.create(Native Method)
-      at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:500)
-      at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:159)
-      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1126)
-      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1089)
-      at java.base/java.lang.Runtime.exec(Runtime.java:681)
-      at java.base/java.lang.Runtime.exec(Runtime.java:577)
-      at backend.CommandUtils.executeCommand0(CommandUtils.java:48)
-      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
-      at backend.BacklightService.disableX11Management(BacklightService.java:47)
-      at Main.init(Main.java:93)
-      at Main.main(Main.java:46)
-
-===================== End of backtrace =========================
-
-===================== End of backtrace =========================
-
-===================== End of backtrace =========================
-[33mW [353]: display.dpms: failed to disable x11 screensaver[0m
-[34mV [353]: display.dpms stdout: null[0m
-[34mV [354]: display.dpms stderr: null[0m
+[34mV [344]: display.backlight: got raw brightness 45[0m
 [31mE [355]: command_engine: unable to execute provided command. details below[0m
 
 ============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
-Exception in thread main java.lang.IllegalStateException Unable to execute command: xset -dpms
+Exception in thread main java.lang.IllegalStateException Unable to execute command: xset
       at backend.CommandUtils.executeCommand0(CommandUtils.java:58)
       at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
-      at backend.BacklightService.disableX11Management(BacklightService.java:56)
-      at Main.init(Main.java:93)
-      at Main.main(Main.java:46)
+      at backend.BacklightService.disableX11Management(BacklightService.java:46)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:47)
 
 This exception was caused by:
 
 ============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
-Exception in thread main java.io.IOException Cannot run program "xset -dpms": CreateProcess error=2, The system cannot find the file specified
-      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1170)
-      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1089)
-      at java.base/java.lang.Runtime.exec(Runtime.java:681)
-      at java.base/java.lang.Runtime.exec(Runtime.java:577)
+Exception in thread main java.io.IOException Cannot run program "xset": CreateProcess error=2, The system cannot find the file specified
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1143)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1073)
+      at java.base/java.lang.Runtime.exec(Runtime.java:594)
+      at java.base/java.lang.Runtime.exec(Runtime.java:496)
       at backend.CommandUtils.executeCommand0(CommandUtils.java:48)
       at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
-      at backend.BacklightService.disableX11Management(BacklightService.java:56)
-      at Main.init(Main.java:93)
-      at Main.main(Main.java:46)
+      at backend.BacklightService.disableX11Management(BacklightService.java:46)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:47)
 
 This exception was caused by:
 
 ============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
 Exception in thread main java.io.IOException CreateProcess error=2, The system cannot find the file specified
       at java.base/java.lang.ProcessImpl.create(Native Method)
-      at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:500)
-      at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:159)
-      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1126)
-      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1089)
-      at java.base/java.lang.Runtime.exec(Runtime.java:681)
-      at java.base/java.lang.Runtime.exec(Runtime.java:577)
+      at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:499)
+      at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:158)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1110)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1073)
+      at java.base/java.lang.Runtime.exec(Runtime.java:594)
+      at java.base/java.lang.Runtime.exec(Runtime.java:496)
       at backend.CommandUtils.executeCommand0(CommandUtils.java:48)
       at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
-      at backend.BacklightService.disableX11Management(BacklightService.java:56)
-      at Main.init(Main.java:93)
-      at Main.main(Main.java:46)
+      at backend.BacklightService.disableX11Management(BacklightService.java:46)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:47)
 
 ===================== End of backtrace =========================
 
 ===================== End of backtrace =========================
 
 ===================== End of backtrace =========================
-[33mW [357]: display.dpms: failed to full disable dpms[0m
-[34mV [357]: display.dpms stdout: null[0m
-[34mV [357]: display.dpms stderr: null[0m
-[31mE [362]: network_backend: rfkill exec failed; couldn't determine network adapter index[0m
-[34mV [362]: network_backend: pushing job wait_for_network_assoc[0m
-[34mV [370]: sm_thread: pushing synchronous job backend.system_mgmt.SystemManagementJob@543e710e[0m
-[34mV [389]: main: active process environment: {USERDOMAIN_ROAMINGPROFILE=DESKTOP-V7HV8UO, PROCESSOR_LEVEL=6, SESSIONNAME=Console, ALLUSERSPROFILE=C:\ProgramData, PROCESSOR_ARCHITECTURE=AMD64, VSCODE_GIT_IPC_HANDLE=\\.\pipe\vscode-git-8dbe22ca5b-sock, PSModulePath=C:\Users\Raine\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules, SystemDrive=C:, EFC_7180_1592913036=1, VSCODE_INJECTION=1, COLORTERM=truecolor, USERNAME=Raine, VSCODE_GIT_ASKPASS_NODE=C:\Users\Raine\AppData\Local\Programs\Microsoft VS Code\Code.exe, TERM_PROGRAM_VERSION=1.108.1, ProgramFiles(x86)=C:\Program Files (x86), GIT_ASKPASS=c:\Users\Raine\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass.sh, CHROME_CRASHPAD_PIPE_NAME=\\.\pipe\crashpad_16352_XRRNVAUCGZXZBBBN, VSCODE_STABLE=1, PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL, DriverData=C:\Windows\System32\Drivers\DriverData, VSCODE_A11Y_MODE=0, ProgramData=C:\ProgramData, ProgramW6432=C:\Program Files, HOMEPATH=\Users\Raine, PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 11, GenuineIntel, ProgramFiles=C:\Program Files, PUBLIC=C:\Users\Public, windir=C:\WINDOWS, ZES_ENABLE_SYSMAN=1, LOCALAPPDATA=C:\Users\Raine\AppData\Local, USERDOMAIN=DESKTOP-V7HV8UO, LOGONSERVER=\\DESKTOP-V7HV8UO, LANG=en_US.UTF-8, VSCODE_GIT_ASKPASS_MAIN=c:\Users\Raine\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass-main.js, OneDrive=C:\Users\Raine\OneDrive, APPDATA=C:\Users\Raine\AppData\Roaming, VSCODE_GIT_ASKPASS_EXTRA_ARGS=, CommonProgramFiles=C:\Program Files\Common Files, Path=C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\PuTTY\;C:\Program Files\qemu;C:\Users\Raine\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\Raine\AppData\Local\Programs\Python\Python313\;C:\Users\Raine\AppData\Local\Programs\Python\Launcher\;C:\Users\Raine\AppData\Local\Microsoft\WindowsApps;C:\Users\Raine\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\qemu;C:\Program Files\wpa-supplicant-windows-bin-2.10-R20240324-pipe;C:\Users\Raine\AppData\Local\Programs\Git\cmd;c:\Users\Raine\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\bundled\scripts\noConfigScripts, OS=Windows_NT, TERM_PROGRAM=vscode, VSCODE_JDWP_ADAPTER_ENDPOINTS=c:\Users\Raine\.vscode\extensions\vscjava.vscode-java-debug-0.58.5\.noConfigDebugAdapterEndpoints\endpoint-87c058f484375c27.txt, COMPUTERNAME=DESKTOP-V7HV8UO, PROCESSOR_REVISION=8e0b, CommonProgramW6432=C:\Program Files\Common Files, ComSpec=C:\WINDOWS\system32\cmd.exe, VSCODE_NONCE=290e96fe-6594-4d1b-bc52-c66bd20815b8, SystemRoot=C:\WINDOWS, TEMP=C:\Users\Raine\AppData\Local\Temp, HOMEDRIVE=C:, USERPROFILE=C:\Users\Raine, TMP=C:\Users\Raine\AppData\Local\Temp, CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files, NUMBER_OF_PROCESSORS=8, VSCODE_JAVA_EXEC=C:\Program Files\Java\jdk-21.0.2\bin\java}[0m
-[31mE [500]: perfmon: failed to read arm freq[0m
-[34mV [500]: stdout: null[0m
-[34mV [500]: stderr: null[0m
-[31mE [504]: perfmon: failed to read v3d freq[0m
-[34mV [504]: stdout: null[0m
-[34mV [504]: stderr: null[0m
-[31mE [506]: perfmon: failed to read SoC V_core[0m
-[34mV [507]: stdout: null[0m
-[34mV [507]: stderr: null[0m
-[31mE [509]: perfmon: failed to read SoC temp[0m
-[34mV [509]: stdout: null[0m
-[34mV [510]: stderr: null[0m
-[31mE [512]: perfmon: failed to read meminfo[0m
-[34mV [512]: stdout: null[0m
-[34mV [512]: stderr: null[0m
-[31mE [1548]: perfmon: failed to read arm freq[0m
-[34mV [1548]: stdout: null[0m
-[34mV [1549]: stderr: null[0m
-[31mE [1552]: perfmon: failed to read v3d freq[0m
-[34mV [1552]: stdout: null[0m
-[34mV [1552]: stderr: null[0m
-[31mE [1554]: perfmon: failed to read SoC V_core[0m
-[34mV [1554]: stdout: null[0m
-[34mV [1554]: stderr: null[0m
-[31mE [1556]: perfmon: failed to read SoC temp[0m
-[34mV [1556]: stdout: null[0m
-[34mV [1556]: stderr: null[0m
-[31mE [1558]: perfmon: failed to read meminfo[0m
-[34mV [1559]: stdout: null[0m
-[34mV [1559]: stderr: null[0m
-[31mE [2673]: perfmon: failed to read arm freq[0m
-[34mV [2674]: stdout: null[0m
-[34mV [2674]: stderr: null[0m
-[31mE [2683]: perfmon: failed to read v3d freq[0m
-[34mV [2684]: stdout: null[0m
-[34mV [2684]: stderr: null[0m
-[31mE [2692]: perfmon: failed to read SoC V_core[0m
-[34mV [2693]: stdout: null[0m
-[34mV [2693]: stderr: null[0m
-[31mE [2697]: perfmon: failed to read SoC temp[0m
-[34mV [2698]: stdout: null[0m
-[34mV [2698]: stderr: null[0m
-[31mE [2703]: perfmon: failed to read meminfo[0m
-[34mV [2704]: stdout: null[0m
-[34mV [2704]: stderr: null[0m
-[31mE [3789]: perfmon: failed to read arm freq[0m
-[34mV [3789]: stdout: null[0m
-[34mV [3789]: stderr: null[0m
-[31mE [3792]: perfmon: failed to read v3d freq[0m
-[34mV [3792]: stdout: null[0m
-[34mV [3792]: stderr: null[0m
-[31mE [3793]: perfmon: failed to read SoC V_core[0m
-[34mV [3793]: stdout: null[0m
-[34mV [3794]: stderr: null[0m
-[31mE [3795]: perfmon: failed to read SoC temp[0m
-[34mV [3796]: stdout: null[0m
-[34mV [3796]: stderr: null[0m
-[31mE [3798]: perfmon: failed to read meminfo[0m
-[34mV [3798]: stdout: null[0m
-[34mV [3798]: stderr: null[0m
-[31mE [4894]: perfmon: failed to read arm freq[0m
-[34mV [4894]: stdout: null[0m
-[34mV [4894]: stderr: null[0m
-[31mE [4896]: perfmon: failed to read v3d freq[0m
-[34mV [4896]: stdout: null[0m
-[34mV [4896]: stderr: null[0m
-[31mE [4897]: perfmon: failed to read SoC V_core[0m
-[34mV [4897]: stdout: null[0m
-[34mV [4897]: stderr: null[0m
-[31mE [4899]: perfmon: failed to read SoC temp[0m
-[34mV [4899]: stdout: null[0m
-[34mV [4899]: stderr: null[0m
-[31mE [4901]: perfmon: failed to read meminfo[0m
-[34mV [4901]: stdout: null[0m
-[34mV [4901]: stderr: null[0m
+[33mW [358]: display.dpms: failed to disable x11 screensaver[0m
+[34mV [359]: display.dpms stdout: null[0m
+[34mV [359]: display.dpms stderr: null[0m
+[31mE [363]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: xset
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:58)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
+      at backend.BacklightService.disableX11Management(BacklightService.java:55)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:47)
+
+This exception was caused by:
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.io.IOException Cannot run program "xset": CreateProcess error=2, The system cannot find the file specified
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1143)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1073)
+      at java.base/java.lang.Runtime.exec(Runtime.java:594)
+      at java.base/java.lang.Runtime.exec(Runtime.java:496)
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:48)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
+      at backend.BacklightService.disableX11Management(BacklightService.java:55)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:47)
+
+This exception was caused by:
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.io.IOException CreateProcess error=2, The system cannot find the file specified
+      at java.base/java.lang.ProcessImpl.create(Native Method)
+      at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:499)
+      at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:158)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1110)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1073)
+      at java.base/java.lang.Runtime.exec(Runtime.java:594)
+      at java.base/java.lang.Runtime.exec(Runtime.java:496)
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:48)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
+      at backend.BacklightService.disableX11Management(BacklightService.java:55)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:47)
+
+===================== End of backtrace =========================
+
+===================== End of backtrace =========================
+
+===================== End of backtrace =========================
+[33mW [365]: display.dpms: failed to full disable dpms[0m
+[34mV [365]: display.dpms stdout: null[0m
+[34mV [366]: display.dpms stderr: null[0m
+[31mE [379]: network_backend: rfkill exec failed; couldn't determine network adapter index[0m
+[34mV [380]: network_backend: pushing job wait_for_network_assoc[0m
+[34mV [398]: sm_thread: pushing synchronous job backend.system_mgmt.SystemManagementJob@768b970c[0m
+[34mV [414]: main: active process environment: {USERDOMAIN_ROAMINGPROFILE=DESKTOP-61MBF3G, WT_SESSION=9ddc603f-cdc4-42ba-a788-af699a79dedf, PROCESSOR_LEVEL=6, SESSIONNAME=Console, ALLUSERSPROFILE=C:\ProgramData, PROCESSOR_ARCHITECTURE=AMD64, VSCODE_PYTHON_AUTOACTIVATE_GUARD=1, VSCODE_GIT_IPC_HANDLE=\\.\pipe\vscode-git-f148abdffc-sock, PSModulePath=C:\Users\sRGB\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules, SystemDrive=C:, VSCODE_INJECTION=1, COLORTERM=truecolor, USERNAME=sRGB, VSCODE_GIT_ASKPASS_NODE=C:\Users\sRGB\AppData\Local\Programs\Microsoft VS Code\Code.exe, TERM_PROGRAM_VERSION=1.107.0, ProgramFiles(x86)=C:\Program Files (x86), GIT_ASKPASS=c:\Users\sRGB\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass.sh, CHROME_CRASHPAD_PIPE_NAME=\\.\pipe\crashpad_21356_TVGJESSCMJBBRSLH, PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL, DriverData=C:\Windows\System32\Drivers\DriverData, ProgramData=C:\ProgramData, ProgramW6432=C:\Program Files, HOMEPATH=\Users\sRGB, PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 60 Stepping 3, GenuineIntel, ProgramFiles=C:\Program Files, PUBLIC=C:\Users\Public, windir=C:\WINDOWS, LOCALAPPDATA=C:\Users\sRGB\AppData\Local, USERDOMAIN=DESKTOP-61MBF3G, LOGONSERVER=\\DESKTOP-61MBF3G, PROMPT=$P$G, LANG=en_US.UTF-8, VSCODE_GIT_ASKPASS_MAIN=c:\Users\sRGB\AppData\Local\Programs\Microsoft VS Code\resources\app\extensions\git\dist\askpass-main.js, WT_PROFILE_ID={61c54bbd-c2c6-5271-96e7-009a87ff44bf}, OneDrive=C:\Users\sRGB\OneDrive, APPDATA=C:\Users\sRGB\AppData\Roaming, VSCODE_GIT_ASKPASS_EXTRA_ARGS=, CommonProgramFiles=C:\Program Files\Common Files, Path=C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Users\sRGB\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\sRGB\AppData\Local\Programs\Python\Python313\;C:\Users\sRGB\AppData\Local\Programs\Python\Launcher\;C:\Users\sRGB\AppData\Local\Microsoft\WindowsApps;C:\Users\sRGB\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\java\bin;c:\Users\sRGB\.vscode\extensions\vscjava.vscode-java-debug-0.58.4\bundled\scripts\noConfigScripts, OS=Windows_NT, TERM_PROGRAM=vscode, VSCODE_JDWP_ADAPTER_ENDPOINTS=c:\Users\sRGB\.vscode\extensions\vscjava.vscode-java-debug-0.58.4\.noConfigDebugAdapterEndpoints\endpoint-a1f7cc93b1cf35f6.txt, COMPUTERNAME=DESKTOP-61MBF3G, PROCESSOR_REVISION=3c03, CommonProgramW6432=C:\Program Files\Common Files, ComSpec=C:\WINDOWS\system32\cmd.exe, SystemRoot=C:\WINDOWS, TEMP=C:\Users\sRGB\AppData\Local\Temp, HOMEDRIVE=C:, USERPROFILE=C:\Users\sRGB, TMP=C:\Users\sRGB\AppData\Local\Temp, WSLENV=WT_SESSION:WT_PROFILE_ID:, CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files, NUMBER_OF_PROCESSORS=8, VSCODE_JAVA_EXEC=C:\Program Files\java\bin\java}[0m
+[32mI [457]: perfmon: started performance overlay thread[0m
+[31mE [567]: perfmon: failed to read meminfo[0m
+[31mE [593]: perfmon: unable to read /proc/stat[0m
+[31mE [600]: perfmon: failed to read arm freq[0m
+[34mV [600]: stdout: null[0m
+[34mV [600]: stderr: null[0m
+[31mE [603]: perfmon: unable to read V3D profiling counters[0m
+[31mE [611]: perfmon: failed to read v3d freq[0m
+[34mV [612]: stdout: null[0m
+[34mV [612]: stderr: null[0m
+[31mE [619]: perfmon: failed to read SoC V_core[0m
+[34mV [621]: stdout: null[0m
+[34mV [621]: stderr: null[0m
+[31mE [626]: perfmon: failed to read SoC temp[0m
+[34mV [626]: stdout: null[0m
+[34mV [626]: stderr: null[0m
+[31mE [627]: perfmon: failed to read meminfo[0m
+[31mE [1612]: perfmon: unable to read /proc/stat[0m
+[31mE [1620]: perfmon: failed to read arm freq[0m
+[34mV [1620]: stdout: null[0m
+[34mV [1620]: stderr: null[0m
+[31mE [1621]: perfmon: unable to read V3D profiling counters[0m
+[31mE [1628]: perfmon: failed to read v3d freq[0m
+[34mV [1628]: stdout: null[0m
+[34mV [1628]: stderr: null[0m
+[31mE [1634]: perfmon: failed to read SoC V_core[0m
+[34mV [1634]: stdout: null[0m
+[34mV [1634]: stderr: null[0m
+[31mE [1639]: perfmon: failed to read SoC temp[0m
+[34mV [1639]: stdout: null[0m
+[34mV [1640]: stderr: null[0m
+[31mE [1641]: perfmon: failed to read meminfo[0m
+[31mE [2618]: perfmon: unable to read /proc/stat[0m
+[31mE [2623]: perfmon: failed to read arm freq[0m
+[34mV [2623]: stdout: null[0m
+[34mV [2623]: stderr: null[0m
+[31mE [2624]: perfmon: unable to read V3D profiling counters[0m
+[31mE [2628]: perfmon: failed to read v3d freq[0m
+[34mV [2628]: stdout: null[0m
+[34mV [2628]: stderr: null[0m
+[31mE [2631]: perfmon: failed to read SoC V_core[0m
+[34mV [2631]: stdout: null[0m
+[34mV [2631]: stderr: null[0m
+[31mE [2635]: perfmon: failed to read SoC temp[0m
+[34mV [2635]: stdout: null[0m
+[34mV [2635]: stderr: null[0m
+[31mE [2635]: perfmon: failed to read meminfo[0m
+[31mE [3613]: perfmon: unable to read /proc/stat[0m
+[31mE [3621]: perfmon: failed to read arm freq[0m
+[34mV [3621]: stdout: null[0m
+[34mV [3621]: stderr: null[0m
+[31mE [3622]: perfmon: unable to read V3D profiling counters[0m
+[31mE [3632]: perfmon: failed to read v3d freq[0m
+[34mV [3633]: stdout: null[0m
+[34mV [3633]: stderr: null[0m
+[31mE [3644]: perfmon: failed to read SoC V_core[0m
+[34mV [3644]: stdout: null[0m
+[34mV [3645]: stderr: null[0m
+[31mE [3654]: perfmon: failed to read SoC temp[0m
+[34mV [3654]: stdout: null[0m
+[34mV [3654]: stderr: null[0m
+[31mE [3655]: perfmon: failed to read meminfo[0m
+[31mE [4630]: perfmon: unable to read /proc/stat[0m
+[31mE [4634]: perfmon: failed to read arm freq[0m
+[34mV [4634]: stdout: null[0m
+[34mV [4634]: stderr: null[0m
+[31mE [4634]: perfmon: unable to read V3D profiling counters[0m
+[31mE [4637]: perfmon: failed to read v3d freq[0m
+[34mV [4637]: stdout: null[0m
+[34mV [4637]: stderr: null[0m
+[31mE [4639]: perfmon: failed to read SoC V_core[0m
+[34mV [4639]: stdout: null[0m
+[34mV [4639]: stderr: null[0m
+[31mE [4643]: perfmon: failed to read SoC temp[0m
+[34mV [4643]: stdout: null[0m
+[34mV [4643]: stderr: null[0m
+[31mE [4643]: perfmon: failed to read meminfo[0m
+[31mE [5622]: perfmon: unable to read /proc/stat[0m
+[31mE [5627]: perfmon: failed to read arm freq[0m
+[34mV [5627]: stdout: null[0m
+[34mV [5627]: stderr: null[0m
+[31mE [5627]: perfmon: unable to read V3D profiling counters[0m
+[31mE [5631]: perfmon: failed to read v3d freq[0m
+[34mV [5633]: stdout: null[0m
+[34mV [5633]: stderr: null[0m
+[31mE [5637]: perfmon: failed to read SoC V_core[0m
+[34mV [5638]: stdout: null[0m
+[34mV [5638]: stderr: null[0m
+[31mE [5644]: perfmon: failed to read SoC temp[0m
+[34mV [5644]: stdout: null[0m
+[34mV [5644]: stderr: null[0m
+[31mE [5644]: perfmon: failed to read meminfo[0m
+[31mE [6625]: perfmon: unable to read /proc/stat[0m
+[31mE [6635]: perfmon: failed to read arm freq[0m
+[34mV [6635]: stdout: null[0m
+[34mV [6635]: stderr: null[0m
+[31mE [6636]: perfmon: unable to read V3D profiling counters[0m
+[31mE [6650]: perfmon: failed to read v3d freq[0m
+[34mV [6651]: stdout: null[0m
+[34mV [6651]: stderr: null[0m
+[31mE [6658]: perfmon: failed to read SoC V_core[0m
+[34mV [6659]: stdout: null[0m
+[34mV [6659]: stderr: null[0m
+[31mE [6665]: perfmon: failed to read SoC temp[0m
+[34mV [6666]: stdout: null[0m
+[34mV [6666]: stderr: null[0m
+[31mE [6667]: perfmon: failed to read meminfo[0m
+[31mE [7648]: perfmon: unable to read /proc/stat[0m
+[31mE [7651]: perfmon: failed to read arm freq[0m
+[34mV [7651]: stdout: null[0m
+[34mV [7651]: stderr: null[0m
+[31mE [7652]: perfmon: unable to read V3D profiling counters[0m
+[31mE [7654]: perfmon: failed to read v3d freq[0m
+[34mV [7654]: stdout: null[0m
+[34mV [7654]: stderr: null[0m
+[31mE [7657]: perfmon: failed to read SoC V_core[0m
+[34mV [7657]: stdout: null[0m
+[34mV [7657]: stderr: null[0m
+[31mE [7659]: perfmon: failed to read SoC temp[0m
+[34mV [7660]: stdout: null[0m
+[34mV [7660]: stderr: null[0m
+[31mE [7660]: perfmon: failed to read meminfo[0m
+[31mE [8642]: perfmon: unable to read /proc/stat[0m
+[31mE [8655]: perfmon: failed to read arm freq[0m
+[34mV [8655]: stdout: null[0m
+[34mV [8655]: stderr: null[0m
+[31mE [8656]: perfmon: unable to read V3D profiling counters[0m
+[31mE [8667]: perfmon: failed to read v3d freq[0m
+[34mV [8667]: stdout: null[0m
+[34mV [8667]: stderr: null[0m
+[31mE [8672]: perfmon: failed to read SoC V_core[0m
+[34mV [8672]: stdout: null[0m
+[34mV [8672]: stderr: null[0m
+[31mE [8677]: perfmon: failed to read SoC temp[0m
+[34mV [8677]: stdout: null[0m
+[34mV [8677]: stderr: null[0m
+[31mE [8678]: perfmon: failed to read meminfo[0m
+[31mE [9653]: perfmon: unable to read /proc/stat[0m
+[31mE [9666]: perfmon: failed to read arm freq[0m
+[34mV [9667]: stdout: null[0m
+[34mV [9667]: stderr: null[0m
+[31mE [9670]: perfmon: unable to read V3D profiling counters[0m

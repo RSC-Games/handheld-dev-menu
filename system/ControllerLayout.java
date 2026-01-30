@@ -36,6 +36,7 @@ abstract class ControllerLayout {
         Log.logVerbose("gamepad: controller info " + controller.getType());
 
         switch (controller.getName()) {
+            case "Microsoft X-Box 360 pad":
             case "Controller (XBOX 360 For Windows)": // JC200 reports this in Xbox mode.
                 return new XBOX_360_DefaultLayout(controller);
             case "ZhiXu Gamepad":
@@ -210,6 +211,10 @@ abstract class ControllerLayout {
         if (!buttonJustPressed(homeBtn))
             return false;
 
+        return getButtonHomeRaw();
+    }
+
+    public boolean getButtonHomeRaw() {
         return homeBtn.getPollData() > homeBtn.getDeadZone();
     }
 

@@ -7,7 +7,7 @@ import backend.PerformanceMonitor;
 import ui.UIElement;
 import ui.UIKeyValueText;
 
-public class EntryCPUUtil extends UIKeyValueText {
+class EntryCPUUtil extends UIKeyValueText {
 
     public EntryCPUUtil(UIElement parent, Point location) {
         super(parent, location, Color.white);

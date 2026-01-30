@@ -7,7 +7,7 @@ import backend.PerformanceMonitor;
 import ui.UIElement;
 import ui.UIText;
 
-public class EntrySoCTemp extends UIText {
+class EntrySoCTemp extends UIText {
 
     public EntrySoCTemp(UIElement parent, Point location) {
         super(parent, location, "85C", Color.red, 12);

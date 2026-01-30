@@ -26,6 +26,7 @@ import util.Utils;
 public class InputManager implements KeyListener, NativeKeyListener {
     private static final boolean ENABLE_MAPPING_MODE = false;
     private static final int RESCAN_INTERVAL = 60; // frames
+    private static final int LONG_HOME_PRESS_MS = 550; // time to register a long home press.
     static InputManager activeManager;
 
     Controller activeController = null;
@@ -33,6 +34,16 @@ public class InputManager implements KeyListener, NativeKeyListener {
     int rescanCounter = 0;
     ArrayList<Integer> releasedKeys;
     ArrayList<Integer> activeKeys;
+
+    /**
+     * Allow determining short vs long home key presses.
+     */
+    long homePressedStart = 0;
+
+    /**
+     * Track home state updates on the gamepad
+     */
+    boolean homeBtnWasPressed = false;
 
     // TODO: OSK interface. OSKs are kinda weird and for maximum app compatibility I need to adhere to existing standards.
     // For now I'll use onboard but I will be writing a custom OSK later.
@@ -126,8 +137,8 @@ public class InputManager implements KeyListener, NativeKeyListener {
      * Pulse all rumble motors in the controller for the given intensity.
      * Called shock due to how it feels.
      * 
-     * @param ms
-     * @param intensity
+     * @param ms Pulse milliseconds
+     * @param intensity How hard to pulse
      */
     // Probably should do the rumble in the layout system.
     void shock(int ms, float intensity) {
@@ -269,13 +280,33 @@ public class InputManager implements KeyListener, NativeKeyListener {
 
         mapping.poll();
 
-        // Determine if the home button was pressed (focus request)
-        if (mapping.getButtonHome() && TitleLaunchService.getWindowHideState())
-            reopenWindow();
+        // Determine if the home button was pressed and how long (focus request)
+        if (mapping.getButtonHomeRaw() && !this.homeBtnWasPressed) {
+            this.homePressedStart = System.currentTimeMillis();
+            this.homeBtnWasPressed = true;
+        }
+
+        // Short presses open the main menu. Long presses (irrespective of whether the menu
+        // system is already open) will open the settings overlay.
+        else if (!mapping.getButtonHomeRaw() && this.homeBtnWasPressed) {
+            int pressedDuration = (int)(System.currentTimeMillis() - this.homePressedStart);
+            this.homeBtnWasPressed = false;
+
+            // Long press; open the settings overlay.
+            if (pressedDuration >= LONG_HOME_PRESS_MS)
+                openOverlayWindow();
+            else if (TitleLaunchService.getWindowHideState())
+                reopenWindow();
+        }
     }
 
     private void reopenWindow() {
         TitleLaunchService.setWindowHideState(false);
+    }
+
+    private void openOverlayWindow() {
+        Log.logWarning("input: cannot open overlay window; not implemented");
+        MenuOverlayWindow.getWindow().show();
     }
 
     boolean getKey(Integer code) {
@@ -289,14 +320,32 @@ public class InputManager implements KeyListener, NativeKeyListener {
     // TODO: Determine short vs long home key press to open app menu/options overlay menu respectively
     @Override
     public void nativeKeyPressed(NativeKeyEvent e) {
-        if (e.getKeyCode() == NativeKeyEvent.VC_HOME)
-            reopenWindow();
+        if (e.getKeyCode() == NativeKeyEvent.VC_HOME && !this.homeBtnWasPressed) {
+            this.homePressedStart = System.currentTimeMillis();
+            this.homeBtnWasPressed = true;
+        }
+    }
+
+    @Override
+    public void nativeKeyReleased(NativeKeyEvent e) {
+        if (e.getKeyCode() == NativeKeyEvent.VC_HOME) {
+            int pressedDuration = (int)(System.currentTimeMillis() - this.homePressedStart);
+            this.homeBtnWasPressed = false;
+
+            // Long press; open the settings overlay.
+            if (pressedDuration >= LONG_HOME_PRESS_MS)
+                openOverlayWindow();
+            else
+                reopenWindow();
+        }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_HOME)
-            reopenWindow();
+        if (e.getKeyCode() == KeyEvent.VK_HOME && !this.homeBtnWasPressed) {
+            this.homePressedStart = System.currentTimeMillis();
+            this.homeBtnWasPressed = true;
+        }
 
         if (!TitleLaunchService.getWindowHideState() && !this.activeKeys.contains(e.getKeyCode()))
             this.activeKeys.add(e.getKeyCode());
@@ -306,6 +355,17 @@ public class InputManager implements KeyListener, NativeKeyListener {
     public void keyReleased(KeyEvent e) {
         if (TitleLaunchService.getWindowHideState())
             return;
+
+        if (e.getKeyCode() == KeyEvent.VK_HOME) {
+            int pressedDuration = (int)(System.currentTimeMillis() - this.homePressedStart);
+            this.homeBtnWasPressed = false;
+
+            // Long press; open the settings overlay.
+            if (pressedDuration >= LONG_HOME_PRESS_MS)
+                openOverlayWindow();
+            else
+                reopenWindow();
+        }
 
         this.activeKeys.remove((Integer)e.getKeyCode());
         this.releasedKeys.add(e.getKeyCode());

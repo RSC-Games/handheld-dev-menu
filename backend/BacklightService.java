@@ -42,9 +42,8 @@ public class BacklightService {
      * its own)
      */
     public static void disableX11Management() {
-        // TODO: FIX: most commands aren't on path for some reason?
         // Disable screensaver
-        CommandOutput output = CommandUtils.executeCommandRetry("xset s off");
+        CommandOutput output = CommandUtils.executeCommandRetry("xset", "s", "off");
 
         if (output.getExitCode() != 0) {
             Log.logWarning("display.dpms: failed to disable x11 screensaver");
@@ -53,7 +52,7 @@ public class BacklightService {
         }
 
         // Force disable dpms (which the DSI screen probably won't use anyway)
-        output = CommandUtils.executeCommandRetry("xset -dpms");
+        output = CommandUtils.executeCommandRetry("xset", "-dpms");
 
         if (output.getExitCode() != 0) {
             Log.logWarning("display.dpms: failed to full disable dpms");

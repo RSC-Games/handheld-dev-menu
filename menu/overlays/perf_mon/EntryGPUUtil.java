@@ -7,7 +7,7 @@ import backend.PerformanceMonitor;
 import ui.UIElement;
 import ui.UIKeyValueText;
 
-public class EntryGPUUtil extends UIKeyValueText {
+class EntryGPUUtil extends UIKeyValueText {
 
     public EntryGPUUtil(UIElement parent, Point location) {
         super(parent, location, Color.white);

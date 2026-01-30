@@ -245,19 +245,14 @@ public class PerformanceMonitor {
      * @return The memory region size in kB
      */
     private static int getMemoryTypeMB(String flagName) {
-        // The proper way to do this is with the native file I/O of java...
-        // Or coreutils can do it for me since the logic is already here.
-        // TODO: Use proper file I/O to read the file.
-        CommandOutput output = CommandUtils.executeCommandRetry("cat", "/proc/meminfo");
+        String meminfo = Utils.readTextFile("/proc/meminfo");
 
-        if (output.getExitCode() != 0) {
+        if (meminfo == null) {
             Log.logError("perfmon: failed to read meminfo");
-            Log.logVerbose("stdout: " + output.getStdout());
-            Log.logVerbose("stderr: " + output.getStderr());
             return 0; // Can't read memory info? You must have NO RAM >:D
         }
 
-        String[] memFlags = output.getStdout().split("\n");
+        String[] memFlags = meminfo.split("\n");
         String requestedFlag = null;
 
         for (String memFlag : memFlags) {

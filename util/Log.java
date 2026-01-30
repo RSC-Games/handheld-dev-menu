@@ -33,7 +33,7 @@ public class Log {
         // MacOS unsupported (Windows only supported for dev reasons)
         if (System.getProperty("os.name").equals("Linux")) {
             logPath = new File(System.getProperty("user.home") + "/.local/share/rsc-games/menu-logs");
-            logName = "log-" + LocalDateTime.now() + ".log";
+            logName = String.format("log-%s-%s.log", Version.VERSION, LocalDateTime.now());
         }
         else {
             logPath = new File("./.local/share/rsc-games/menu-logs");
@@ -209,6 +209,7 @@ public class Log {
             }
 
             logWriter.append("\n===================== End of backtrace =========================\n");
+            logWriter.flush();
         }
         catch (IOException exc) {
             System.err.println("Warning: failed to write backtrace to logfile!");

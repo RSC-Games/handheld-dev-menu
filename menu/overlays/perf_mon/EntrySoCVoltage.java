@@ -7,7 +7,7 @@ import backend.PerformanceMonitor;
 import ui.UIElement;
 import ui.UIText;
 
-public class EntrySoCVoltage extends UIText {
+class EntrySoCVoltage extends UIText {
 
     public EntrySoCVoltage(UIElement parent, Point location) {
         super(parent, location, "0.95V", new Color(192, 192, 192), 12);

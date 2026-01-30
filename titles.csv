@@ -1,7 +1,7 @@
 Minecraft 1.21.10 Modded, bash, ../load_prism.sh
 mGBA - A Link to the Past, /usr/games/mgba, ../roms/zelda_past.gba
 Super Tux Kart, /usr/games/supertuxkart
-Testing another menu system (Windows host), java, -Djava.library.path=./lib, -jar, ../crap-awt-menu_build/menu-system.jar
+Testing another menu system (Windows host), java, -Djava.library.path=./lib, -jar, ../handheld-dev-menu_build/menu-system.jar
 Bluetooth scan, bluetoothctl, --timeout, 10, scan, on
 Bluetooth connect WH201A, bluetoothctl, --timeout, 5, connect, D1:3D:D5:9D:7D:F9
 Bluetooth connect Soundcore Q20i, bluetoothctl, --timeout, 5, connect, 88:0E:85:85:44:B8

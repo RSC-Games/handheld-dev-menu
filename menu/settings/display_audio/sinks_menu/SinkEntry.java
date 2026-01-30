@@ -37,7 +37,7 @@ class SinkEntry extends MenuEntry {
                 }
             }, 
             // No event
-            new DefaultActionElement(3)
+            new DefaultActionElement(2)
         ));
     }
 }

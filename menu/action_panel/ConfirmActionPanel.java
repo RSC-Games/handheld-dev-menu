@@ -37,6 +37,7 @@ public class ConfirmActionPanel extends UIPanel {
         new UIText(bodyArea, new Point(20, 80), ">>> " + message, Color.WHITE, 12);
         MenuOptionList optionList = new MenuOptionList(bodyArea, new Point(30, 95));
 
+        // TODO: Fix (looks horrible by default)
         // Force consistency.
         yesActionElement.setText("Yes");
         yesActionElement.setColor(Color.green);

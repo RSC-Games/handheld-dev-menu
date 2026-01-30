@@ -10,5 +10,7 @@ class EnumerateSinks {
 
         for (AudioSink sink : sinks)
             new SinkEntry(menu, sink);
+
+        // TODO: If no sinks are given, show a warning panel instead.
     }
 }
