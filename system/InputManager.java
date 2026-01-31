@@ -11,6 +11,7 @@ import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
+import backend.BacklightManagement;
 import backend.TitleLaunchService;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
@@ -278,7 +279,9 @@ public class InputManager implements KeyListener, NativeKeyListener {
             return;
         }
 
-        mapping.poll();
+        // Controller input resets idle timers.
+        if (mapping.poll())
+            BacklightManagement.getBacklightService().resetIdleTimer();
 
         // Determine if the home button was pressed and how long (focus request)
         if (mapping.getButtonHomeRaw() && !this.homeBtnWasPressed) {
@@ -317,13 +320,16 @@ public class InputManager implements KeyListener, NativeKeyListener {
         return this.releasedKeys.contains((Integer)code);
     }
 
-    // TODO: Determine short vs long home key press to open app menu/options overlay menu respectively
+    // TODO: open menu after timer has been hit rather than after the button is released.
     @Override
     public void nativeKeyPressed(NativeKeyEvent e) {
         if (e.getKeyCode() == NativeKeyEvent.VC_HOME && !this.homeBtnWasPressed) {
             this.homePressedStart = System.currentTimeMillis();
             this.homeBtnWasPressed = true;
         }
+
+        // Prevent dim timeout if the system is actively being used (regardless of what's focused)
+        BacklightManagement.getBacklightService().resetIdleTimer();
     }
 
     @Override
@@ -349,6 +355,9 @@ public class InputManager implements KeyListener, NativeKeyListener {
 
         if (!TitleLaunchService.getWindowHideState() && !this.activeKeys.contains(e.getKeyCode()))
             this.activeKeys.add(e.getKeyCode());
+
+        // Prevent dim timeout if the system is actively being used (regardless of what's focused)
+        BacklightManagement.getBacklightService().resetIdleTimer();
     }
 
     @Override

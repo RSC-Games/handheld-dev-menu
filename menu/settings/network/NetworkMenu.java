@@ -14,8 +14,6 @@ import ui.UIPanel;
 import ui.UIText;
 import util.Version;
 
-// TODO: Whole network tree in bugfix mode (except the listed features that need to be
-// added)
 public class NetworkMenu extends UIPanel {
     public NetworkMenu() {
         super("network");

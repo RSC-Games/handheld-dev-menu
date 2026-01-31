@@ -514,7 +514,7 @@ public class NetworkBackend {
             for (AccessPoint ap : discoveredNetworks) {
                 if (ap == null) {
                     Log.logVerbose("wpa_cli.scan: got null access point when filtering; discarding");
-                    continue; // TODO: FIX (should not be null)
+                    continue;
                 }
 
                 if (ssids.contains(ap.ssid))

@@ -17,6 +17,7 @@
 // Unless otherwise specified, all source code within this repository is
 // covered by the above license terms.
 
+import backend.BacklightManagement;
 import backend.BacklightService;
 import backend.NetworkBackend;
 import backend.TitleLaunchService;
@@ -54,7 +55,9 @@ public class Main {
         try {
             // TODO: bug: settings overlay window shows and freezes
             window.show();
+            Utils.sleepms(50);
             perfOverlay.start();
+            Utils.sleepms(50);
             settingsOverlay.hide();
 
             while (true) {
@@ -92,6 +95,7 @@ public class Main {
 
         // TODO: Volume settings are not automatically restored yet.
         BacklightService.disableX11Management();
+        BacklightManagement.getBacklightService().resetIdleTimer();
         // (Backlight is automatically restored by systemd)
 
         // Run dhcp if applicable

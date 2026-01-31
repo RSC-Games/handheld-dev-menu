@@ -12,8 +12,6 @@ import backend.CommandUtils.CommandOutput;
 import util.Log;
 import backend.TitleLaunchService;
 
-// TODO: Overlay options window in a new class.
-// TODO: Performance overlay (not interactible).
 public class MainWindow extends WindowBase {
     PanelManager panelManager;
     InputManager inputManager;

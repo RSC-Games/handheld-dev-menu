@@ -37,7 +37,7 @@ public class PerformanceMonitor {
         String stats = Utils.readTextFile("/proc/stat");
 
         if (stats == null) {
-            Log.logError("perfmon: unable to read /proc/stat");
+            Log.logVerbose("perfmon: unable to read /proc/stat");
             return -1;
         }
 
@@ -110,7 +110,7 @@ public class PerformanceMonitor {
 
             // Probably running on an unsupported device?
             if (gpuStats == null) {
-                Log.logError("perfmon: unable to read V3D profiling counters");
+                Log.logVerbose("perfmon: unable to read V3D profiling counters");
                 return -1;
             }
         }
@@ -160,7 +160,7 @@ public class PerformanceMonitor {
         CommandOutput output = CommandUtils.executeCommandRetry("vcgencmd", "measure_volts");
 
         if (output.getExitCode() != 0) {
-            Log.logError("perfmon: failed to read SoC V_core");
+            Log.logVerbose("perfmon: failed to read SoC V_core");
             Log.logVerbose("stdout: " + output.getStdout());
             Log.logVerbose("stderr: " + output.getStderr());
             return 0.5f; // Idling RPi 4 V_core is 0.675 V; anything lower is obviously wrong.
@@ -184,7 +184,7 @@ public class PerformanceMonitor {
         CommandOutput output = CommandUtils.executeCommandRetry("vcgencmd", "measure_temp");
 
         if (output.getExitCode() != 0) {
-            Log.logError("perfmon: failed to read SoC temp");
+            Log.logVerbose("perfmon: failed to read SoC temp");
             Log.logVerbose("stdout: " + output.getStdout());
             Log.logVerbose("stderr: " + output.getStderr());
             return 0; // Unlikely the thing is going to still be at freezing after boot, even in cold weather.
@@ -227,7 +227,7 @@ public class PerformanceMonitor {
         CommandOutput output = CommandUtils.executeCommandRetry("vcgencmd", "measure_clock", domain);
 
         if (output.getExitCode() != 0) {
-            Log.logError("perfmon: failed to read " + domain + " freq");
+            Log.logVerbose("perfmon: failed to read " + domain + " freq");
             Log.logVerbose("stdout: " + output.getStdout());
             Log.logVerbose("stderr: " + output.getStderr());
             return 50; // No clock domain will idle below 50 MHz; the Pi idles at 600 MHz/1.5 GHz (Pi 4/5)
@@ -248,7 +248,7 @@ public class PerformanceMonitor {
         String meminfo = Utils.readTextFile("/proc/meminfo");
 
         if (meminfo == null) {
-            Log.logError("perfmon: failed to read meminfo");
+            Log.logVerbose("perfmon: failed to read meminfo");
             return 0; // Can't read memory info? You must have NO RAM >:D
         }
 

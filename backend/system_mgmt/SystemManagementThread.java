@@ -60,7 +60,7 @@ public class SystemManagementThread implements Runnable {
     /**
      * Push a repeating job for repeated queuing and execution.
      * 
-     * @param delay Time between invocations.
+     * @param delay Time between invocations (in seconds)
      * @param cb The callback to execute.
      */
     public static void repeatingJob(int delay, SMCallbackFunction cb) {
@@ -72,7 +72,7 @@ public class SystemManagementThread implements Runnable {
      * Deferred is required for pushing jobs within an existing job handler.
      * @implNote THE SYSTEM THREAD WILL DEADLOCK IF THE NON-DEFERRED VARIANT IS CALLED!
      * 
-     * @param delay Time between invocations.
+     * @param delay Time between invocations (in seconds)
      * @param cb The callback to execute.
      */
     public static void repeatingJobDeferred(int delay, SMCallbackFunction cb) {
@@ -143,6 +143,7 @@ public class SystemManagementThread implements Runnable {
             }
             catch (Exception ie) {
                 Log.logError("sm_thread: fatal exception in job; force unqueuing. exception details:");
+                ie.printStackTrace();
                 Log.logException(ie);
             }
         }

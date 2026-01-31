@@ -65,8 +65,13 @@ abstract class ControllerLayout {
 
     /**
      * Remove unpressed buttons to facilitate the one-shot system.
+     * Reports the gamepad state to the input system to facilitate the sleep 
+     * timer system.
+     * 
+     * @return If the controller is actively being used (no buttons/sticks means
+     *  idle)
      */
-    public void poll() {
+    public boolean poll() {
         activeButtons.addAll(newButtons);
         newButtons.clear();
 
@@ -83,6 +88,17 @@ abstract class ControllerLayout {
             if (component.getPollData() > component.getDeadZone() && !activeButtons.contains(component))
                 newButtons.add(component);
         }
+
+        float[] leftStick = getLeftStick();
+        float[] rightStick = getRightStick();
+
+        // Sticks or DPAD being used means we're not idle.
+        if (getDPAD() != 0 || Math.abs(leftStick[0]) >= STICK_DEADZONE || Math.abs(leftStick[1]) >= STICK_DEADZONE 
+            || Math.abs(rightStick[0]) >= STICK_DEADZONE || Math.abs(rightStick[1]) >= STICK_DEADZONE)
+            return true;
+
+        // Active buttons are currently being held (so not idle).
+        return activeButtons.size() != 0 || newButtons.size() != 0;
     }
 
     boolean buttonJustPressed(Component button) {
@@ -93,7 +109,8 @@ abstract class ControllerLayout {
      * Returns both axes of the left stick (x, y).
      * X: Left values are negative, right values are positive.
      * Y: Up values are negative, down values are positive.
-     * @return
+     * 
+     * @return Both stick axes (x, y)
      */
     public float[] getLeftStick() { 
         float xRaw = leftStick[0].getPollData();
@@ -112,7 +129,8 @@ abstract class ControllerLayout {
      * Returns both axes of the right stick (x, y).
      * X: Left values are negative, right values are positive.
      * Y: Up values are negative, down values are positive.
-     * @return
+     * 
+     * @return Both stick axes (x, y).
      */
     public float[] getRightStick() {
         return new float[] {rightStick[0].getPollData(), rightStick[1].getPollData()};
@@ -125,6 +143,11 @@ abstract class ControllerLayout {
         return rightStickBtn.getPollData() > rightStickBtn.getDeadZone();
     }
 
+    /**
+     * Returns the raw DPAD reading. 0 means unpressed.
+     * 
+     * @return raw DPAD state.
+     */
     public float getDPAD() {
         return dpad.getPollData();
     }
@@ -291,7 +314,7 @@ class XBOX_360_DefaultLayout extends ControllerLayout {
         homeBtn = searchComponentByName(controller, linux ? "Mode" : "Button 6");
         leftTrigBtn = searchComponentByName(controller, linux ? "Left Thumb" : "Button 4");
         rightTrigBtn = searchComponentByName(controller, linux ? "Right Thumb" : "Button 5");
-        triggerZ = searchComponentByName(controller, linux ? "z" : "Z Axis"); // TODO: add z/rz support
+        triggerZ = searchComponentByName(controller, linux ? "z" : "Z Axis");
 
         buttonComponents = new ArrayList<Component>();
         buttonComponents.add(leftStickBtn);
