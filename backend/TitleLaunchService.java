@@ -202,7 +202,9 @@ public class TitleLaunchService {
          */
         boolean startProcess() {
             ProcessBuilder titleToLaunch = new ProcessBuilder(thisTitle.args);
-            titleToLaunch.environment().put("DRI_PRIME", "1");
+            // FIX: DRI_PRIME breaks default GPU sorting on X11 with the dGPU plugged in.
+            //titleToLaunch.environment().put("DRI_PRIME", "1");
+            
             // TODO: OpenGL version is force overridden to 3.3 which could be problematic for
             // certain titles.
 
