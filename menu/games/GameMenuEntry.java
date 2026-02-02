@@ -15,15 +15,14 @@ class GameMenuEntry extends MenuEntry {
     TitleInfo title;
 
     public GameMenuEntry(MenuOptionList parent, TitleInfo title) {
-        super(parent, title.entryName + (TitleLaunchService.thisTitleActive(title) ? " (ACTIVE)" : ""), 
-              Color.white, 12);
-        this.text = String.format(title.entryName);
+        super(parent, title.entryName, Color.white, 12);
+        this.text = title.entryName;
         this.title = title;
     }
 
     @Override
     public void menuTick() {
-
+        this.text = title.entryName + (TitleLaunchService.thisTitleActive(title) ? " *[ACTIVE]" : "");
     }
 
     @Override

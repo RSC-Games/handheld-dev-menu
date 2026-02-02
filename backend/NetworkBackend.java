@@ -1,6 +1,7 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -287,14 +288,14 @@ public class NetworkBackend {
                     throw new SMStopExecution();
                 }
 
-                Log.logInfo("network_backend: failed to obtain dhcp lease; retrying in 5s");
+                Log.logInfo("network_backend: failed to obtain dhcp lease; retrying in 2s");
             }
         };
 
         if (Thread.currentThread().getName().equals("main"))
-            SystemManagementThread.repeatingJob(5, cb);
+            SystemManagementThread.repeatingJob(2, cb);
         else
-            SystemManagementThread.repeatingJobDeferred(5, cb);
+            SystemManagementThread.repeatingJobDeferred(2, cb);
     }
 
     /**
@@ -351,9 +352,9 @@ public class NetworkBackend {
         // Sometimes called on the main thread so avoid deadlocking when
         // re-calling.
         if (Thread.currentThread().getName().equals("main"))
-            SystemManagementThread.repeatingJob(3, cb);
+            SystemManagementThread.repeatingJob(2, cb);
         else
-            SystemManagementThread.repeatingJobDeferred(3, cb);
+            SystemManagementThread.repeatingJobDeferred(2, cb);
     }
 
     public static boolean isConnected() {
@@ -472,6 +473,8 @@ public class NetworkBackend {
             checkExitCode_wpa_cli(output);
 
             String[] rawLines = output.getStdout().split("\n");
+
+            Log.logVerbose("wpa_cli.scan: got output " + Arrays.toString(rawLines));
 
             // Skip the "selected interface" text (could be disastrous later.)
             int startLineOffset = 0;

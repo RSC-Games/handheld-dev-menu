@@ -284,7 +284,7 @@ public class InputManager implements KeyListener, NativeKeyListener {
             BacklightManagement.getBacklightService().resetIdleTimer();
 
         // Determine if the home button was pressed and how long (focus request)
-        if (mapping.getButtonHomeRaw() && !this.homeBtnWasPressed) {
+        else if (mapping.getButtonHomeRaw() && !this.homeBtnWasPressed) {
             this.homePressedStart = System.currentTimeMillis();
             this.homeBtnWasPressed = true;
         }
@@ -300,6 +300,11 @@ public class InputManager implements KeyListener, NativeKeyListener {
                 openOverlayWindow();
             else if (TitleLaunchService.getWindowHideState())
                 reopenWindow();
+        }
+
+        // Easy re-enter the game from any menu screen (with the home button) if one is running.
+        if (mapping.getButtonHome() && TitleLaunchService.isTitleRunning() && TitleLaunchService.getWindowHideState()) {
+            TitleLaunchService.setWindowHideState(true);
         }
     }
 

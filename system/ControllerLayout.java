@@ -85,6 +85,7 @@ abstract class ControllerLayout {
 
         // Find new buttons
         for (Component component : buttonComponents) {
+            // TODO: Race condition when controller is plugged in is causing a dangling reference.
             if (component.getPollData() > component.getDeadZone() && !activeButtons.contains(component))
                 newButtons.add(component);
         }

@@ -1,4 +1,5 @@
-Minecraft 1.21.10 Modded, bash, ../load_prism.sh
+Minecraft 1.21.11 - Main Instance, bash, ../load_prism.sh
+Minecraft 1.21.1 - Yapples SMP, bash, ../load_yapples_smp.sh
 mGBA - A Link to the Past, /usr/games/mgba, ../roms/zelda_past.gba
 Super Tux Kart, /usr/games/supertuxkart
 Testing another menu system (Windows host), java, -Djava.library.path=./lib, -jar, ../handheld-dev-menu_build/menu-system.jar

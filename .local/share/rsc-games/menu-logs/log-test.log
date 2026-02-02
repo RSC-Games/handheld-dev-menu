@@ -1,0 +1,611 @@
+==== STARTED LOG FILE WRITER ====
+[32mI [0]: input: Dev Menu: JInput version 2.0.10[0m
+[33mW [228]: input: failed to connect/map controller[0m
+[32mI [262]: main: started dev menu version v0.1.2-dev[0m
+[33mW [270]: display.backlight: failed to read sysfs entry /sys/class/backlight/10-0045/max_brightness[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.io.FileNotFoundException \sys\class\backlight\10-0045\max_brightness (The system cannot find the path specified)
+      at java.base/java.io.FileInputStream.open0(Native Method)
+      at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+      at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+      at backend.BacklightService.readString(BacklightService.java:143)
+      at backend.BacklightService.<clinit>(BacklightService.java:28)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:48)
+
+===================== End of backtrace =========================
+[33mW [274]: display.backlight: failed to read sysfs entry /sys/class/backlight/10-0045/brightness[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.io.FileNotFoundException \sys\class\backlight\10-0045\brightness (The system cannot find the path specified)
+      at java.base/java.io.FileInputStream.open0(Native Method)
+      at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+      at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+      at backend.BacklightService.readString(BacklightService.java:143)
+      at backend.BacklightService.getRawBrightness(BacklightService.java:91)
+      at backend.BacklightService.getScaledBrightness(BacklightService.java:85)
+      at backend.BacklightService.<clinit>(BacklightService.java:37)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:48)
+
+===================== End of backtrace =========================
+[34mV [275]: display.backlight: got raw brightness 45[0m
+[31mE [282]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: xset
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:58)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
+      at backend.BacklightService.disableX11Management(BacklightService.java:46)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:48)
+
+This exception was caused by:
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.io.IOException Cannot run program "xset": CreateProcess error=2, The system cannot find the file specified
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1143)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1073)
+      at java.base/java.lang.Runtime.exec(Runtime.java:594)
+      at java.base/java.lang.Runtime.exec(Runtime.java:496)
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:48)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
+      at backend.BacklightService.disableX11Management(BacklightService.java:46)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:48)
+
+This exception was caused by:
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.io.IOException CreateProcess error=2, The system cannot find the file specified
+      at java.base/java.lang.ProcessImpl.create(Native Method)
+      at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:499)
+      at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:158)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1110)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1073)
+      at java.base/java.lang.Runtime.exec(Runtime.java:594)
+      at java.base/java.lang.Runtime.exec(Runtime.java:496)
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:48)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
+      at backend.BacklightService.disableX11Management(BacklightService.java:46)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:48)
+
+===================== End of backtrace =========================
+
+===================== End of backtrace =========================
+
+===================== End of backtrace =========================
+[33mW [283]: display.dpms: failed to disable x11 screensaver[0m
+[34mV [284]: display.dpms stdout: null[0m
+[34mV [284]: display.dpms stderr: null[0m
+[31mE [288]: command_engine: unable to execute provided command. details below[0m
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.lang.IllegalStateException Unable to execute command: xset
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:58)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
+      at backend.BacklightService.disableX11Management(BacklightService.java:55)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:48)
+
+This exception was caused by:
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.io.IOException Cannot run program "xset": CreateProcess error=2, The system cannot find the file specified
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1143)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1073)
+      at java.base/java.lang.Runtime.exec(Runtime.java:594)
+      at java.base/java.lang.Runtime.exec(Runtime.java:496)
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:48)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
+      at backend.BacklightService.disableX11Management(BacklightService.java:55)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:48)
+
+This exception was caused by:
+
+============ UNEXPECTED RUNTIME EXCEPTION CAUGHT ================
+Exception in thread main java.io.IOException CreateProcess error=2, The system cannot find the file specified
+      at java.base/java.lang.ProcessImpl.create(Native Method)
+      at java.base/java.lang.ProcessImpl.<init>(ProcessImpl.java:499)
+      at java.base/java.lang.ProcessImpl.start(ProcessImpl.java:158)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1110)
+      at java.base/java.lang.ProcessBuilder.start(ProcessBuilder.java:1073)
+      at java.base/java.lang.Runtime.exec(Runtime.java:594)
+      at java.base/java.lang.Runtime.exec(Runtime.java:496)
+      at backend.CommandUtils.executeCommand0(CommandUtils.java:48)
+      at backend.CommandUtils.executeCommandRetry(CommandUtils.java:24)
+      at backend.BacklightService.disableX11Management(BacklightService.java:55)
+      at Main.init(Main.java:97)
+      at Main.main(Main.java:48)
+
+===================== End of backtrace =========================
+
+===================== End of backtrace =========================
+
+===================== End of backtrace =========================
+[33mW [289]: display.dpms: failed to full disable dpms[0m
+[34mV [289]: display.dpms stdout: null[0m
+[34mV [289]: display.dpms stderr: null[0m
+[32mI [290]: backlight.service: pushing repeating job[0m
+[34mV [294]: sm_thread: pushing synchronous job backend.system_mgmt.SystemManagementJob@2df32bf7[0m
+[31mE [299]: network_backend: rfkill exec failed; couldn't determine network adapter index[0m
+[34mV [299]: network_backend: pushing job wait_for_network_assoc[0m
+[34mV [300]: sm_thread: pushing synchronous job backend.system_mgmt.SystemManagementJob@2f490758[0m
+[32mI [300]: main: init done; starting menu code[0m
+[32mI [371]: perfmon: started performance overlay thread[0m
+[34mV [409]: perfmon: failed to read meminfo[0m
+[34mV [431]: perfmon: unable to read /proc/stat[0m
+[34mV [435]: perfmon: failed to read arm freq[0m
+[34mV [435]: stdout: null[0m
+[34mV [435]: stderr: null[0m
+[34mV [437]: perfmon: unable to read V3D profiling counters[0m
+[34mV [442]: perfmon: failed to read v3d freq[0m
+[34mV [442]: stdout: null[0m
+[34mV [442]: stderr: null[0m
+[34mV [445]: perfmon: failed to read SoC V_core[0m
+[34mV [445]: stdout: null[0m
+[34mV [445]: stderr: null[0m
+[34mV [447]: perfmon: failed to read SoC temp[0m
+[34mV [447]: stdout: null[0m
+[34mV [447]: stderr: null[0m
+[34mV [448]: perfmon: failed to read meminfo[0m
+[34mV [1428]: perfmon: unable to read /proc/stat[0m
+[34mV [1431]: perfmon: failed to read arm freq[0m
+[34mV [1431]: stdout: null[0m
+[34mV [1431]: stderr: null[0m
+[34mV [1431]: perfmon: unable to read V3D profiling counters[0m
+[34mV [1435]: perfmon: failed to read v3d freq[0m
+[34mV [1435]: stdout: null[0m
+[34mV [1435]: stderr: null[0m
+[34mV [1438]: perfmon: failed to read SoC V_core[0m
+[34mV [1438]: stdout: null[0m
+[34mV [1438]: stderr: null[0m
+[34mV [1440]: perfmon: failed to read SoC temp[0m
+[34mV [1440]: stdout: null[0m
+[34mV [1440]: stderr: null[0m
+[34mV [1440]: perfmon: failed to read meminfo[0m
+[34mV [2421]: perfmon: unable to read /proc/stat[0m
+[34mV [2425]: perfmon: failed to read arm freq[0m
+[34mV [2425]: stdout: null[0m
+[34mV [2425]: stderr: null[0m
+[34mV [2425]: perfmon: unable to read V3D profiling counters[0m
+[34mV [2428]: perfmon: failed to read v3d freq[0m
+[34mV [2429]: stdout: null[0m
+[34mV [2429]: stderr: null[0m
+[34mV [2430]: perfmon: failed to read SoC V_core[0m
+[34mV [2430]: stdout: null[0m
+[34mV [2430]: stderr: null[0m
+[34mV [2434]: perfmon: failed to read SoC temp[0m
+[34mV [2434]: stdout: null[0m
+[34mV [2434]: stderr: null[0m
+[34mV [2434]: perfmon: failed to read meminfo[0m
+[34mV [3412]: perfmon: unable to read /proc/stat[0m
+[34mV [3415]: perfmon: failed to read arm freq[0m
+[34mV [3415]: stdout: null[0m
+[34mV [3415]: stderr: null[0m
+[34mV [3415]: perfmon: unable to read V3D profiling counters[0m
+[34mV [3420]: perfmon: failed to read v3d freq[0m
+[34mV [3420]: stdout: null[0m
+[34mV [3420]: stderr: null[0m
+[34mV [3423]: perfmon: failed to read SoC V_core[0m
+[34mV [3423]: stdout: null[0m
+[34mV [3423]: stderr: null[0m
+[34mV [3427]: perfmon: failed to read SoC temp[0m
+[34mV [3427]: stdout: null[0m
+[34mV [3427]: stderr: null[0m
+[34mV [3427]: perfmon: failed to read meminfo[0m
+[34mV [4411]: perfmon: unable to read /proc/stat[0m
+[34mV [4415]: perfmon: failed to read arm freq[0m
+[34mV [4415]: stdout: null[0m
+[34mV [4415]: stderr: null[0m
+[34mV [4415]: perfmon: unable to read V3D profiling counters[0m
+[34mV [4420]: perfmon: failed to read v3d freq[0m
+[34mV [4420]: stdout: null[0m
+[34mV [4420]: stderr: null[0m
+[34mV [4422]: perfmon: failed to read SoC V_core[0m
+[34mV [4422]: stdout: null[0m
+[34mV [4422]: stderr: null[0m
+[34mV [4425]: perfmon: failed to read SoC temp[0m
+[34mV [4425]: stdout: null[0m
+[34mV [4425]: stderr: null[0m
+[34mV [4425]: perfmon: failed to read meminfo[0m
+[34mV [5403]: perfmon: unable to read /proc/stat[0m
+[34mV [5406]: perfmon: failed to read arm freq[0m
+[34mV [5406]: stdout: null[0m
+[34mV [5406]: stderr: null[0m
+[34mV [5407]: perfmon: unable to read V3D profiling counters[0m
+[34mV [5410]: perfmon: failed to read v3d freq[0m
+[34mV [5410]: stdout: null[0m
+[34mV [5410]: stderr: null[0m
+[34mV [5414]: perfmon: failed to read SoC V_core[0m
+[34mV [5414]: stdout: null[0m
+[34mV [5414]: stderr: null[0m
+[34mV [5417]: perfmon: failed to read SoC temp[0m
+[34mV [5417]: stdout: null[0m
+[34mV [5417]: stderr: null[0m
+[34mV [5417]: perfmon: failed to read meminfo[0m
+[34mV [6399]: perfmon: unable to read /proc/stat[0m
+[34mV [6403]: perfmon: failed to read arm freq[0m
+[34mV [6403]: stdout: null[0m
+[34mV [6403]: stderr: null[0m
+[34mV [6403]: perfmon: unable to read V3D profiling counters[0m
+[34mV [6406]: perfmon: failed to read v3d freq[0m
+[34mV [6406]: stdout: null[0m
+[34mV [6406]: stderr: null[0m
+[34mV [6408]: perfmon: failed to read SoC V_core[0m
+[34mV [6408]: stdout: null[0m
+[34mV [6408]: stderr: null[0m
+[34mV [6410]: perfmon: failed to read SoC temp[0m
+[34mV [6410]: stdout: null[0m
+[34mV [6410]: stderr: null[0m
+[34mV [6410]: perfmon: failed to read meminfo[0m
+[34mV [7393]: perfmon: unable to read /proc/stat[0m
+[34mV [7396]: perfmon: failed to read arm freq[0m
+[34mV [7396]: stdout: null[0m
+[34mV [7396]: stderr: null[0m
+[34mV [7396]: perfmon: unable to read V3D profiling counters[0m
+[34mV [7399]: perfmon: failed to read v3d freq[0m
+[34mV [7399]: stdout: null[0m
+[34mV [7399]: stderr: null[0m
+[34mV [7401]: perfmon: failed to read SoC V_core[0m
+[34mV [7401]: stdout: null[0m
+[34mV [7401]: stderr: null[0m
+[34mV [7403]: perfmon: failed to read SoC temp[0m
+[34mV [7403]: stdout: null[0m
+[34mV [7403]: stderr: null[0m
+[34mV [7403]: perfmon: failed to read meminfo[0m
+[34mV [8383]: perfmon: unable to read /proc/stat[0m
+[34mV [8385]: perfmon: failed to read arm freq[0m
+[34mV [8385]: stdout: null[0m
+[34mV [8385]: stderr: null[0m
+[34mV [8386]: perfmon: unable to read V3D profiling counters[0m
+[34mV [8389]: perfmon: failed to read v3d freq[0m
+[34mV [8389]: stdout: null[0m
+[34mV [8389]: stderr: null[0m
+[34mV [8392]: perfmon: failed to read SoC V_core[0m
+[34mV [8392]: stdout: null[0m
+[34mV [8392]: stderr: null[0m
+[34mV [8394]: perfmon: failed to read SoC temp[0m
+[34mV [8394]: stdout: null[0m
+[34mV [8394]: stderr: null[0m
+[34mV [8394]: perfmon: failed to read meminfo[0m
+[34mV [9374]: perfmon: unable to read /proc/stat[0m
+[34mV [9378]: perfmon: failed to read arm freq[0m
+[34mV [9378]: stdout: null[0m
+[34mV [9378]: stderr: null[0m
+[34mV [9379]: perfmon: unable to read V3D profiling counters[0m
+[34mV [9384]: perfmon: failed to read v3d freq[0m
+[34mV [9384]: stdout: null[0m
+[34mV [9384]: stderr: null[0m
+[34mV [9387]: perfmon: failed to read SoC V_core[0m
+[34mV [9387]: stdout: null[0m
+[34mV [9387]: stderr: null[0m
+[34mV [9389]: perfmon: failed to read SoC temp[0m
+[34mV [9390]: stdout: null[0m
+[34mV [9390]: stderr: null[0m
+[34mV [9390]: perfmon: failed to read meminfo[0m
+[34mV [10372]: perfmon: unable to read /proc/stat[0m
+[34mV [10375]: perfmon: failed to read arm freq[0m
+[34mV [10375]: stdout: null[0m
+[34mV [10375]: stderr: null[0m
+[34mV [10375]: perfmon: unable to read V3D profiling counters[0m
+[34mV [10380]: perfmon: failed to read v3d freq[0m
+[34mV [10380]: stdout: null[0m
+[34mV [10380]: stderr: null[0m
+[34mV [10382]: perfmon: failed to read SoC V_core[0m
+[34mV [10382]: stdout: null[0m
+[34mV [10382]: stderr: null[0m
+[34mV [10384]: perfmon: failed to read SoC temp[0m
+[34mV [10384]: stdout: null[0m
+[34mV [10384]: stderr: null[0m
+[34mV [10384]: perfmon: failed to read meminfo[0m
+[34mV [11427]: perfmon: unable to read /proc/stat[0m
+[34mV [11430]: perfmon: failed to read arm freq[0m
+[34mV [11430]: stdout: null[0m
+[34mV [11430]: stderr: null[0m
+[34mV [11430]: perfmon: unable to read V3D profiling counters[0m
+[34mV [11433]: perfmon: failed to read v3d freq[0m
+[34mV [11433]: stdout: null[0m
+[34mV [11433]: stderr: null[0m
+[34mV [11436]: perfmon: failed to read SoC V_core[0m
+[34mV [11436]: stdout: null[0m
+[34mV [11436]: stderr: null[0m
+[34mV [11438]: perfmon: failed to read SoC temp[0m
+[34mV [11438]: stdout: null[0m
+[34mV [11438]: stderr: null[0m
+[34mV [11438]: perfmon: failed to read meminfo[0m
+[34mV [12468]: perfmon: unable to read /proc/stat[0m
+[34mV [12471]: perfmon: failed to read arm freq[0m
+[34mV [12471]: stdout: null[0m
+[34mV [12471]: stderr: null[0m
+[34mV [12471]: perfmon: unable to read V3D profiling counters[0m
+[34mV [12474]: perfmon: failed to read v3d freq[0m
+[34mV [12474]: stdout: null[0m
+[34mV [12474]: stderr: null[0m
+[34mV [12476]: perfmon: failed to read SoC V_core[0m
+[34mV [12476]: stdout: null[0m
+[34mV [12476]: stderr: null[0m
+[34mV [12479]: perfmon: failed to read SoC temp[0m
+[34mV [12479]: stdout: null[0m
+[34mV [12479]: stderr: null[0m
+[34mV [12479]: perfmon: failed to read meminfo[0m
+[34mV [13455]: perfmon: unable to read /proc/stat[0m
+[34mV [13459]: perfmon: failed to read arm freq[0m
+[34mV [13459]: stdout: null[0m
+[34mV [13459]: stderr: null[0m
+[34mV [13459]: perfmon: unable to read V3D profiling counters[0m
+[34mV [13462]: perfmon: failed to read v3d freq[0m
+[34mV [13462]: stdout: null[0m
+[34mV [13462]: stderr: null[0m
+[34mV [13464]: perfmon: failed to read SoC V_core[0m
+[34mV [13464]: stdout: null[0m
+[34mV [13464]: stderr: null[0m
+[34mV [13466]: perfmon: failed to read SoC temp[0m
+[34mV [13466]: stdout: null[0m
+[34mV [13466]: stderr: null[0m
+[34mV [13466]: perfmon: failed to read meminfo[0m
+[34mV [14445]: perfmon: unable to read /proc/stat[0m
+[34mV [14449]: perfmon: failed to read arm freq[0m
+[34mV [14449]: stdout: null[0m
+[34mV [14449]: stderr: null[0m
+[34mV [14449]: perfmon: unable to read V3D profiling counters[0m
+[34mV [14452]: perfmon: failed to read v3d freq[0m
+[34mV [14452]: stdout: null[0m
+[34mV [14452]: stderr: null[0m
+[34mV [14454]: perfmon: failed to read SoC V_core[0m
+[34mV [14454]: stdout: null[0m
+[34mV [14454]: stderr: null[0m
+[34mV [14456]: perfmon: failed to read SoC temp[0m
+[34mV [14456]: stdout: null[0m
+[34mV [14456]: stderr: null[0m
+[34mV [14457]: perfmon: failed to read meminfo[0m
+[34mV [15436]: perfmon: unable to read /proc/stat[0m
+[34mV [15439]: perfmon: failed to read arm freq[0m
+[34mV [15439]: stdout: null[0m
+[34mV [15439]: stderr: null[0m
+[34mV [15439]: perfmon: unable to read V3D profiling counters[0m
+[34mV [15443]: perfmon: failed to read v3d freq[0m
+[34mV [15443]: stdout: null[0m
+[34mV [15443]: stderr: null[0m
+[34mV [15445]: perfmon: failed to read SoC V_core[0m
+[34mV [15445]: stdout: null[0m
+[34mV [15445]: stderr: null[0m
+[34mV [15449]: perfmon: failed to read SoC temp[0m
+[34mV [15449]: stdout: null[0m
+[34mV [15449]: stderr: null[0m
+[34mV [15449]: perfmon: failed to read meminfo[0m
+[34mV [16429]: perfmon: unable to read /proc/stat[0m
+[34mV [16433]: perfmon: failed to read arm freq[0m
+[34mV [16433]: stdout: null[0m
+[34mV [16433]: stderr: null[0m
+[34mV [16433]: perfmon: unable to read V3D profiling counters[0m
+[34mV [16437]: perfmon: failed to read v3d freq[0m
+[34mV [16437]: stdout: null[0m
+[34mV [16437]: stderr: null[0m
+[34mV [16439]: perfmon: failed to read SoC V_core[0m
+[34mV [16439]: stdout: null[0m
+[34mV [16439]: stderr: null[0m
+[34mV [16440]: perfmon: failed to read SoC temp[0m
+[34mV [16440]: stdout: null[0m
+[34mV [16440]: stderr: null[0m
+[34mV [16440]: perfmon: failed to read meminfo[0m
+[34mV [17421]: perfmon: unable to read /proc/stat[0m
+[34mV [17424]: perfmon: failed to read arm freq[0m
+[34mV [17424]: stdout: null[0m
+[34mV [17424]: stderr: null[0m
+[34mV [17424]: perfmon: unable to read V3D profiling counters[0m
+[34mV [17427]: perfmon: failed to read v3d freq[0m
+[34mV [17427]: stdout: null[0m
+[34mV [17427]: stderr: null[0m
+[34mV [17429]: perfmon: failed to read SoC V_core[0m
+[34mV [17429]: stdout: null[0m
+[34mV [17429]: stderr: null[0m
+[34mV [17431]: perfmon: failed to read SoC temp[0m
+[34mV [17431]: stdout: null[0m
+[34mV [17431]: stderr: null[0m
+[34mV [17431]: perfmon: failed to read meminfo[0m
+[34mV [18411]: perfmon: unable to read /proc/stat[0m
+[34mV [18414]: perfmon: failed to read arm freq[0m
+[34mV [18414]: stdout: null[0m
+[34mV [18414]: stderr: null[0m
+[34mV [18415]: perfmon: unable to read V3D profiling counters[0m
+[34mV [18417]: perfmon: failed to read v3d freq[0m
+[34mV [18417]: stdout: null[0m
+[34mV [18417]: stderr: null[0m
+[34mV [18419]: perfmon: failed to read SoC V_core[0m
+[34mV [18419]: stdout: null[0m
+[34mV [18419]: stderr: null[0m
+[34mV [18421]: perfmon: failed to read SoC temp[0m
+[34mV [18421]: stdout: null[0m
+[34mV [18421]: stderr: null[0m
+[34mV [18421]: perfmon: failed to read meminfo[0m
+SoC V_core[0m
+[34mV [9601]: stdout: null[0m
+[34mV [9601]: stderr: null[0m
+[34mV [9603]: perfmon: failed to read SoC temp[0m
+[34mV [9603]: stdout: null[0m
+[34mV [9603]: stderr: null[0m
+[34mV [9604]: perfmon: failed to read meminfo[0m
+[34mV [10586]: perfmon: unable to read /proc/stat[0m
+[34mV [10589]: perfmon: failed to read arm freq[0m
+[34mV [10589]: stdout: null[0m
+[34mV [10589]: stderr: null[0m
+[34mV [10589]: perfmon: unable to read V3D profiling counters[0m
+[34mV [10592]: perfmon: failed to read v3d freq[0m
+[34mV [10592]: stdout: null[0m
+[34mV [10592]: stderr: null[0m
+[34mV [10595]: perfmon: failed to read SoC V_core[0m
+[34mV [10595]: stdout: null[0m
+[34mV [10595]: stderr: null[0m
+[34mV [10597]: perfmon: failed to read SoC temp[0m
+[34mV [10597]: stdout: null[0m
+[34mV [10597]: stderr: null[0m
+[34mV [10598]: perfmon: failed to read meminfo[0m
+[34mV [11576]: perfmon: unable to read /proc/stat[0m
+[34mV [11580]: perfmon: failed to read arm freq[0m
+[34mV [11580]: stdout: null[0m
+[34mV [11580]: stderr: null[0m
+[34mV [11580]: perfmon: unable to read V3D profiling counters[0m
+[34mV [11584]: perfmon: failed to read v3d freq[0m
+[34mV [11584]: stdout: null[0m
+[34mV [11584]: stderr: null[0m
+[34mV [11586]: perfmon: failed to read SoC V_core[0m
+[34mV [11586]: stdout: null[0m
+[34mV [11586]: stderr: null[0m
+[34mV [11589]: perfmon: failed to read SoC temp[0m
+[34mV [11589]: stdout: null[0m
+[34mV [11589]: stderr: null[0m
+[34mV [11590]: perfmon: failed to read meminfo[0m
+[34mV [12566]: perfmon: unable to read /proc/stat[0m
+[34mV [12569]: perfmon: failed to read arm freq[0m
+[34mV [12570]: stdout: null[0m
+[34mV [12570]: stderr: null[0m
+[34mV [12570]: perfmon: unable to read V3D profiling counters[0m
+[34mV [12573]: perfmon: failed to read v3d freq[0m
+[34mV [12573]: stdout: null[0m
+[34mV [12573]: stderr: null[0m
+[34mV [12575]: perfmon: failed to read SoC V_core[0m
+[34mV [12575]: stdout: null[0m
+[34mV [12575]: stderr: null[0m
+[34mV [12578]: perfmon: failed to read SoC temp[0m
+[34mV [12578]: stdout: null[0m
+[34mV [12578]: stderr: null[0m
+[34mV [12578]: perfmon: failed to read meminfo[0m
+[34mV [13563]: perfmon: unable to read /proc/stat[0m
+[34mV [13566]: perfmon: failed to read arm freq[0m
+[34mV [13566]: stdout: null[0m
+[34mV [13566]: stderr: null[0m
+[34mV [13566]: perfmon: unable to read V3D profiling counters[0m
+[34mV [13569]: perfmon: failed to read v3d freq[0m
+[34mV [13569]: stdout: null[0m
+[34mV [13569]: stderr: null[0m
+[34mV [13571]: perfmon: failed to read SoC V_core[0m
+[34mV [13571]: stdout: null[0m
+[34mV [13571]: stderr: null[0m
+[34mV [13574]: perfmon: failed to read SoC temp[0m
+[34mV [13574]: stdout: null[0m
+[34mV [13574]: stderr: null[0m
+[34mV [13574]: perfmon: failed to read meminfo[0m
+[34mV [14605]: perfmon: unable to read /proc/stat[0m
+[34mV [14608]: perfmon: failed to read arm freq[0m
+[34mV [14608]: stdout: null[0m
+[34mV [14608]: stderr: null[0m
+[34mV [14608]: perfmon: unable to read V3D profiling counters[0m
+[34mV [14613]: perfmon: failed to read v3d freq[0m
+[34mV [14613]: stdout: null[0m
+[34mV [14613]: stderr: null[0m
+[34mV [14616]: perfmon: failed to read SoC V_core[0m
+[34mV [14617]: stdout: null[0m
+[34mV [14617]: stderr: null[0m
+[34mV [14622]: perfmon: failed to read SoC temp[0m
+[34mV [14622]: stdout: null[0m
+[34mV [14622]: stderr: null[0m
+[34mV [14623]: perfmon: failed to read meminfo[0m
+[34mV [15632]: perfmon: unable to read /proc/stat[0m
+[34mV [15663]: perfmon: failed to read arm freq[0m
+[34mV [15663]: stdout: null[0m
+[34mV [15663]: stderr: null[0m
+[34mV [15664]: perfmon: unable to read V3D profiling counters[0m
+[34mV [15678]: perfmon: failed to read v3d freq[0m
+[34mV [15678]: stdout: null[0m
+[34mV [15678]: stderr: null[0m
+[34mV [15685]: perfmon: failed to read SoC V_core[0m
+[34mV [15685]: stdout: null[0m
+[34mV [15685]: stderr: null[0m
+[34mV [15690]: perfmon: failed to read SoC temp[0m
+[34mV [15690]: stdout: null[0m
+[34mV [15690]: stderr: null[0m
+[34mV [15690]: perfmon: failed to read meminfo[0m
+[34mV [16673]: perfmon: unable to read /proc/stat[0m
+[34mV [16676]: perfmon: failed to read arm freq[0m
+[34mV [16676]: stdout: null[0m
+[34mV [16676]: stderr: null[0m
+[34mV [16676]: perfmon: unable to read V3D profiling counters[0m
+[34mV [16678]: perfmon: failed to read v3d freq[0m
+[34mV [16678]: stdout: null[0m
+[34mV [16678]: stderr: null[0m
+[34mV [16680]: perfmon: failed to read SoC V_core[0m
+[34mV [16680]: stdout: null[0m
+[34mV [16680]: stderr: null[0m
+[34mV [16682]: perfmon: failed to read SoC temp[0m
+[34mV [16682]: stdout: null[0m
+[34mV [16682]: stderr: null[0m
+[34mV [16682]: perfmon: failed to read meminfo[0m
+[34mV [17662]: perfmon: unable to read /proc/stat[0m
+[34mV [17665]: perfmon: failed to read arm freq[0m
+[34mV [17665]: stdout: null[0m
+[34mV [17665]: stderr: null[0m
+[34mV [17665]: perfmon: unable to read V3D profiling counters[0m
+[34mV [17669]: perfmon: failed to read v3d freq[0m
+[34mV [17669]: stdout: null[0m
+[34mV [17669]: stderr: null[0m
+[34mV [17671]: perfmon: failed to read SoC V_core[0m
+[34mV [17671]: stdout: null[0m
+[34mV [17671]: stderr: null[0m
+[34mV [17674]: perfmon: failed to read SoC temp[0m
+[34mV [17674]: stdout: null[0m
+[34mV [17674]: stderr: null[0m
+[34mV [17674]: perfmon: failed to read meminfo[0m
+[34mV [18651]: perfmon: unable to read /proc/stat[0m
+[34mV [18654]: perfmon: failed to read arm freq[0m
+[34mV [18654]: stdout: null[0m
+[34mV [18654]: stderr: null[0m
+[34mV [18655]: perfmon: unable to read V3D profiling counters[0m
+[34mV [18657]: perfmon: failed to read v3d freq[0m
+[34mV [18657]: stdout: null[0m
+[34mV [18657]: stderr: null[0m
+[34mV [18659]: perfmon: failed to read SoC V_core[0m
+[34mV [18659]: stdout: null[0m
+[34mV [18659]: stderr: null[0m
+[34mV [18661]: perfmon: failed to read SoC temp[0m
+[34mV [18661]: stdout: null[0m
+[34mV [18661]: stderr: null[0m
+[34mV [18661]: perfmon: failed to read meminfo[0m
+[34mV [19637]: perfmon: unable to read /proc/stat[0m
+[34mV [19641]: perfmon: failed to read arm freq[0m
+[34mV [19641]: stdout: null[0m
+[34mV [19641]: stderr: null[0m
+[34mV [19641]: perfmon: unable to read V3D profiling counters[0m
+[34mV [19646]: perfmon: failed to read v3d freq[0m
+[34mV [19646]: stdout: null[0m
+[34mV [19646]: stderr: null[0m
+[34mV [19649]: perfmon: failed to read SoC V_core[0m
+[34mV [19649]: stdout: null[0m
+[34mV [19649]: stderr: null[0m
+[34mV [19655]: perfmon: failed to read SoC temp[0m
+[34mV [19655]: stdout: null[0m
+[34mV [19655]: stderr: null[0m
+[34mV [19656]: perfmon: failed to read meminfo[0m
+[34mV [20642]: perfmon: unable to read /proc/stat[0m
+[34mV [20646]: perfmon: failed to read arm freq[0m
+[34mV [20646]: stdout: null[0m
+[34mV [20646]: stderr: null[0m
+[34mV [20646]: perfmon: unable to read V3D profiling counters[0m
+[34mV [20649]: perfmon: failed to read v3d freq[0m
+[34mV [20649]: stdout: null[0m
+[34mV [20649]: stderr: null[0m
+[34mV [20651]: perfmon: failed to read SoC V_core[0m
+[34mV [20651]: stdout: null[0m
+[34mV [20651]: stderr: null[0m
+[34mV [20654]: perfmon: failed to read SoC temp[0m
+[34mV [20654]: stdout: null[0m
+[34mV [20654]: stderr: null[0m
+[34mV [20654]: perfmon: failed to read meminfo[0m
+[34mV [21632]: perfmon: unable to read /proc/stat[0m
+[34mV [21635]: perfmon: failed to read arm freq[0m
+[34mV [21635]: stdout: null[0m
+[34mV [21635]: stderr: null[0m
+[34mV [21635]: perfmon: unable to read V3D profiling counters[0m
+[34mV [21639]: perfmon: failed to read v3d freq[0m
+[34mV [21639]: stdout: null[0m
+[34mV [21639]: stderr: null[0m
+[34mV [21641]: perfmon: failed to read SoC V_core[0m
+[34mV [21641]: stdout: null[0m
+[34mV [21641]: stderr: null[0m
+[34mV [21644]: perfmon: failed to read SoC temp[0m
+[34mV [21644]: stdout: null[0m
+[34mV [21644]: stderr: null[0m
+[34mV [21644]: perfmon: failed to read meminfo[0m
